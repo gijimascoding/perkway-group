@@ -1,11 +1,57 @@
 "use client";
 
-import { useState } from "react";
+import { useState, FormEvent } from "react";
+
+type FormStatus = "idle" | "submitting" | "success" | "error";
 
 export function ContactForm() {
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState<FormStatus>("idle");
+  const [errorMessage, setErrorMessage] = useState("");
 
-  if (submitted) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setStatus("submitting");
+    setErrorMessage("");
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    const data: Record<string, string> = {};
+    formData.forEach((value, key) => {
+      data[key] = value.toString();
+    });
+
+    try {
+      const response = await fetch(
+        "https://formsubmit.co/ajax/info@perkways.com",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to send message");
+      }
+
+      const result = await response.json();
+      if (result.success) {
+        setStatus("success");
+      } else {
+        throw new Error(result.message || "Failed to send message");
+      }
+    } catch {
+      setStatus("error");
+      setErrorMessage(
+        "There was an error sending your message. Please try again or email us directly at info@perkways.com."
+      );
+    }
+  }
+
+  if (status === "success") {
     return (
       <div className="border border-slate-200 p-10 text-center">
         <div className="w-12 h-12 bg-navy-900 text-white flex items-center justify-center mx-auto mb-4">
@@ -32,13 +78,24 @@ export function ContactForm() {
   }
 
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        setSubmitted(true);
-      }}
-      className="space-y-6"
-    >
+    <form onSubmit={handleSubmit} className="space-y-6">
+      {/* FormSubmit.co configuration */}
+      <input
+        type="hidden"
+        name="_subject"
+        value="New Inquiry — Perkway Group Website"
+      />
+      <input type="hidden" name="_captcha" value="false" />
+      <input type="hidden" name="_template" value="table" />
+      <input type="text" name="_honey" style={{ display: "none" }} />
+
+      {/* Error banner */}
+      {status === "error" && (
+        <div className="border border-red-300 bg-red-50 p-4 text-sm text-red-700">
+          {errorMessage}
+        </div>
+      )}
+
       <div className="grid sm:grid-cols-2 gap-6">
         <div>
           <label className="block text-xs font-semibold text-navy-900 uppercase tracking-wide mb-2">
@@ -46,6 +103,7 @@ export function ContactForm() {
           </label>
           <input
             type="text"
+            name="First Name"
             required
             className="w-full px-4 py-3 border border-slate-300 text-sm focus:outline-none focus:border-navy-400 transition-colors"
           />
@@ -56,6 +114,7 @@ export function ContactForm() {
           </label>
           <input
             type="text"
+            name="Last Name"
             required
             className="w-full px-4 py-3 border border-slate-300 text-sm focus:outline-none focus:border-navy-400 transition-colors"
           />
@@ -69,6 +128,7 @@ export function ContactForm() {
           </label>
           <input
             type="email"
+            name="Email"
             required
             className="w-full px-4 py-3 border border-slate-300 text-sm focus:outline-none focus:border-navy-400 transition-colors"
           />
@@ -79,6 +139,7 @@ export function ContactForm() {
           </label>
           <input
             type="tel"
+            name="Phone"
             className="w-full px-4 py-3 border border-slate-300 text-sm focus:outline-none focus:border-navy-400 transition-colors"
           />
         </div>
@@ -90,6 +151,7 @@ export function ContactForm() {
         </label>
         <input
           type="text"
+          name="Organization"
           className="w-full px-4 py-3 border border-slate-300 text-sm focus:outline-none focus:border-navy-400 transition-colors"
         />
       </div>
@@ -99,6 +161,7 @@ export function ContactForm() {
           Inquiry Type *
         </label>
         <select
+          name="Inquiry Type"
           required
           defaultValue=""
           className="w-full px-4 py-3 border border-slate-300 text-sm focus:outline-none focus:border-navy-400 transition-colors bg-white"
@@ -106,13 +169,19 @@ export function ContactForm() {
           <option value="" disabled>
             Select an option
           </option>
-          <option value="investment">Investment Opportunities</option>
-          <option value="partnership">Partnership & Co-Investment</option>
-          <option value="services">Property Management Services</option>
-          <option value="advisory">Advisory & Consulting</option>
-          <option value="media">Media & Press</option>
-          <option value="careers">Careers</option>
-          <option value="general">General Inquiry</option>
+          <option value="Investment Opportunities">
+            Investment Opportunities
+          </option>
+          <option value="Partnership & Co-Investment">
+            Partnership & Co-Investment
+          </option>
+          <option value="Property Management Services">
+            Property Management Services
+          </option>
+          <option value="Advisory & Consulting">Advisory & Consulting</option>
+          <option value="Media & Press">Media & Press</option>
+          <option value="Careers">Careers</option>
+          <option value="General Inquiry">General Inquiry</option>
         </select>
       </div>
 
@@ -121,6 +190,7 @@ export function ContactForm() {
           Message *
         </label>
         <textarea
+          name="Message"
           required
           rows={5}
           className="w-full px-4 py-3 border border-slate-300 text-sm focus:outline-none focus:border-navy-400 transition-colors resize-none"
@@ -134,7 +204,10 @@ export function ContactForm() {
           id="consent"
           className="mt-1 accent-navy-900"
         />
-        <label htmlFor="consent" className="text-xs text-slate-500 leading-relaxed">
+        <label
+          htmlFor="consent"
+          className="text-xs text-slate-500 leading-relaxed"
+        >
           I consent to Perkway Group collecting and storing the data submitted
           through this form for the purpose of responding to my inquiry. I
           understand that my information will be handled in accordance with the
@@ -144,9 +217,10 @@ export function ContactForm() {
 
       <button
         type="submit"
-        className="px-8 py-4 bg-navy-900 text-white text-sm font-semibold tracking-wide hover:bg-navy-800 transition-colors"
+        disabled={status === "submitting"}
+        className="px-8 py-4 bg-navy-900 text-white text-sm font-semibold tracking-wide hover:bg-navy-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        Submit Inquiry
+        {status === "submitting" ? "Sending..." : "Submit Inquiry"}
       </button>
     </form>
   );
