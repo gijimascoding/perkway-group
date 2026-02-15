@@ -21,17 +21,14 @@ export function ContactForm() {
     });
 
     try {
-      const response = await fetch(
-        "https://formsubmit.co/ajax/info@perkways.com",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-          body: JSON.stringify(data),
-        }
-      );
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(data),
+      });
 
       if (!response.ok) {
         throw new Error("Failed to send message");
@@ -40,6 +37,7 @@ export function ContactForm() {
       const result = await response.json();
       if (result.success) {
         setStatus("success");
+        form.reset();
       } else {
         throw new Error(result.message || "Failed to send message");
       }
@@ -79,15 +77,23 @@ export function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      {/* FormSubmit.co configuration */}
+      {/* Web3Forms configuration */}
       <input
         type="hidden"
-        name="_subject"
+        name="access_key"
+        value="475a6ab7-cddb-4db3-8006-3898b094d8e3"
+      />
+      <input
+        type="hidden"
+        name="subject"
         value="New Inquiry — Perkway Group Website"
       />
-      <input type="hidden" name="_captcha" value="false" />
-      <input type="hidden" name="_template" value="table" />
-      <input type="text" name="_honey" style={{ display: "none" }} />
+      <input
+        type="hidden"
+        name="from_name"
+        value="Perkway Group Contact Form"
+      />
+      <input type="checkbox" name="botcheck" style={{ display: "none" }} />
 
       {/* Error banner */}
       {status === "error" && (
