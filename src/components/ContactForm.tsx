@@ -134,7 +134,7 @@ export function ContactForm() {
           </label>
           <input
             type="email"
-            name="Email"
+            name="email"
             required
             className="w-full px-4 py-3 border border-slate-300 text-sm focus:outline-none focus:border-navy-400 transition-colors"
           />
