@@ -331,7 +331,7 @@ export default function Home() {
             <Reveal delay={120} className="relative aspect-[4/5] overflow-hidden order-first lg:order-last">
               <Image
                 src="/images/sustainability.jpg"
-                alt="Sustainable modern residence"
+                alt="Toronto skyline at dusk"
                 fill
                 sizes="(min-width:1024px) 45vw, 100vw"
                 className="object-cover"
