@@ -51,8 +51,8 @@ export function ContactForm() {
 
   if (status === "success") {
     return (
-      <div className="border border-slate-200 p-10 text-center">
-        <div className="w-12 h-12 bg-navy-900 text-white flex items-center justify-center mx-auto mb-4">
+      <div className="border border-paper-300 p-10 text-center">
+        <div className="w-12 h-12 bg-ink-900 text-white flex items-center justify-center mx-auto mb-4">
           <svg
             width="20"
             height="20"
@@ -64,10 +64,10 @@ export function ContactForm() {
             <path d="M20 6L9 17l-5-5" />
           </svg>
         </div>
-        <h3 className="text-lg font-semibold text-navy-900 mb-2">
+        <h3 className="text-lg font-semibold text-ink-900 mb-2">
           Message Received
         </h3>
-        <p className="text-sm text-slate-600">
+        <p className="text-sm text-ink-600">
           Thank you for your inquiry. A member of our team will respond within
           one business day.
         </p>
@@ -104,73 +104,73 @@ export function ContactForm() {
 
       <div className="grid sm:grid-cols-2 gap-6">
         <div>
-          <label className="block text-xs font-semibold text-navy-900 uppercase tracking-wide mb-2">
+          <label className="block text-xs font-semibold text-ink-900 uppercase tracking-wide mb-2">
             First Name *
           </label>
           <input
             type="text"
             name="First Name"
             required
-            className="w-full px-4 py-3 border border-slate-300 text-sm focus:outline-none focus:border-navy-400 transition-colors"
+            className="w-full px-4 py-3 border border-paper-300 text-sm focus:outline-none focus:border-ink-900 transition-colors"
           />
         </div>
         <div>
-          <label className="block text-xs font-semibold text-navy-900 uppercase tracking-wide mb-2">
+          <label className="block text-xs font-semibold text-ink-900 uppercase tracking-wide mb-2">
             Last Name *
           </label>
           <input
             type="text"
             name="Last Name"
             required
-            className="w-full px-4 py-3 border border-slate-300 text-sm focus:outline-none focus:border-navy-400 transition-colors"
+            className="w-full px-4 py-3 border border-paper-300 text-sm focus:outline-none focus:border-ink-900 transition-colors"
           />
         </div>
       </div>
 
       <div className="grid sm:grid-cols-2 gap-6">
         <div>
-          <label className="block text-xs font-semibold text-navy-900 uppercase tracking-wide mb-2">
+          <label className="block text-xs font-semibold text-ink-900 uppercase tracking-wide mb-2">
             Email *
           </label>
           <input
             type="email"
             name="email"
             required
-            className="w-full px-4 py-3 border border-slate-300 text-sm focus:outline-none focus:border-navy-400 transition-colors"
+            className="w-full px-4 py-3 border border-paper-300 text-sm focus:outline-none focus:border-ink-900 transition-colors"
           />
         </div>
         <div>
-          <label className="block text-xs font-semibold text-navy-900 uppercase tracking-wide mb-2">
+          <label className="block text-xs font-semibold text-ink-900 uppercase tracking-wide mb-2">
             Phone
           </label>
           <input
             type="tel"
             name="Phone"
-            className="w-full px-4 py-3 border border-slate-300 text-sm focus:outline-none focus:border-navy-400 transition-colors"
+            className="w-full px-4 py-3 border border-paper-300 text-sm focus:outline-none focus:border-ink-900 transition-colors"
           />
         </div>
       </div>
 
       <div>
-        <label className="block text-xs font-semibold text-navy-900 uppercase tracking-wide mb-2">
+        <label className="block text-xs font-semibold text-ink-900 uppercase tracking-wide mb-2">
           Organization
         </label>
         <input
           type="text"
           name="Organization"
-          className="w-full px-4 py-3 border border-slate-300 text-sm focus:outline-none focus:border-navy-400 transition-colors"
+          className="w-full px-4 py-3 border border-paper-300 text-sm focus:outline-none focus:border-ink-900 transition-colors"
         />
       </div>
 
       <div>
-        <label className="block text-xs font-semibold text-navy-900 uppercase tracking-wide mb-2">
+        <label className="block text-xs font-semibold text-ink-900 uppercase tracking-wide mb-2">
           Inquiry Type *
         </label>
         <select
           name="Inquiry Type"
           required
           defaultValue=""
-          className="w-full px-4 py-3 border border-slate-300 text-sm focus:outline-none focus:border-navy-400 transition-colors bg-white"
+          className="w-full px-4 py-3 border border-paper-300 text-sm focus:outline-none focus:border-ink-900 transition-colors bg-white"
         >
           <option value="" disabled>
             Select an option
@@ -192,14 +192,14 @@ export function ContactForm() {
       </div>
 
       <div>
-        <label className="block text-xs font-semibold text-navy-900 uppercase tracking-wide mb-2">
+        <label className="block text-xs font-semibold text-ink-900 uppercase tracking-wide mb-2">
           Message *
         </label>
         <textarea
           name="Message"
           required
           rows={5}
-          className="w-full px-4 py-3 border border-slate-300 text-sm focus:outline-none focus:border-navy-400 transition-colors resize-none"
+          className="w-full px-4 py-3 border border-paper-300 text-sm focus:outline-none focus:border-ink-900 transition-colors resize-none"
         />
       </div>
 
@@ -208,11 +208,11 @@ export function ContactForm() {
           type="checkbox"
           required
           id="consent"
-          className="mt-1 accent-navy-900"
+          className="mt-1 accent-ink-900"
         />
         <label
           htmlFor="consent"
-          className="text-xs text-slate-500 leading-relaxed"
+          className="text-xs text-ink-500 leading-relaxed"
         >
           I consent to Perkway Group collecting and storing the data submitted
           through this form for the purpose of responding to my inquiry. I
@@ -224,7 +224,7 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="px-8 py-4 bg-navy-900 text-white text-sm font-semibold tracking-wide hover:bg-navy-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        className="px-8 py-4 bg-ink-900 text-white text-sm font-semibold tracking-wide hover:bg-ink-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {status === "submitting" ? "Sending..." : "Submit Inquiry"}
       </button>

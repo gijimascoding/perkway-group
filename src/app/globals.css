@@ -1,65 +1,116 @@
 @import "tailwindcss";
 
 @theme {
-  --color-navy-50: #f0f2f7;
-  --color-navy-100: #d9dde8;
-  --color-navy-200: #b3bbd1;
-  --color-navy-300: #8d99ba;
-  --color-navy-400: #6777a3;
-  --color-navy-500: #4a5a8a;
-  --color-navy-600: #3a4770;
-  --color-navy-700: #2a3455;
-  --color-navy-800: #1a213b;
-  --color-navy-900: #0d1120;
-  --color-navy-950: #070a14;
+  /* Ink / charcoal — primary text and dark UI */
+  --color-ink-900: #17181a;
+  --color-ink-800: #26282b;
+  --color-ink-700: #3a3d42;
+  --color-ink-600: #565a61;
+  --color-ink-500: #71767e;
+  --color-ink-400: #9aa0a8;
+  --color-ink-300: #c3c7cd;
 
-  --color-gold-50: #fdf8f0;
-  --color-gold-100: #f9edd8;
-  --color-gold-200: #f2d9ad;
-  --color-gold-300: #e9c07a;
-  --color-gold-400: #dfa94e;
-  --color-gold-500: #c4912e;
-  --color-gold-600: #a07425;
-  --color-gold-700: #7c5a1d;
-  --color-gold-800: #5a4116;
-  --color-gold-900: #3d2c0f;
+  /* Paper — off-white neutrals */
+  --color-paper-50: #ffffff;
+  --color-paper-100: #faf9f6;
+  --color-paper-200: #f4f2ec;
+  --color-paper-300: #ebe8df;
 
-  --color-slate-50: #f8f9fa;
-  --color-slate-100: #f1f3f5;
-  --color-slate-200: #e9ecef;
-  --color-slate-300: #dee2e6;
-  --color-slate-400: #ced4da;
-  --color-slate-500: #adb5bd;
-  --color-slate-600: #868e96;
-  --color-slate-700: #495057;
-  --color-slate-800: #343a40;
-  --color-slate-900: #212529;
+  /* Sage — Apple-REIT muted accent boxes */
+  --color-sage-100: #eceadd;
+  --color-sage-200: #dcdccd;
+  --color-sage-300: #c7c8b4;
 
-  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --font-serif: "Georgia", "Times New Roman", serif;
+  /* Gold — eyebrow labels, dividers, accents */
+  --color-gold-400: #c79a3f;
+  --color-gold-500: #a8842c;
+  --color-gold-600: #8a6d24;
+
+  --font-sans: var(--font-nunito), ui-sans-serif, system-ui, -apple-system, sans-serif;
 }
 
 @layer base {
   html {
-    scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
+  /* Smooth scroll only when the user hasn't asked for reduced motion. */
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+  }
+
   body {
     font-family: var(--font-sans);
-    color: var(--color-navy-900);
-    background-color: #ffffff;
+    color: var(--color-ink-800);
+    background-color: var(--color-paper-100);
+    font-size: 17px;
+    line-height: 1.7;
+  }
+
+  h1, h2, h3, h4 {
+    color: var(--color-ink-900);
+    line-height: 1.05;
   }
 
   ::selection {
-    background-color: var(--color-navy-800);
+    background-color: var(--color-ink-900);
     color: #ffffff;
+  }
+
+  /* Keyboard focus: visible ring on keyboard nav only, never on mouse click. */
+  :focus { outline: none; }
+  :focus-visible {
+    outline: 2px solid var(--color-ink-900);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  /* On dark surfaces (nav, footer, dark hero CTAs) a white ring reads better. */
+  .bg-ink-900 :focus-visible,
+  header :focus-visible {
+    outline-color: #ffffff;
+  }
+
+  section[id] {
+    scroll-margin-top: 84px;
   }
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  .text-balance { text-wrap: balance; }
+
+  /* Giant uppercase display headline — matches Apple Hospitality REIT
+     (Nunito Sans ExtraBold 800, normal tracking). */
+  .display {
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    line-height: 0.98;
+  }
+
+  /* Restrained uppercase eyebrow label — monochrome, institutional */
+  .eyebrow {
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 12px;
+    color: var(--color-ink-500);
+  }
+  .eyebrow-light {
+    color: rgba(255, 255, 255, 0.55);
+  }
+}
+
+/* Scroll-reveal (progressive enhancement; visible by default without JS) */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1),
+                transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+  .reveal.in {
+    opacity: 1;
+    transform: none;
   }
 }
