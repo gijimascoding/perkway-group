@@ -28,7 +28,7 @@ export default function AboutPage() {
             {metrics.map((m, i) => (
               <Reveal key={m.label} delay={i * 60} className={i > 0 ? "lg:border-l lg:border-paper-300 lg:pl-4" : ""}>
                 <p className="text-ink-900 font-[800] text-[clamp(1.8rem,3vw,2.6rem)] leading-none tabular-nums">{m.value}</p>
-                <p className="mt-2.5 text-ink-500 text-[11.5px] font-[700] uppercase tracking-[0.13em]">{m.label}</p>
+                <p className="mt-2.5 text-ink-600 text-[11.5px] font-[700] uppercase tracking-[0.13em]">{m.label}</p>
               </Reveal>
             ))}
           </div>

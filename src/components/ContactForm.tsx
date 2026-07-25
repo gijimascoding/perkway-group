@@ -104,73 +104,79 @@ export function ContactForm() {
 
       <div className="grid sm:grid-cols-2 gap-6">
         <div>
-          <label className="block text-xs font-semibold text-ink-900 uppercase tracking-wide mb-2">
+          <label htmlFor="cf-first" className="block text-xs font-semibold text-ink-900 uppercase tracking-wide mb-2">
             First Name *
           </label>
           <input
+            id="cf-first"
             type="text"
             name="First Name"
             required
-            className="w-full px-4 py-3 border border-paper-300 text-sm focus:outline-none focus:border-ink-900 transition-colors"
+            className="w-full px-4 py-3 border border-paper-300 text-base focus:outline-none focus:border-ink-900 transition-colors"
           />
         </div>
         <div>
-          <label className="block text-xs font-semibold text-ink-900 uppercase tracking-wide mb-2">
+          <label htmlFor="cf-last" className="block text-xs font-semibold text-ink-900 uppercase tracking-wide mb-2">
             Last Name *
           </label>
           <input
+            id="cf-last"
             type="text"
             name="Last Name"
             required
-            className="w-full px-4 py-3 border border-paper-300 text-sm focus:outline-none focus:border-ink-900 transition-colors"
+            className="w-full px-4 py-3 border border-paper-300 text-base focus:outline-none focus:border-ink-900 transition-colors"
           />
         </div>
       </div>
 
       <div className="grid sm:grid-cols-2 gap-6">
         <div>
-          <label className="block text-xs font-semibold text-ink-900 uppercase tracking-wide mb-2">
+          <label htmlFor="cf-email" className="block text-xs font-semibold text-ink-900 uppercase tracking-wide mb-2">
             Email *
           </label>
           <input
+            id="cf-email"
             type="email"
             name="email"
             required
-            className="w-full px-4 py-3 border border-paper-300 text-sm focus:outline-none focus:border-ink-900 transition-colors"
+            className="w-full px-4 py-3 border border-paper-300 text-base focus:outline-none focus:border-ink-900 transition-colors"
           />
         </div>
         <div>
-          <label className="block text-xs font-semibold text-ink-900 uppercase tracking-wide mb-2">
+          <label htmlFor="cf-phone" className="block text-xs font-semibold text-ink-900 uppercase tracking-wide mb-2">
             Phone
           </label>
           <input
+            id="cf-phone"
             type="tel"
             name="Phone"
-            className="w-full px-4 py-3 border border-paper-300 text-sm focus:outline-none focus:border-ink-900 transition-colors"
+            className="w-full px-4 py-3 border border-paper-300 text-base focus:outline-none focus:border-ink-900 transition-colors"
           />
         </div>
       </div>
 
       <div>
-        <label className="block text-xs font-semibold text-ink-900 uppercase tracking-wide mb-2">
+        <label htmlFor="cf-org" className="block text-xs font-semibold text-ink-900 uppercase tracking-wide mb-2">
           Organization
         </label>
         <input
+          id="cf-org"
           type="text"
           name="Organization"
-          className="w-full px-4 py-3 border border-paper-300 text-sm focus:outline-none focus:border-ink-900 transition-colors"
+          className="w-full px-4 py-3 border border-paper-300 text-base focus:outline-none focus:border-ink-900 transition-colors"
         />
       </div>
 
       <div>
-        <label className="block text-xs font-semibold text-ink-900 uppercase tracking-wide mb-2">
+        <label htmlFor="cf-inquiry" className="block text-xs font-semibold text-ink-900 uppercase tracking-wide mb-2">
           Inquiry Type *
         </label>
         <select
+          id="cf-inquiry"
           name="Inquiry Type"
           required
           defaultValue=""
-          className="w-full px-4 py-3 border border-paper-300 text-sm focus:outline-none focus:border-ink-900 transition-colors bg-white"
+          className="w-full px-4 py-3 border border-paper-300 text-base focus:outline-none focus:border-ink-900 transition-colors bg-white"
         >
           <option value="" disabled>
             Select an option
@@ -192,14 +198,15 @@ export function ContactForm() {
       </div>
 
       <div>
-        <label className="block text-xs font-semibold text-ink-900 uppercase tracking-wide mb-2">
+        <label htmlFor="cf-message" className="block text-xs font-semibold text-ink-900 uppercase tracking-wide mb-2">
           Message *
         </label>
         <textarea
+          id="cf-message"
           name="Message"
           required
           rows={5}
-          className="w-full px-4 py-3 border border-paper-300 text-sm focus:outline-none focus:border-ink-900 transition-colors resize-none"
+          className="w-full px-4 py-3 border border-paper-300 text-base focus:outline-none focus:border-ink-900 transition-colors resize-none"
         />
       </div>
 
@@ -212,7 +219,7 @@ export function ContactForm() {
         />
         <label
           htmlFor="consent"
-          className="text-xs text-ink-500 leading-relaxed"
+          className="text-xs text-ink-600 leading-relaxed"
         >
           I consent to Perkway Group collecting and storing the data submitted
           through this form for the purpose of responding to my inquiry. I

@@ -33,7 +33,7 @@ export function PageHero({
 
       <div className="relative w-full max-w-[1360px] mx-auto px-6 lg:px-10 pb-20 lg:pb-28">
         <p className="eyebrow eyebrow-light">{eyebrow}</p>
-        <h1 className="display mt-6 text-white text-[clamp(2.8rem,7vw,6rem)] max-w-[18ch]">{title}</h1>
+        <h1 className="display mt-6 text-white text-[clamp(2rem,6vw,5.25rem)] max-w-[18ch] break-words">{title}</h1>
         {subtitle && (
           <p className="mt-7 max-w-[58ch] text-white/85 text-[18px] lg:text-[21px] leading-relaxed font-[300]">
             {subtitle}

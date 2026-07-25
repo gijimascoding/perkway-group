@@ -39,6 +39,7 @@ export function CountUp({ value, className = "" }: { value: string; className?: 
       setDisplay(value);
       return;
     }
+    let raf: number | undefined;
     const io = new IntersectionObserver(
       ([entry]) => {
         if (!entry.isIntersecting) return;
@@ -50,14 +51,17 @@ export function CountUp({ value, className = "" }: { value: string; className?: 
           const p = Math.min((t - start) / duration, 1);
           const eased = 1 - Math.pow(1 - p, 3);
           setDisplay(`${prefix}${format(num * eased, decimals, hasComma)}${suffix}`);
-          if (p < 1) requestAnimationFrame(step);
+          if (p < 1) raf = requestAnimationFrame(step);
         };
-        requestAnimationFrame(step);
+        raf = requestAnimationFrame(step);
       },
       { threshold: 0.4 }
     );
     io.observe(el);
-    return () => io.disconnect();
+    return () => {
+      io.disconnect();
+      if (raf) cancelAnimationFrame(raf);
+    };
   }, [num, prefix, suffix, decimals, hasComma, value]);
 
   return (

@@ -26,11 +26,11 @@ export default function InsightsPage() {
           <Reveal className="group border-t-2 border-ink-900 pt-8 pb-14 mb-14 border-b border-paper-300">
             <div className="grid lg:grid-cols-[1fr_1.4fr] gap-8 lg:gap-16">
               <div className="flex items-center gap-4 text-[11px] font-[700] uppercase tracking-[0.12em]">
-                <span className="text-ink-500">{feature.category}</span>
+                <span className="text-ink-600">{feature.category}</span>
                 <span className="text-ink-400">{feature.date}</span>
               </div>
               <div>
-                <h2 className="text-ink-900 text-[clamp(1.6rem,2.8vw,2.4rem)] font-[800] leading-tight group-hover:text-ink-500 transition-colors">
+                <h2 className="text-ink-900 text-[clamp(1.6rem,2.8vw,2.4rem)] font-[800] leading-tight group-hover:text-ink-600 transition-colors">
                   {feature.title}
                 </h2>
                 <p className="mt-5 text-ink-700 text-[16.5px] leading-relaxed max-w-[62ch]">{feature.excerpt}</p>
@@ -43,10 +43,10 @@ export default function InsightsPage() {
             {rest.map((n, i) => (
               <Reveal key={n.id} delay={i * 90} className="group border-t-2 border-ink-900 pt-6">
                 <div className="flex items-center justify-between text-[11px] font-[700] uppercase tracking-[0.12em]">
-                  <span className="text-ink-500">{n.category}</span>
+                  <span className="text-ink-600">{n.category}</span>
                   <span className="text-ink-400">{n.date}</span>
                 </div>
-                <h3 className="mt-4 text-ink-900 text-[20px] font-[800] leading-snug group-hover:text-ink-500 transition-colors">
+                <h3 className="mt-4 text-ink-900 text-[20px] font-[800] leading-snug group-hover:text-ink-600 transition-colors">
                   {n.title}
                 </h3>
                 <p className="mt-3.5 text-ink-600 text-[14.5px] leading-relaxed">{n.excerpt}</p>

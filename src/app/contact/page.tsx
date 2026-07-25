@@ -59,8 +59,8 @@ export default function ContactPage() {
                       { l: "Phone", v: company.phone, href: `tel:${company.phone.replace(/[^0-9+]/g, "")}` },
                     ].map((c) => (
                       <div key={c.l}>
-                        <p className="text-[11px] text-ink-500 uppercase tracking-[0.1em] font-[700] mb-1">{c.l}</p>
-                        <a href={c.href} className="text-[15px] text-ink-900 font-[700] hover:text-ink-500 transition-colors">
+                        <p className="text-[11px] text-ink-600 uppercase tracking-[0.1em] font-[700] mb-1">{c.l}</p>
+                        <a href={c.href} className="text-[15px] text-ink-900 font-[700] hover:text-ink-600 transition-colors">
                           {c.v}
                         </a>
                       </div>
@@ -80,7 +80,7 @@ export default function ContactPage() {
                       "Careers & Employment",
                     ].map((item) => (
                       <li key={item} className="flex items-start gap-2.5 text-[14px] text-white/75">
-                        <span className="mt-[9px] w-1 h-1 rounded-full bg-ink-900 shrink-0" />
+                        <span className="mt-[9px] w-1 h-1 rounded-full bg-white/40 shrink-0" />
                         {item}
                       </li>
                     ))}

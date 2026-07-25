@@ -32,12 +32,12 @@ export default function PortfolioPage() {
                 <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-8 lg:gap-16 p-8 lg:p-14">
                   <div>
                     <div className="flex items-baseline gap-4">
-                      <span className="text-ink-500 font-[800] text-[22px] tabular-nums">
+                      <span className="text-ink-600 font-[800] text-[22px] tabular-nums">
                         {String(i + 1).padStart(2, "0")}
                       </span>
                       <span className="h-px flex-1 bg-paper-300" />
                     </div>
-                    <p className="mt-5 text-[11px] font-[700] uppercase tracking-[0.14em] text-ink-500">{s.subtitle}</p>
+                    <p className="mt-5 text-[11px] font-[700] uppercase tracking-[0.14em] text-ink-600">{s.subtitle}</p>
                     <h2 className="mt-2 text-ink-900 text-[clamp(1.6rem,2.6vw,2.2rem)] font-[800] leading-tight max-w-[16ch]">
                       {s.title}
                     </h2>

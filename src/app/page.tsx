@@ -64,7 +64,7 @@ export default function Home() {
             {metrics.map((m, i) => (
               <Reveal key={m.label} delay={i * 60} className={i > 0 ? "lg:border-l lg:border-paper-300 lg:pl-4" : ""}>
                 <CountUp value={m.value} className="text-ink-900 font-[800] text-[clamp(1.8rem,3vw,2.6rem)] leading-none block" />
-                <p className="mt-2.5 text-ink-500 text-[11.5px] font-[700] uppercase tracking-[0.13em]">
+                <p className="mt-2.5 text-ink-600 text-[11.5px] font-[700] uppercase tracking-[0.13em]">
                   {m.label}
                 </p>
               </Reveal>
@@ -96,7 +96,7 @@ export default function Home() {
             </div>
             <Link
               href="/about"
-              className="mt-12 inline-block text-[13px] font-[700] tracking-[0.14em] uppercase text-ink-900 border-b-2 border-ink-900 pb-1 py-1.5 hover:text-ink-500 transition-colors"
+              className="mt-12 inline-block text-[13px] font-[700] tracking-[0.14em] uppercase text-ink-900 border-b-2 border-ink-900 pb-1.5 py-3 hover:text-ink-600 transition-colors"
             >
               Learn More About Perkway
             </Link>
@@ -115,7 +115,7 @@ export default function Home() {
               ].map((s) => (
                 <Reveal key={s.l}>
                   <CountUp value={s.v} className="text-ink-900 font-[800] text-[clamp(2rem,3vw,2.6rem)] leading-none block" />
-                  <p className="mt-3 text-ink-500 text-[11px] font-[700] uppercase tracking-[0.13em]">{s.l}</p>
+                  <p className="mt-3 text-ink-600 text-[11px] font-[700] uppercase tracking-[0.13em]">{s.l}</p>
                 </Reveal>
               ))}
             </div>
@@ -160,7 +160,7 @@ export default function Home() {
           <Reveal className="mt-14">
             <Link
               href="/portfolio"
-              className="inline-block text-[13px] font-[700] tracking-[0.14em] uppercase text-white border-b-2 border-white/50 pb-1 py-1.5 hover:text-white transition-colors"
+              className="inline-block text-[13px] font-[700] tracking-[0.14em] uppercase text-white border-b-2 border-white/50 pb-1.5 py-3 hover:text-white transition-colors"
             >
               Explore All Business Segments
             </Link>
@@ -177,7 +177,7 @@ export default function Home() {
               We build businesses designed to compound value across generations, not quarters.
             </blockquote>
             <div className="mt-8 h-px w-12 bg-ink-900 mx-auto" />
-            <p className="mt-6 text-ink-500 text-[12px] font-[700] uppercase tracking-[0.16em]">
+            <p className="mt-6 text-ink-600 text-[12px] font-[700] uppercase tracking-[0.16em]">
               Perkway Group &middot; Investment Philosophy
             </p>
           </Reveal>
@@ -206,7 +206,7 @@ export default function Home() {
           <Reveal className="mt-14">
             <Link
               href="/leadership"
-              className="inline-block text-[13px] font-[700] tracking-[0.14em] uppercase text-ink-900 border-b-2 border-ink-900 pb-1 py-1.5 hover:text-ink-500 transition-colors"
+              className="inline-block text-[13px] font-[700] tracking-[0.14em] uppercase text-ink-900 border-b-2 border-ink-900 pb-1.5 py-3 hover:text-ink-600 transition-colors"
             >
               View Full Leadership Team &amp; Board
             </Link>
@@ -216,7 +216,7 @@ export default function Home() {
 
       {/* ============ GLOBAL PRESENCE ============ */}
       <section id="global" className="relative overflow-hidden bg-ink-900">
-        <Image src="/images/skyline.jpg" alt="City skyline" fill sizes="100vw" className="object-cover opacity-25" />
+        <Image src="/images/skyline.jpg" alt="" aria-hidden fill sizes="100vw" className="object-cover opacity-25" />
         <div className="absolute inset-0 bg-ink-900/70" />
         <div className="relative max-w-[1360px] mx-auto px-6 lg:px-10 py-24 lg:py-32">
           <div className="grid lg:grid-cols-[1.1fr_1fr] gap-14 lg:gap-20 items-start">
@@ -269,7 +269,7 @@ export default function Home() {
             </div>
             <Link
               href="/insights"
-              className="text-[13px] font-[700] tracking-[0.14em] uppercase text-ink-900 border-b-2 border-ink-900 pb-1 py-1.5 hover:text-ink-500 transition-colors"
+              className="text-[13px] font-[700] tracking-[0.14em] uppercase text-ink-900 border-b-2 border-ink-900 pb-1.5 py-3 hover:text-ink-600 transition-colors"
             >
               View All
             </Link>
@@ -279,10 +279,10 @@ export default function Home() {
             {insights.slice(0, 3).map((n, i) => (
               <Reveal key={n.id} delay={i * 90} className="group border-t-2 border-ink-900 pt-6">
                 <div className="flex items-center justify-between text-[11px] font-[700] uppercase tracking-[0.12em]">
-                  <span className="text-ink-500">{n.category}</span>
+                  <span className="text-ink-600">{n.category}</span>
                   <span className="text-ink-400">{n.date}</span>
                 </div>
-                <h3 className="mt-4 text-ink-900 text-[20px] font-[800] leading-snug group-hover:text-ink-500 transition-colors">
+                <h3 className="mt-4 text-ink-900 text-[20px] font-[800] leading-snug group-hover:text-ink-600 transition-colors">
                   {n.title}
                 </h3>
                 <p className="mt-3.5 text-ink-600 text-[14.5px] leading-relaxed">{n.excerpt}</p>
