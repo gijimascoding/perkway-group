@@ -86,7 +86,7 @@ export default function AboutPage() {
           </Reveal>
           <div className="mt-12 grid sm:grid-cols-3 gap-5 max-w-3xl">
             {globalPresence.map((o) => (
-              <Reveal key={o.city} className="border-l-2 border-gold-500 pl-4">
+              <Reveal key={o.city} className="border-l-2 border-white/40 pl-4">
                 <p className="text-white text-[18px] font-[800]">{o.city}</p>
                 <p className="text-white/55 text-[13px]">{o.country}</p>
                 <p className="mt-1 text-[10.5px] uppercase tracking-[0.12em] text-white/40">{o.type}</p>
@@ -94,7 +94,7 @@ export default function AboutPage() {
             ))}
           </div>
           <Reveal className="mt-14">
-            <p className="text-[11px] font-[700] uppercase tracking-[0.14em] text-gold-400">Active Markets</p>
+            <p className="text-[11px] font-[700] uppercase tracking-[0.14em] text-white/55">Active Markets</p>
             <div className="mt-5 flex flex-wrap gap-2.5">
               {operatingMarkets.map((mk) => (
                 <span key={mk} className="px-4 py-2 border border-white/20 text-white/85 text-[13.5px] font-[600]">{mk}</span>
@@ -117,7 +117,7 @@ function CTASection() {
           <h2 className="display text-ink-900 text-[clamp(1.8rem,3.4vw,2.8rem)] max-w-[24ch] mx-auto">
             Explore Partnership &amp; Investment Opportunities
           </h2>
-          <Link href="/contact" className="mt-8 inline-block px-8 py-3.5 bg-gold-500 text-white text-[13px] font-[700] tracking-[0.14em] uppercase hover:bg-gold-600 transition-colors">
+          <Link href="/contact" className="mt-8 inline-block px-8 py-3.5 bg-ink-900 text-white text-[13px] font-[700] tracking-[0.14em] uppercase hover:bg-ink-800 transition-colors">
             Get in Touch
           </Link>
         </Reveal>

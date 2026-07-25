@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { company, navigationItems, businessSegments } from "@/data/company";
+import { GlobeMark } from "@/components/GlobeMark";
 
 export function Footer() {
   return (
@@ -9,9 +10,7 @@ export function Footer() {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-3">
-              <span className="w-9 h-9 rounded-sm bg-white flex items-center justify-center text-[13px] font-[900] text-ink-900">
-                PG
-              </span>
+              <GlobeMark className="w-9 h-9" />
               <span className="text-white text-[15px] font-[800] tracking-[0.16em] uppercase">
                 Perkway Group
               </span>
@@ -29,7 +28,7 @@ export function Footer() {
             <ul className="mt-5 space-y-3">
               {navigationItems.map((item) => (
                 <li key={item.href}>
-                  <Link href={item.href} className="text-[14.5px] hover:text-gold-400 transition-colors">
+                  <Link href={item.href} className="text-[14.5px] hover:text-white/55 transition-colors">
                     {item.label}
                   </Link>
                 </li>
@@ -43,7 +42,7 @@ export function Footer() {
             <ul className="mt-5 space-y-3">
               {businessSegments.slice(0, 6).map((s) => (
                 <li key={s.id}>
-                  <Link href="/portfolio" className="text-[14.5px] hover:text-gold-400 transition-colors">
+                  <Link href="/portfolio" className="text-[14.5px] hover:text-white/55 transition-colors">
                     {s.title}
                   </Link>
                 </li>
@@ -61,11 +60,11 @@ export function Footer() {
               <br />
               {company.address.country}
               <br />
-              <a href={`mailto:${company.email}`} className="mt-3 inline-block hover:text-gold-400 transition-colors">
+              <a href={`mailto:${company.email}`} className="mt-3 inline-block hover:text-white/55 transition-colors">
                 {company.email}
               </a>
               <br />
-              <a href={`tel:${company.phone.replace(/[^0-9+]/g, "")}`} className="hover:text-gold-400 transition-colors">
+              <a href={`tel:${company.phone.replace(/[^0-9+]/g, "")}`} className="hover:text-white/55 transition-colors">
                 {company.phone}
               </a>
             </address>

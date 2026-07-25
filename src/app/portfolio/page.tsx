@@ -32,12 +32,12 @@ export default function PortfolioPage() {
                 <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-8 lg:gap-16 p-8 lg:p-14">
                   <div>
                     <div className="flex items-baseline gap-4">
-                      <span className="text-gold-500 font-[800] text-[22px] tabular-nums">
+                      <span className="text-ink-500 font-[800] text-[22px] tabular-nums">
                         {String(i + 1).padStart(2, "0")}
                       </span>
                       <span className="h-px flex-1 bg-paper-300" />
                     </div>
-                    <p className="mt-5 text-[11px] font-[700] uppercase tracking-[0.14em] text-gold-600">{s.subtitle}</p>
+                    <p className="mt-5 text-[11px] font-[700] uppercase tracking-[0.14em] text-ink-500">{s.subtitle}</p>
                     <h2 className="mt-2 text-ink-900 text-[clamp(1.6rem,2.6vw,2.2rem)] font-[800] leading-tight max-w-[16ch]">
                       {s.title}
                     </h2>
@@ -47,7 +47,7 @@ export default function PortfolioPage() {
                     <ul className="mt-6 grid sm:grid-cols-2 gap-x-8 gap-y-3">
                       {s.highlights.map((h) => (
                         <li key={h} className="flex items-start gap-3 text-ink-700 text-[14.5px] leading-snug">
-                          <span className="mt-[9px] h-[5px] w-[5px] rounded-full bg-gold-500 shrink-0" />
+                          <span className="mt-[9px] h-[5px] w-[5px] rounded-full bg-ink-900 shrink-0" />
                           {h}
                         </li>
                       ))}
@@ -66,7 +66,7 @@ export default function PortfolioPage() {
             <h2 className="display text-white text-[clamp(1.8rem,3.4vw,2.8rem)] max-w-[26ch] mx-auto">
               Partner With a Vertically Integrated Platform
             </h2>
-            <Link href="/contact" className="mt-8 inline-block px-8 py-3.5 bg-gold-500 text-white text-[13px] font-[700] tracking-[0.14em] uppercase hover:bg-gold-600 transition-colors">
+            <Link href="/contact" className="mt-8 inline-block px-8 py-3.5 bg-ink-900 text-white text-[13px] font-[700] tracking-[0.14em] uppercase hover:bg-ink-800 transition-colors">
               Investor Inquiries
             </Link>
           </Reveal>

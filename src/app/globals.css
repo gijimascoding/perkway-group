@@ -31,9 +31,13 @@
 
 @layer base {
   html {
-    scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Smooth scroll only when the user hasn't asked for reduced motion. */
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
   }
 
   body {
@@ -54,6 +58,19 @@
     color: #ffffff;
   }
 
+  /* Keyboard focus: visible ring on keyboard nav only, never on mouse click. */
+  :focus { outline: none; }
+  :focus-visible {
+    outline: 2px solid var(--color-ink-900);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  /* On dark surfaces (nav, footer, dark hero CTAs) a white ring reads better. */
+  .bg-ink-900 :focus-visible,
+  header :focus-visible {
+    outline-color: #ffffff;
+  }
+
   section[id] {
     scroll-margin-top: 84px;
   }
@@ -62,21 +79,25 @@
 @layer utilities {
   .text-balance { text-wrap: balance; }
 
-  /* Giant uppercase display headline, Apple-REIT signature */
+  /* Giant uppercase display headline — matches Apple Hospitality REIT
+     (Nunito Sans ExtraBold 800, normal tracking). */
   .display {
-    font-weight: 900;
+    font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: -0.01em;
-    line-height: 0.95;
+    letter-spacing: 0;
+    line-height: 0.98;
   }
 
-  /* Gold uppercase eyebrow label */
+  /* Restrained uppercase eyebrow label — monochrome, institutional */
   .eyebrow {
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.18em;
     font-size: 12px;
-    color: var(--color-gold-500);
+    color: var(--color-ink-500);
+  }
+  .eyebrow-light {
+    color: rgba(255, 255, 255, 0.55);
   }
 }
 

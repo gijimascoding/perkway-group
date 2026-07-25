@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { navigationItems } from "@/data/company";
+import { GlobeMark } from "@/components/GlobeMark";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -34,9 +35,7 @@ export function Navbar() {
         <div className="flex items-center justify-between h-[68px]">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3">
-            <span className="w-9 h-9 rounded-sm bg-white flex items-center justify-center text-[13px] font-[900] tracking-tight text-ink-900">
-              PG
-            </span>
+            <GlobeMark className="w-9 h-9" />
             <span className="text-white text-[15px] font-[800] tracking-[0.16em] uppercase">
               Perkway Group
             </span>
@@ -48,14 +47,14 @@ export function Navbar() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-white/85 text-[13px] font-[700] tracking-[0.14em] uppercase transition-colors duration-200 hover:text-gold-400"
+                className="text-white/85 text-[13px] font-[700] tracking-[0.14em] uppercase transition-colors duration-200 hover:text-white/55"
               >
                 {item.label}
               </Link>
             ))}
             <Link
               href="/contact"
-              className="text-[12.5px] font-[700] tracking-[0.14em] uppercase px-5 py-2.5 border border-white/35 text-white transition-all duration-200 hover:border-gold-400 hover:text-gold-400"
+              className="text-[12.5px] font-[700] tracking-[0.14em] uppercase px-5 py-2.5 border border-white/35 text-white transition-all duration-200 hover:border-white hover:text-white/55"
             >
               Investor Inquiries
             </Link>
@@ -91,7 +90,7 @@ export function Navbar() {
             <Link
               href="/contact"
               onClick={() => setMobileOpen(false)}
-              className="mt-6 text-center py-3.5 bg-gold-500 text-white text-[13px] font-[700] tracking-[0.14em] uppercase"
+              className="mt-6 text-center py-3.5 bg-ink-900 text-white text-[13px] font-[700] tracking-[0.14em] uppercase"
             >
               Investor Inquiries
             </Link>

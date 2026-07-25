@@ -60,7 +60,7 @@ export default function ContactPage() {
                     ].map((c) => (
                       <div key={c.l}>
                         <p className="text-[11px] text-ink-500 uppercase tracking-[0.1em] font-[700] mb-1">{c.l}</p>
-                        <a href={c.href} className="text-[15px] text-ink-900 font-[700] hover:text-gold-600 transition-colors">
+                        <a href={c.href} className="text-[15px] text-ink-900 font-[700] hover:text-ink-500 transition-colors">
                           {c.v}
                         </a>
                       </div>
@@ -69,7 +69,7 @@ export default function ContactPage() {
                 </div>
 
                 <div className="bg-ink-900 p-8 text-white">
-                  <p className="text-[11px] font-[700] uppercase tracking-[0.14em] text-gold-400">How Can We Help</p>
+                  <p className="text-[11px] font-[700] uppercase tracking-[0.14em] text-white/55">How Can We Help</p>
                   <ul className="mt-4 space-y-3">
                     {[
                       "Investment & Co-Investment Opportunities",
@@ -80,7 +80,7 @@ export default function ContactPage() {
                       "Careers & Employment",
                     ].map((item) => (
                       <li key={item} className="flex items-start gap-2.5 text-[14px] text-white/75">
-                        <span className="mt-[9px] w-1 h-1 rounded-full bg-gold-400 shrink-0" />
+                        <span className="mt-[9px] w-1 h-1 rounded-full bg-ink-900 shrink-0" />
                         {item}
                       </li>
                     ))}

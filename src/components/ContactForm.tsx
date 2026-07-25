@@ -111,7 +111,7 @@ export function ContactForm() {
             type="text"
             name="First Name"
             required
-            className="w-full px-4 py-3 border border-paper-300 text-sm focus:outline-none focus:border-gold-500 transition-colors"
+            className="w-full px-4 py-3 border border-paper-300 text-sm focus:outline-none focus:border-ink-900 transition-colors"
           />
         </div>
         <div>
@@ -122,7 +122,7 @@ export function ContactForm() {
             type="text"
             name="Last Name"
             required
-            className="w-full px-4 py-3 border border-paper-300 text-sm focus:outline-none focus:border-gold-500 transition-colors"
+            className="w-full px-4 py-3 border border-paper-300 text-sm focus:outline-none focus:border-ink-900 transition-colors"
           />
         </div>
       </div>
@@ -136,7 +136,7 @@ export function ContactForm() {
             type="email"
             name="email"
             required
-            className="w-full px-4 py-3 border border-paper-300 text-sm focus:outline-none focus:border-gold-500 transition-colors"
+            className="w-full px-4 py-3 border border-paper-300 text-sm focus:outline-none focus:border-ink-900 transition-colors"
           />
         </div>
         <div>
@@ -146,7 +146,7 @@ export function ContactForm() {
           <input
             type="tel"
             name="Phone"
-            className="w-full px-4 py-3 border border-paper-300 text-sm focus:outline-none focus:border-gold-500 transition-colors"
+            className="w-full px-4 py-3 border border-paper-300 text-sm focus:outline-none focus:border-ink-900 transition-colors"
           />
         </div>
       </div>
@@ -158,7 +158,7 @@ export function ContactForm() {
         <input
           type="text"
           name="Organization"
-          className="w-full px-4 py-3 border border-paper-300 text-sm focus:outline-none focus:border-gold-500 transition-colors"
+          className="w-full px-4 py-3 border border-paper-300 text-sm focus:outline-none focus:border-ink-900 transition-colors"
         />
       </div>
 
@@ -170,7 +170,7 @@ export function ContactForm() {
           name="Inquiry Type"
           required
           defaultValue=""
-          className="w-full px-4 py-3 border border-paper-300 text-sm focus:outline-none focus:border-gold-500 transition-colors bg-white"
+          className="w-full px-4 py-3 border border-paper-300 text-sm focus:outline-none focus:border-ink-900 transition-colors bg-white"
         >
           <option value="" disabled>
             Select an option
@@ -199,7 +199,7 @@ export function ContactForm() {
           name="Message"
           required
           rows={5}
-          className="w-full px-4 py-3 border border-paper-300 text-sm focus:outline-none focus:border-gold-500 transition-colors resize-none"
+          className="w-full px-4 py-3 border border-paper-300 text-sm focus:outline-none focus:border-ink-900 transition-colors resize-none"
         />
       </div>
 
