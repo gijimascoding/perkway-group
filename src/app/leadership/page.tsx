@@ -25,20 +25,20 @@ export default function LeadershipPage() {
       />
 
       <section className="bg-paper-100">
-        <div className="max-w-[1360px] mx-auto px-6 lg:px-10 py-24 lg:py-32">
+        <div className="container-x section-pad">
           <Reveal>
-            <p className="eyebrow">Executive Team</p>
-            <h2 className="display mt-4 text-ink-900 text-[clamp(1.8rem,3.4vw,2.8rem)]">Executive Leadership</h2>
+            <p className="eyebrow max-w-[260px]">Executive Team</p>
+            <h2 className="h2 mt-8 text-ink-900">Executive Leadership</h2>
           </Reveal>
-          <Reveal className="mt-12">
+          <Reveal className="mt-16">
             <TeamGrid members={executives} columns={4} />
           </Reveal>
 
-          <Reveal className="mt-24">
-            <p className="eyebrow">Board of Directors</p>
-            <h2 className="display mt-4 text-ink-900 text-[clamp(1.8rem,3.4vw,2.8rem)]">Board &amp; Advisors</h2>
+          <Reveal className="mt-32">
+            <p className="eyebrow max-w-[260px]">Board of Directors</p>
+            <h2 className="h2 mt-8 text-ink-900">Board &amp; Advisors</h2>
           </Reveal>
-          <Reveal className="mt-12">
+          <Reveal className="mt-16">
             <TeamGrid members={board} columns={3} />
           </Reveal>
         </div>

@@ -51,7 +51,7 @@ export function ContactForm() {
 
   if (status === "success") {
     return (
-      <div className="border border-paper-300 p-10 text-center">
+      <div className="border border-hairline p-10 text-center">
         <div className="w-12 h-12 bg-ink-900 text-white flex items-center justify-center mx-auto mb-4">
           <svg
             width="20"
@@ -104,7 +104,7 @@ export function ContactForm() {
 
       <div className="grid sm:grid-cols-2 gap-6">
         <div>
-          <label htmlFor="cf-first" className="block text-xs font-semibold text-ink-900 uppercase tracking-wide mb-2">
+          <label htmlFor="cf-first" className="block text-[12px] font-semibold text-ink-500 uppercase tracking-[0.08em] mb-2">
             First Name *
           </label>
           <input
@@ -112,11 +112,11 @@ export function ContactForm() {
             type="text"
             name="First Name"
             required
-            className="w-full px-4 py-3 border border-paper-300 text-base focus:outline-none focus:border-ink-900 transition-colors"
+            className="w-full px-4 py-3 border border-hairline rounded-[2px] text-base focus:outline-none focus:border-accent transition-colors"
           />
         </div>
         <div>
-          <label htmlFor="cf-last" className="block text-xs font-semibold text-ink-900 uppercase tracking-wide mb-2">
+          <label htmlFor="cf-last" className="block text-[12px] font-semibold text-ink-500 uppercase tracking-[0.08em] mb-2">
             Last Name *
           </label>
           <input
@@ -124,14 +124,14 @@ export function ContactForm() {
             type="text"
             name="Last Name"
             required
-            className="w-full px-4 py-3 border border-paper-300 text-base focus:outline-none focus:border-ink-900 transition-colors"
+            className="w-full px-4 py-3 border border-hairline rounded-[2px] text-base focus:outline-none focus:border-accent transition-colors"
           />
         </div>
       </div>
 
       <div className="grid sm:grid-cols-2 gap-6">
         <div>
-          <label htmlFor="cf-email" className="block text-xs font-semibold text-ink-900 uppercase tracking-wide mb-2">
+          <label htmlFor="cf-email" className="block text-[12px] font-semibold text-ink-500 uppercase tracking-[0.08em] mb-2">
             Email *
           </label>
           <input
@@ -139,36 +139,36 @@ export function ContactForm() {
             type="email"
             name="email"
             required
-            className="w-full px-4 py-3 border border-paper-300 text-base focus:outline-none focus:border-ink-900 transition-colors"
+            className="w-full px-4 py-3 border border-hairline rounded-[2px] text-base focus:outline-none focus:border-accent transition-colors"
           />
         </div>
         <div>
-          <label htmlFor="cf-phone" className="block text-xs font-semibold text-ink-900 uppercase tracking-wide mb-2">
+          <label htmlFor="cf-phone" className="block text-[12px] font-semibold text-ink-500 uppercase tracking-[0.08em] mb-2">
             Phone
           </label>
           <input
             id="cf-phone"
             type="tel"
             name="Phone"
-            className="w-full px-4 py-3 border border-paper-300 text-base focus:outline-none focus:border-ink-900 transition-colors"
+            className="w-full px-4 py-3 border border-hairline rounded-[2px] text-base focus:outline-none focus:border-accent transition-colors"
           />
         </div>
       </div>
 
       <div>
-        <label htmlFor="cf-org" className="block text-xs font-semibold text-ink-900 uppercase tracking-wide mb-2">
+        <label htmlFor="cf-org" className="block text-[12px] font-semibold text-ink-500 uppercase tracking-[0.08em] mb-2">
           Organization
         </label>
         <input
           id="cf-org"
           type="text"
           name="Organization"
-          className="w-full px-4 py-3 border border-paper-300 text-base focus:outline-none focus:border-ink-900 transition-colors"
+          className="w-full px-4 py-3 border border-hairline rounded-[2px] text-base focus:outline-none focus:border-accent transition-colors"
         />
       </div>
 
       <div>
-        <label htmlFor="cf-inquiry" className="block text-xs font-semibold text-ink-900 uppercase tracking-wide mb-2">
+        <label htmlFor="cf-inquiry" className="block text-[12px] font-semibold text-ink-500 uppercase tracking-[0.08em] mb-2">
           Inquiry Type *
         </label>
         <select
@@ -176,7 +176,7 @@ export function ContactForm() {
           name="Inquiry Type"
           required
           defaultValue=""
-          className="w-full px-4 py-3 border border-paper-300 text-base focus:outline-none focus:border-ink-900 transition-colors bg-white"
+          className="w-full px-4 py-3 border border-hairline rounded-[2px] text-base focus:outline-none focus:border-accent transition-colors bg-white"
         >
           <option value="" disabled>
             Select an option
@@ -198,7 +198,7 @@ export function ContactForm() {
       </div>
 
       <div>
-        <label htmlFor="cf-message" className="block text-xs font-semibold text-ink-900 uppercase tracking-wide mb-2">
+        <label htmlFor="cf-message" className="block text-[12px] font-semibold text-ink-500 uppercase tracking-[0.08em] mb-2">
           Message *
         </label>
         <textarea
@@ -206,7 +206,7 @@ export function ContactForm() {
           name="Message"
           required
           rows={5}
-          className="w-full px-4 py-3 border border-paper-300 text-base focus:outline-none focus:border-ink-900 transition-colors resize-none"
+          className="w-full px-4 py-3 border border-hairline rounded-[2px] text-base focus:outline-none focus:border-accent transition-colors resize-none"
         />
       </div>
 
@@ -231,7 +231,7 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="px-8 py-4 bg-ink-900 text-white text-sm font-semibold tracking-wide hover:bg-ink-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        className="inline-flex items-center justify-center h-[52px] px-8 bg-ink-900 text-white text-[14px] uppercase tracking-[0.06em] rounded-[2px] hover:bg-ink-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {status === "submitting" ? "Sending..." : "Submit Inquiry"}
       </button>

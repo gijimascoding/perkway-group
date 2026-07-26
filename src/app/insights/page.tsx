@@ -21,35 +21,35 @@ export default function InsightsPage() {
       />
 
       <section className="bg-paper-100">
-        <div className="max-w-[1360px] mx-auto px-6 lg:px-10 py-24 lg:py-32">
+        <div className="container-x section-pad">
           {/* Featured */}
-          <Reveal className="group border-t-2 border-ink-900 pt-8 pb-14 mb-14 border-b border-paper-300">
+          <Reveal className="group border-t border-ink-900 pt-6 pb-14 mb-14 border-b border-hairline">
             <div className="grid lg:grid-cols-[1fr_1.4fr] gap-8 lg:gap-16">
-              <div className="flex items-center gap-4 text-[11px] font-[700] uppercase tracking-[0.12em]">
+              <div className="flex items-center gap-3 text-[12px] uppercase tracking-[0.12em]">
                 <span className="text-ink-600">{feature.category}</span>
                 <span className="text-ink-400">{feature.date}</span>
               </div>
               <div>
-                <h2 className="text-ink-900 text-[clamp(1.6rem,2.8vw,2.4rem)] font-[800] leading-tight group-hover:text-ink-600 transition-colors">
+                <h2 className="h2 text-ink-900 group-hover:text-accent transition-colors">
                   {feature.title}
                 </h2>
-                <p className="mt-5 text-ink-700 text-[16.5px] leading-relaxed max-w-[62ch]">{feature.excerpt}</p>
+                <p className="mt-5 lead text-ink-700 measure">{feature.excerpt}</p>
               </div>
             </div>
           </Reveal>
 
           {/* Rest */}
-          <div className="grid md:grid-cols-3 gap-10">
+          <div className="grid md:grid-cols-3 gap-x-8 gap-y-12">
             {rest.map((n, i) => (
-              <Reveal key={n.id} delay={i * 90} className="group border-t-2 border-ink-900 pt-6">
-                <div className="flex items-center justify-between text-[11px] font-[700] uppercase tracking-[0.12em]">
+              <Reveal key={n.id} delay={i * 90} className="group border-t border-ink-900 pt-6">
+                <div className="flex items-center gap-3 text-[12px] uppercase tracking-[0.12em]">
                   <span className="text-ink-600">{n.category}</span>
                   <span className="text-ink-400">{n.date}</span>
                 </div>
-                <h3 className="mt-4 text-ink-900 text-[20px] font-[800] leading-snug group-hover:text-ink-600 transition-colors">
+                <h3 className="h3 mt-4 text-ink-900 group-hover:text-accent transition-colors">
                   {n.title}
                 </h3>
-                <p className="mt-3.5 text-ink-600 text-[14.5px] leading-relaxed">{n.excerpt}</p>
+                <p className="mt-4 text-ink-600 text-[15px] leading-relaxed line-clamp-3">{n.excerpt}</p>
               </Reveal>
             ))}
           </div>

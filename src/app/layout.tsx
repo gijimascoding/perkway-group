@@ -1,13 +1,21 @@
 import type { Metadata } from "next";
-import { Nunito_Sans } from "next/font/google";
+import { Inter, Archivo } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 
-const nunito = Nunito_Sans({
+// Body: neutral sans. Display: tight grotesk.
+const inter = Inter({
   subsets: ["latin"],
-  weight: ["300", "400", "600", "700", "800", "900"],
-  variable: "--font-nunito",
+  weight: ["400", "500", "600"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const archivo = Archivo({
+  subsets: ["latin"],
+  weight: ["600", "700"],
+  variable: "--font-archivo",
   display: "swap",
 });
 
@@ -41,13 +49,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={nunito.variable}>
+    <html lang="en" className={`no-js ${inter.variable} ${archivo.variable}`}>
       <head>
-        {/* No-JS fallback: scroll-reveal wrappers render at opacity:0 until JS
-            adds `.in`. Without JS, force them visible so content is never hidden. */}
-        <noscript>
-          <style>{`.reveal{opacity:1 !important;transform:none !important}`}</style>
-        </noscript>
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.remove('no-js')" }} />
       </head>
       <body className="min-h-screen flex flex-col">
         <Navbar />

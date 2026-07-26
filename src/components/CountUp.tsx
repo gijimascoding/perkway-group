@@ -28,7 +28,8 @@ function format(n: number, decimals: number, hasComma: boolean) {
 export function CountUp({ value, className = "" }: { value: string; className?: string }) {
   const { prefix, num, suffix, decimals, hasComma } = parse(value);
   const ref = useRef<HTMLSpanElement>(null);
-  const [display, setDisplay] = useState(num === null ? value : `${prefix}${format(0, decimals, hasComma)}${suffix}`);
+  // SSR the FINAL value so it's correct with JS disabled / before hydration.
+  const [display, setDisplay] = useState(value);
 
   useEffect(() => {
     if (num === null) return;
@@ -44,7 +45,7 @@ export function CountUp({ value, className = "" }: { value: string; className?: 
       ([entry]) => {
         if (!entry.isIntersecting) return;
         io.disconnect();
-        const duration = 1400;
+        const duration = 1100;
         let start: number | null = null;
         const step = (t: number) => {
           if (start === null) start = t;

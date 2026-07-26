@@ -11,7 +11,7 @@ function usablePhoto(m: LeadershipMember) {
 function Portrait({ m, className = "" }: { m: LeadershipMember; className?: string }) {
   const photo = usablePhoto(m);
   return photo ? (
-    <Image src={photo} alt={m.name} fill sizes="(min-width:1024px) 25vw, 50vw" className={`object-cover object-[50%_16%] grayscale ${className}`} />
+    <Image src={photo} alt={m.name} fill quality={82} sizes="(max-width:768px) 50vw, 320px" className={`object-cover object-top grayscale contrast-[1.02] ${className}`} />
   ) : (
     <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-ink-700 to-ink-900">
       <span className="text-white/90 text-[44px] font-[800] tracking-tight">{m.initials}</span>
@@ -43,26 +43,26 @@ export function TeamGrid({ members, columns = 4 }: { members: LeadershipMember[]
     };
   }, [active]);
 
-  const grid = columns === 3 ? "sm:grid-cols-2 lg:grid-cols-3" : "sm:grid-cols-2 lg:grid-cols-4";
+  const grid = columns === 3 ? "sm:grid-cols-2 lg:grid-cols-3" : "grid-cols-2 lg:grid-cols-4";
 
   return (
     <>
-      <div className={`grid ${grid} gap-6`}>
+      <div className={`grid ${grid} gap-x-8 gap-y-12`}>
         {members.map((m) => (
           <button
             key={m.name}
             onClick={() => open(m)}
-            className="group text-left focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink-900"
+            className="group text-left"
           >
-            <div className="relative aspect-[3/4] overflow-hidden bg-paper-200">
-              <Portrait m={m} className="transition-transform duration-700 group-hover:scale-[1.04]" />
-              <div className="absolute inset-0 bg-gradient-to-t from-ink-900/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <span className="absolute bottom-4 left-4 text-white text-[11px] font-[700] uppercase tracking-[0.14em] opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
-                Read Bio +
-              </span>
+            {/* Uniform 4:5 grayscale portrait, hairline frame, no radius */}
+            <div className="relative aspect-[4/5] overflow-hidden bg-paper-200 ring-1 ring-hairline">
+              <Portrait m={m} />
             </div>
-            <h3 className="mt-5 text-ink-900 text-[18px] font-[800] leading-tight">{m.name}</h3>
-            <p className="mt-1 text-ink-600 text-[12px] font-[700] uppercase tracking-[0.1em]">{m.title}</p>
+            <h3 className="mt-5 text-ink-900 text-[18px] font-[600]">{m.name}</h3>
+            <p className="mt-1 text-ink-500 text-[13px]">{m.title}</p>
+            <span className="mt-3 inline-block link-underline text-[12px] group-hover:text-accent-hover">
+              Read Bio +
+            </span>
           </button>
         ))}
       </div>

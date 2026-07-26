@@ -20,39 +20,34 @@ export default function PortfolioPage() {
         image="/images/city-street.jpg"
       />
 
-      <section className="bg-paper-100">
-        <div className="max-w-[1360px] mx-auto px-6 lg:px-10 py-20 lg:py-28">
-          <div className="space-y-px bg-paper-300">
+      <section className="bg-paper-50 border-t border-hairline">
+        <div className="container-x section-pad">
+          <div className="border-t border-hairline">
             {businessSegments.map((s, i) => (
               <Reveal
                 key={s.id}
                 id={s.id}
-                className="bg-paper-50 scroll-mt-24"
+                className="scroll-mt-24 grid lg:grid-cols-[0.9fr_1.1fr] gap-8 lg:gap-16 py-12 lg:py-16 border-b border-hairline"
               >
-                <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-8 lg:gap-16 p-8 lg:p-14">
-                  <div>
-                    <div className="flex items-baseline gap-4">
-                      <span className="text-ink-600 font-[800] text-[22px] tabular-nums">
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
-                      <span className="h-px flex-1 bg-paper-300" />
-                    </div>
-                    <p className="mt-5 text-[11px] font-[700] uppercase tracking-[0.14em] text-ink-600">{s.subtitle}</p>
-                    <h2 className="mt-2 text-ink-900 text-[clamp(1.6rem,2.6vw,2.2rem)] font-[800] leading-tight max-w-[16ch]">
-                      {s.title}
-                    </h2>
-                  </div>
-                  <div>
-                    <p className="text-ink-700 text-[16.5px] leading-relaxed max-w-[62ch]">{s.description}</p>
-                    <ul className="mt-6 grid sm:grid-cols-2 gap-x-8 gap-y-3">
-                      {s.highlights.map((h) => (
-                        <li key={h} className="flex items-start gap-3 text-ink-700 text-[14.5px] leading-snug">
-                          <span className="mt-[9px] h-[5px] w-[5px] rounded-full bg-ink-900 shrink-0" />
-                          {h}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                <div>
+                  <span className="font-display text-ink-400 font-[700] text-[18px] tabular-nums">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <p className="eyebrow max-w-[260px] mt-5">{s.subtitle}</p>
+                  <h3 className="h3 mt-4 text-ink-900">
+                    {s.title}
+                  </h3>
+                </div>
+                <div>
+                  <p className="text-ink-700 text-[16px] leading-relaxed measure">{s.description}</p>
+                  <ul className="mt-8 grid sm:grid-cols-2 gap-x-8 gap-y-3">
+                    {s.highlights.map((h) => (
+                      <li key={h} className="flex items-start gap-3 text-ink-700 text-[14.5px] leading-snug">
+                        <span className="mt-[9px] h-[5px] w-[5px] rounded-full bg-ink-900 shrink-0" />
+                        {h}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </Reveal>
             ))}
@@ -60,13 +55,13 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      <section className="bg-ink-900">
-        <div className="max-w-[1360px] mx-auto px-6 lg:px-10 py-20 lg:py-24 text-center">
+      <section className="on-dark bg-ink-900">
+        <div className="container-x section-pad text-center">
           <Reveal>
-            <h2 className="display text-white text-[clamp(1.8rem,3.4vw,2.8rem)] max-w-[26ch] mx-auto">
+            <h2 className="h2 text-white max-w-[26ch] mx-auto">
               Partner With a Vertically Integrated Platform
             </h2>
-            <Link href="/contact" className="mt-8 inline-block px-8 py-3.5 bg-ink-900 text-white text-[13px] font-[700] tracking-[0.14em] uppercase hover:bg-ink-800 transition-colors">
+            <Link href="/contact" className="mt-10 inline-flex items-center justify-center h-[52px] px-8 bg-white text-ink-900 text-[14px] uppercase tracking-[0.06em] rounded-[2px] hover:bg-paper-200 transition-colors">
               Investor Inquiries
             </Link>
           </Reveal>

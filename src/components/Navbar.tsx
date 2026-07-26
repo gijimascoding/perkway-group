@@ -10,7 +10,7 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
+    const handleScroll = () => setScrolled(window.scrollY > 8);
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
@@ -34,36 +34,34 @@ export function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-ink-900/95 backdrop-blur-md shadow-[0_1px_0_rgba(255,255,255,0.06)]"
-          : "bg-gradient-to-b from-black/45 to-transparent"
+      className={`sticky top-0 z-50 bg-paper-100 transition-shadow duration-300 ${
+        scrolled ? "border-b border-hairline" : "border-b border-transparent"
       }`}
     >
-      <div className="max-w-[1360px] mx-auto px-6 lg:px-10">
-        <div className="flex items-center justify-between h-[68px]">
-          {/* Logo */}
+      <div className="container-x">
+        <div className="flex items-center justify-between h-[72px]">
+          {/* Logo lockup — monogram + wordmark on a shared baseline */}
           <Link href="/" className="flex items-center gap-3">
             <GlobeMark className="w-9 h-9" />
-            <span className="text-white text-[15px] font-[800] tracking-[0.16em] uppercase">
+            <span className="text-ink-900 text-[16px] font-[700] tracking-[0.06em] uppercase">
               Perkway Group
             </span>
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-9">
+          <nav className="hidden lg:flex items-center gap-8">
             {navigationItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-white/85 text-[13px] font-[700] tracking-[0.14em] uppercase transition-colors duration-200 hover:text-white/55"
+                className="text-ink-700 text-[14px] tracking-[0.02em] transition-colors duration-200 hover:text-ink-900"
               >
                 {item.label}
               </Link>
             ))}
             <Link
               href="/contact"
-              className="text-[12.5px] font-[700] tracking-[0.14em] uppercase px-5 py-2.5 border border-white/35 text-white transition-all duration-200 hover:border-white hover:text-white/55"
+              className="ml-2 text-[13px] tracking-[0.04em] px-5 h-[40px] inline-flex items-center rounded-[2px] border border-accent text-ink-900 transition-colors duration-200 hover:text-accent hover:border-accent-hover"
             >
               Investor Inquiries
             </Link>
@@ -73,7 +71,7 @@ export function Navbar() {
           <button
             type="button"
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="lg:hidden -m-1 p-3 text-white"
+            className="lg:hidden -m-1 p-3 text-ink-900"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
             aria-controls="mobile-menu"
@@ -92,7 +90,7 @@ export function Navbar() {
           role="dialog"
           aria-modal="true"
           aria-label="Site navigation"
-          className="lg:hidden fixed inset-0 top-[68px] bg-ink-900 z-40 pb-[env(safe-area-inset-bottom)]"
+          className="on-dark lg:hidden fixed inset-0 top-[72px] bg-ink-900 z-40 pb-[env(safe-area-inset-bottom)]"
         >
           <nav className="flex flex-col p-8 gap-1">
             {navigationItems.map((item) => (
@@ -100,7 +98,7 @@ export function Navbar() {
                 key={item.href}
                 href={item.href}
                 onClick={() => setMobileOpen(false)}
-                className="text-white text-[15px] font-[700] tracking-[0.12em] uppercase py-4 border-b border-white/10"
+                className="text-white text-[16px] tracking-[0.02em] py-4 border-b border-white/10"
               >
                 {item.label}
               </Link>
@@ -108,7 +106,7 @@ export function Navbar() {
             <Link
               href="/contact"
               onClick={() => setMobileOpen(false)}
-              className="mt-6 text-center py-3.5 bg-ink-900 text-white text-[13px] font-[700] tracking-[0.14em] uppercase"
+              className="mt-6 text-center py-4 rounded-[2px] border border-white/40 text-white text-[13px] tracking-[0.06em] uppercase"
             >
               Investor Inquiries
             </Link>

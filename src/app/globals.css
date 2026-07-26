@@ -1,41 +1,37 @@
 @import "tailwindcss";
 
 @theme {
-  /* Ink / charcoal — primary text and dark UI */
-  --color-ink-900: #17181a;
-  --color-ink-800: #26282b;
+  /* Deep neutral — text + dark sections */
+  --color-ink-900: #16181c;
+  --color-ink-800: #24272c;
   --color-ink-700: #3a3d42;
   --color-ink-600: #565a61;
-  --color-ink-500: #71767e;
+  --color-ink-500: #6c7178;
   --color-ink-400: #9aa0a8;
-  --color-ink-300: #c3c7cd;
 
-  /* Paper — off-white neutrals */
+  /* Ivory ground */
   --color-paper-50: #ffffff;
-  --color-paper-100: #faf9f6;
-  --color-paper-200: #f4f2ec;
-  --color-paper-300: #ebe8df;
+  --color-paper-100: #f7f5f0;
+  --color-paper-200: #f1eee7;
 
-  /* Sage — Apple-REIT muted accent boxes */
-  --color-sage-100: #eceadd;
-  --color-sage-200: #dcdccd;
-  --color-sage-300: #c7c8b4;
+  /* Hairline + muted */
+  --color-hairline: #e4e2dd;
+  --color-hairline-dark: rgba(255, 255, 255, 0.12);
 
-  /* Gold — eyebrow labels, dividers, accents */
-  --color-gold-400: #c79a3f;
-  --color-gold-500: #a8842c;
-  --color-gold-600: #8a6d24;
+  /* One accent — links + CTA borders only */
+  --color-accent: #1c3d5a;
+  --color-accent-hover: #274f72;
 
-  --font-sans: var(--font-nunito), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display: var(--font-archivo), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 }
 
 @layer base {
   html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
-
-  /* Smooth scroll only when the user hasn't asked for reduced motion. */
   @media (prefers-reduced-motion: no-preference) {
     html { scroll-behavior: smooth; }
   }
@@ -45,72 +41,100 @@
     color: var(--color-ink-800);
     background-color: var(--color-paper-100);
     font-size: 17px;
-    line-height: 1.7;
+    line-height: 1.65;
   }
 
   h1, h2, h3, h4 {
+    font-family: var(--font-display);
     color: var(--color-ink-900);
-    line-height: 1.05;
+    font-weight: 700;
   }
 
-  ::selection {
-    background-color: var(--color-ink-900);
-    color: #ffffff;
-  }
+  a { color: inherit; }
 
-  /* Keyboard focus: visible ring on keyboard nav only, never on mouse click. */
+  ::selection { background-color: var(--color-ink-900); color: #ffffff; }
+
   :focus { outline: none; }
   :focus-visible {
-    outline: 2px solid var(--color-ink-900);
-    outline-offset: 3px;
-    border-radius: 2px;
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
   }
-  /* On dark surfaces (nav, footer, dark hero CTAs) a white ring reads better. */
-  .bg-ink-900 :focus-visible,
-  header :focus-visible {
-    outline-color: #ffffff;
-  }
+  .on-dark :focus-visible,
+  header :focus-visible { outline-color: #ffffff; }
 
-  section[id] {
-    scroll-margin-top: 84px;
+  section[id] { scroll-margin-top: 80px; }
+}
+
+@layer components {
+  /* ---- Single content container: 1440px, 24/48/80 padding ---- */
+  .container-x {
+    width: 100%;
+    max-width: 1440px;
+    margin-inline: auto;
+    padding-inline: 24px;
   }
+  @media (min-width: 768px) { .container-x { padding-inline: 48px; } }
+  @media (min-width: 1024px) { .container-x { padding-inline: 80px; } }
+
+  /* ---- Uniform vertical rhythm: 96 mobile / 140 desktop ---- */
+  .section-pad { padding-block: 96px; }
+  @media (min-width: 1024px) { .section-pad { padding-block: 140px; } }
+
+  /* ---- Type scale ---- */
+  .h1 { font-family: var(--font-display); font-weight: 700; font-size: clamp(44px, 4.4vw, 68px); line-height: 1.05; letter-spacing: -0.02em; }
+  .h2 { font-family: var(--font-display); font-weight: 700; font-size: clamp(32px, 2.8vw, 44px); line-height: 1.12; letter-spacing: -0.015em; }
+  .h3 { font-family: var(--font-display); font-weight: 600; font-size: 22px; line-height: 1.25; letter-spacing: -0.01em; }
+  .lead { font-size: 19px; line-height: 1.6; }
+  .small { font-size: 15px; line-height: 1.55; }
+  .measure { max-width: 68ch; }
+
+  /* ---- Eyebrow: uppercase 12/0.14em muted + 1px hairline 16px beneath ---- */
+  .eyebrow {
+    display: block;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 12px;
+    color: var(--color-ink-500);
+  }
+  .eyebrow::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 1px;
+    background: var(--color-hairline);
+    margin-top: 16px;
+  }
+  .eyebrow-light { color: rgba(255, 255, 255, 0.6); }
+  .eyebrow-light::after { background: var(--color-hairline-dark); }
+
+  /* ---- Stat block (reused by hero band + responsibility) ---- */
+  .stat-num { font-family: var(--font-display); font-weight: 700; font-size: 40px; line-height: 1; letter-spacing: -0.02em; color: var(--color-ink-900); }
+  .stat-label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--color-ink-500); margin-top: 10px; display: block; }
+
+  .hairline { background: var(--color-hairline); }
+
+  /* Text link with hairline underline (accent) */
+  .link-underline {
+    display: inline-block;
+    font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600;
+    color: var(--color-accent); border-bottom: 1px solid var(--color-accent); padding-bottom: 2px;
+    transition: color 200ms ease, border-color 200ms ease;
+  }
+  .link-underline:hover { color: var(--color-accent-hover); border-color: var(--color-accent-hover); }
 }
 
 @layer utilities {
   .text-balance { text-wrap: balance; }
-
-  /* Giant uppercase display headline — matches Apple Hospitality REIT
-     (Nunito Sans ExtraBold 800, normal tracking). */
-  .display {
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0;
-    line-height: 0.98;
-  }
-
-  /* Restrained uppercase eyebrow label — monochrome, institutional */
-  .eyebrow {
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.18em;
-    font-size: 12px;
-    color: var(--color-ink-600);
-  }
-  .eyebrow-light {
-    color: rgba(255, 255, 255, 0.55);
-  }
+  .font-display { font-family: var(--font-display); }
 }
 
-/* Scroll-reveal (progressive enhancement; visible by default without JS) */
+/* ---- Motion: opacity + 12px translateY, 320ms, once ---- */
 @media (prefers-reduced-motion: no-preference) {
-  .reveal {
-    opacity: 0;
-    transform: translateY(18px);
-    transition: opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1),
-                transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
-  }
-  .reveal.in {
-    opacity: 1;
-    transform: none;
-  }
+  .reveal { opacity: 0; transform: translateY(12px); transition: opacity 320ms ease-out, transform 320ms ease-out; }
+  .reveal.in { opacity: 1; transform: none; }
 }
+
+/* No-JS fallback */
+.no-js .reveal { opacity: 1 !important; transform: none !important; }

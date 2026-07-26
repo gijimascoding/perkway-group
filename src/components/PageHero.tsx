@@ -5,39 +5,37 @@ export function PageHero({
   title,
   subtitle,
   image,
-  variant = "photo",
 }: {
   eyebrow: string;
   title: string;
   subtitle?: string;
   image: string;
-  /** "photo" for a daytime image; "dark" for an already-dark night image */
+  /** kept for call-site compatibility; no longer changes rendering */
   variant?: "photo" | "dark";
 }) {
-  const isDark = variant === "dark";
   return (
-    <section className="relative overflow-hidden bg-ink-900 min-h-[86vh] flex items-end pt-[68px]">
+    <section className="on-dark relative overflow-hidden bg-ink-900 h-[58vh] min-h-[420px] flex items-end">
       <Image
         src={image}
         alt=""
         aria-hidden
         fill
         priority
+        quality={82}
         sizes="100vw"
-        className={`object-cover ${isDark ? "opacity-90" : "opacity-65"}`}
+        placeholder="blur"
+        blurDataURL="data:image/gif;base64,R0lGODlhAQABAPAAACIkKAAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
+        className="object-cover object-[center_45%]"
       />
-      {/* Refined, bottom-weighted gradient: keeps the image visible through the
-          middle while anchoring legible text at the base. */}
-      <div className="absolute inset-0 bg-gradient-to-t from-ink-900/95 via-ink-900/35 to-ink-900/55" />
-      {isDark && <div className="absolute inset-0 bg-gradient-to-r from-ink-900/70 via-transparent to-transparent" />}
+      {/* Flat scrim, no gradient mesh */}
+      <div className="absolute inset-0 bg-ink-900/50" />
+      <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-ink-900/70 to-transparent" />
 
-      <div className="relative w-full max-w-[1360px] mx-auto px-6 lg:px-10 pb-20 lg:pb-28">
-        <p className="eyebrow eyebrow-light">{eyebrow}</p>
-        <h1 className="display mt-6 text-white text-[clamp(2rem,6vw,5.25rem)] max-w-[18ch] break-words">{title}</h1>
+      <div className="relative w-full container-x pb-16 lg:pb-24">
+        <p className="eyebrow eyebrow-light max-w-[260px]">{eyebrow}</p>
+        <h1 className="h1 mt-8 text-white max-w-[20ch] text-balance">{title}</h1>
         {subtitle && (
-          <p className="mt-7 max-w-[58ch] text-white/85 text-[18px] lg:text-[21px] leading-relaxed font-[300]">
-            {subtitle}
-          </p>
+          <p className="mt-6 measure lead text-white/85">{subtitle}</p>
         )}
       </div>
     </section>

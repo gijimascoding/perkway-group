@@ -20,28 +20,28 @@ export default function ContactPage() {
       />
 
       <section className="bg-paper-100">
-        <div className="max-w-[1360px] mx-auto px-6 lg:px-10 py-24 lg:py-32">
+        <div className="container-x section-pad">
           <div className="grid lg:grid-cols-5 gap-16 lg:gap-24">
             {/* Form */}
             <div className="lg:col-span-3">
-              <p className="eyebrow">Send a Message</p>
-              <h2 className="display mt-4 text-ink-900 text-[clamp(1.7rem,3vw,2.4rem)]">
+              <p className="eyebrow max-w-[260px]">Send a Message</p>
+              <h2 className="h2 mt-8 text-ink-900">
                 Contact Our Team
               </h2>
-              <p className="mt-4 text-ink-600 text-[16px] leading-relaxed max-w-[52ch]">
+              <p className="mt-6 lead text-ink-600 measure">
                 Fill out the form below and a member of our team will be in touch shortly.
               </p>
-              <div className="mt-8">
+              <div className="mt-10">
                 <ContactForm />
               </div>
             </div>
 
             {/* Sidebar */}
             <div className="lg:col-span-2">
-              <div className="sticky top-28 space-y-6">
-                <div className="border border-paper-300 bg-paper-50 p-8">
-                  <p className="eyebrow">Headquarters</p>
-                  <p className="mt-4 text-[15px] text-ink-700 leading-relaxed">
+              <div className="sticky top-28">
+                <div>
+                  <p className="eyebrow max-w-[260px]">Headquarters</p>
+                  <p className="mt-6 text-[15px] text-ink-700 leading-relaxed">
                     {company.address.street}
                     <br />
                     {company.address.city}, {company.address.province}
@@ -50,9 +50,9 @@ export default function ContactPage() {
                   </p>
                 </div>
 
-                <div className="border border-paper-300 bg-paper-50 p-8">
-                  <p className="eyebrow">Contact Information</p>
-                  <div className="mt-4 space-y-5">
+                <div className="mt-12 pt-12 border-t border-hairline">
+                  <p className="eyebrow max-w-[260px]">Contact Information</p>
+                  <div className="mt-6 space-y-5">
                     {[
                       { l: "General Inquiries", v: company.email, href: `mailto:${company.email}` },
                       { l: "Investor Relations", v: company.investorEmail, href: `mailto:${company.investorEmail}` },
@@ -68,7 +68,7 @@ export default function ContactPage() {
                   </div>
                 </div>
 
-                <div className="bg-ink-900 p-8 text-white">
+                <div className="mt-12 bg-ink-900 p-8 text-white">
                   <p className="text-[11px] font-[700] uppercase tracking-[0.14em] text-white/55">How Can We Help</p>
                   <ul className="mt-4 space-y-3">
                     {[
