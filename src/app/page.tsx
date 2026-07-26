@@ -158,13 +158,19 @@ export default function Home() {
           </Reveal>
 
           <div className="mt-16 grid sm:grid-cols-2 border-t border-l border-hairline">
-            {businessSegments.map((s) => (
-              <Reveal key={s.id} className="border-b border-r border-hairline p-8 lg:p-12">
-                <p className="text-ink-500 text-[12px] tracking-[0.14em] uppercase">
-                  {s.subtitle}
-                </p>
-                <h3 className="h3 mt-4 text-ink-900">{s.title}</h3>
-                <p className="mt-4 text-ink-600 text-[15px] leading-relaxed measure">
+            {businessSegments.map((s, i) => (
+              <Reveal key={s.id} className="group border-b border-r border-hairline p-8 lg:p-10 hover:bg-paper-100 transition-colors">
+                <div className="flex items-center gap-3">
+                  <span className="font-display text-ink-400 text-[14px] tabular-nums">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span className="h-px w-6 bg-hairline" />
+                  <span className="text-ink-500 text-[11px] tracking-[0.14em] uppercase">
+                    {s.subtitle}
+                  </span>
+                </div>
+                <h3 className="h3 mt-4 text-ink-900 group-hover:text-accent transition-colors">{s.title}</h3>
+                <p className="mt-3 text-ink-600 text-[15px] leading-relaxed line-clamp-3">
                   {s.description}
                 </p>
               </Reveal>
