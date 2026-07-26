@@ -6,15 +6,7 @@ import { navigationItems } from "@/data/company";
 import { GlobeMark } from "@/components/GlobeMark";
 
 export function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 8);
-    handleScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
@@ -33,11 +25,7 @@ export function Navbar() {
   }, [mobileOpen]);
 
   return (
-    <header
-      className={`sticky top-0 z-50 bg-paper-100 transition-shadow duration-300 ${
-        scrolled ? "border-b border-hairline" : "border-b border-transparent"
-      }`}
-    >
+    <header className="relative z-50 bg-paper-100 border-b border-hairline">
       <div className="container-x">
         <div className="flex items-center justify-between h-[72px]">
           {/* Logo lockup — monogram + wordmark on a shared baseline */}
