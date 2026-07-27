@@ -66,7 +66,7 @@ export function CountUp({ value, className = "" }: { value: string; className?: 
   }, [num, prefix, suffix, decimals, hasComma, value]);
 
   return (
-    <span ref={ref} className={`tabular-nums ${className}`}>
+    <span ref={ref} className={`nums ${className}`}>
       {display}
     </span>
   );

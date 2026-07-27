@@ -18,9 +18,9 @@ const execs = leadership.filter((m) => m.role === "executive");
 const BLUR = "data:image/gif;base64,R0lGODlhAQABAPAAACIkKAAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==";
 
 const btnPrimaryDark =
-  "inline-flex items-center justify-center h-[52px] px-8 bg-white text-ink-900 text-[14px] uppercase tracking-[0.06em] rounded-[2px] hover:bg-paper-200 transition-colors";
+  "inline-flex items-center justify-center h-[52px] px-6 sm:px-8 bg-white text-ink-900 t-micro uppercase tracking-[0.06em] hover:bg-paper-200 transition-colors";
 const btnOutlineDark =
-  "inline-flex items-center justify-center h-[52px] px-8 border border-white/50 text-white text-[14px] uppercase tracking-[0.06em] rounded-[2px] hover:bg-white/10 transition-colors";
+  "inline-flex items-center justify-center h-[52px] px-6 sm:px-8 border border-white/50 text-white t-micro uppercase tracking-[0.06em] hover:bg-white/10 transition-colors";
 
 const aboutStats = [
   { v: "2018", l: "Year Founded" },
@@ -40,7 +40,7 @@ export default function Home() {
   return (
     <>
       {/* ============ HERO ============ */}
-      <section className="on-dark relative w-full overflow-hidden bg-ink-900 h-[62vh] min-h-[440px] lg:h-[78vh]">
+      <section className="hero on-dark relative w-full overflow-hidden bg-ink-900 flex items-end">
         <Image
           src="/images/hero.jpg"
           alt="Global metropolitan skyline at dusk"
@@ -50,27 +50,29 @@ export default function Home() {
           sizes="100vw"
           placeholder="blur"
           blurDataURL={BLUR}
-          className="object-cover object-[center_40%]"
+          className="hero-img object-cover object-[center_42%]"
         />
-        <div className="absolute inset-0 bg-ink-900/[0.42]" />
-        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-ink-900/60 to-transparent" />
+        <div className="absolute inset-0 bg-ink-900/[0.46]" />
+        <div className="hero-foot absolute inset-0" />
 
-        <div className="relative h-full container-x flex flex-col justify-end pb-16 lg:pb-[120px]">
-          <p className="eyebrow eyebrow-light max-w-[260px]">{company.legalName}</p>
-          <h1 className="h1 mt-8 text-white max-w-[16ch] text-balance">
+        <div className="relative w-full container-x pt-[128px] pb-[88px] lg:pt-[160px] lg:pb-[140px]">
+          <p className="eyebrow eyebrow-light">{company.legalName}</p>
+          <h1 className="hero-h1 mt-8 text-white text-balance">
             Building Enduring Value Across Industries
           </h1>
-          <p className="mt-6 measure text-white/85 lead">{company.description}</p>
-          <div className="mt-9 flex flex-wrap gap-3">
+          <p className="hero-sub mt-6 text-white/[0.82]">{company.description}</p>
+          <div className="mt-9 flex flex-wrap gap-2 sm:gap-3">
             <Link href="/portfolio" className={btnPrimaryDark}>Our Portfolio</Link>
             <Link href="/about" className={btnOutlineDark}>About the Group</Link>
           </div>
         </div>
+
+        <span className="hero-scroll" aria-hidden />
       </section>
 
       {/* ============ HERO STAT BAND (6 stats) ============ */}
       <section className="bg-paper-100 border-b border-hairline">
-        <div className="container-x py-16 lg:py-20">
+        <div className="container-x band-pad">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-y-12">
             {metrics.map((m, i) => (
               <Reveal
@@ -91,7 +93,7 @@ export default function Home() {
         <div className="container-x section-pad">
           <div className="grid lg:grid-cols-12 gap-y-12 lg:gap-x-16 items-start">
             <Reveal className="lg:col-span-7">
-              <p className="eyebrow max-w-[260px]">About the Group</p>
+              <p className="eyebrow">About the Group</p>
               <h2 className="h2 mt-8 text-ink-900 max-w-[18ch]">
                 A Vertically Integrated Platform for Real Assets
               </h2>
@@ -113,7 +115,7 @@ export default function Home() {
               <div className="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-y-8 border-t border-hairline pt-8">
                 {aboutStats.map((s) => (
                   <div key={s.l} className="pl-6 border-l border-hairline [&:nth-child(2n+1)]:border-l-0 [&:nth-child(2n+1)]:pl-0 sm:[&:nth-child(2n+1)]:border-l sm:[&:nth-child(2n+1)]:pl-6 sm:[&:nth-child(4n+1)]:border-l-0 sm:[&:nth-child(4n+1)]:pl-0">
-                    <CountUp value={s.v} className="stat-num block !text-[32px]" />
+                    <CountUp value={s.v} className="stat-num-sm" />
                     <span className="stat-label">{s.l}</span>
                   </div>
                 ))}
@@ -125,7 +127,7 @@ export default function Home() {
             </Reveal>
 
             <Reveal delay={100} className="lg:col-span-5">
-              <div className="relative aspect-[4/5] overflow-hidden bg-paper-200 ring-1 ring-hairline">
+              <div className="relative aspect-[4/5] overflow-hidden bg-paper-200 border border-hairline">
                 <Image
                   src="/images/towers.jpg"
                   alt="Modern glass office towers"
@@ -146,7 +148,7 @@ export default function Home() {
       <section id="businesses" className="bg-paper-50 border-t border-hairline">
         <div className="container-x section-pad">
           <Reveal className="measure">
-            <p className="eyebrow max-w-[260px]">Our Businesses</p>
+            <p className="eyebrow">Our Businesses</p>
             <h2 className="h2 mt-8 text-ink-900">
               Diversified Across Eight Core Business Segments
             </h2>
@@ -161,16 +163,16 @@ export default function Home() {
             {businessSegments.map((s, i) => (
               <Reveal key={s.id} className="group border-b border-r border-hairline p-8 lg:p-10 hover:bg-paper-100 transition-colors">
                 <div className="flex items-center gap-3">
-                  <span className="font-display text-ink-400 text-[14px] tabular-nums">
+                  <span className="font-display text-ink-400 t-micro nums">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <span className="h-px w-6 bg-hairline" />
-                  <span className="text-ink-500 text-[11px] tracking-[0.14em] uppercase">
+                  <span className="text-ink-500 t-micro tracking-[0.14em] uppercase">
                     {s.subtitle}
                   </span>
                 </div>
                 <h3 className="h3 mt-4 text-ink-900 group-hover:text-accent transition-colors">{s.title}</h3>
-                <p className="mt-3 text-ink-600 text-[15px] leading-relaxed line-clamp-3">
+                <p className="mt-3 text-ink-600 t-small line-clamp-3">
                   {s.description}
                 </p>
               </Reveal>
@@ -187,13 +189,13 @@ export default function Home() {
 
       {/* ============ PULL QUOTE — dark band ============ */}
       <section className="on-dark bg-ink-900">
-        <div className="container-x section-pad text-center">
-          <Reveal className="max-w-[720px] mx-auto">
-            <div className="h-px w-12 bg-white/30 mx-auto" />
-            <blockquote className="mt-10 font-display text-white font-[600] text-[clamp(28px,2.6vw,40px)] leading-[1.2] tracking-[-0.01em] max-w-[22ch] mx-auto">
+        <div className="container-x section-pad">
+          <Reveal className="max-w-[720px]">
+            <div className="h-px w-12 bg-white/30" />
+            <blockquote className="mt-10 h2 text-white max-w-[22ch]">
               We build businesses designed to compound value across generations, not quarters.
             </blockquote>
-            <p className="mt-10 text-white/50 text-[12px] uppercase tracking-[0.16em]">
+            <p className="mt-10 text-white/50 t-micro uppercase tracking-[0.16em]">
               Perkway Group &middot; Investment Philosophy
             </p>
           </Reveal>
@@ -204,7 +206,7 @@ export default function Home() {
       <section id="leadership" className="bg-paper-100">
         <div className="container-x section-pad">
           <Reveal className="measure">
-            <p className="eyebrow max-w-[260px]">Leadership</p>
+            <p className="eyebrow">Leadership</p>
             <h2 className="h2 mt-8 text-ink-900">
               Guided by Experienced Principals
             </h2>
@@ -244,7 +246,7 @@ export default function Home() {
       <section id="global" className="bg-paper-50 border-t border-hairline">
         <div className="container-x section-pad">
           <Reveal className="measure">
-            <p className="eyebrow max-w-[260px]">Global Presence</p>
+            <p className="eyebrow">Global Presence</p>
             <h2 className="h2 mt-8 text-ink-900 max-w-[16ch]">
               Operating Across 14 Markets Worldwide
             </h2>
@@ -258,13 +260,13 @@ export default function Home() {
 
           {/* Principal Offices — 3-col hairline table */}
           <Reveal className="mt-16">
-            <p className="eyebrow max-w-[260px]">Principal Offices</p>
+            <p className="eyebrow">Principal Offices</p>
             <div className="mt-8 border-t border-hairline">
               {globalPresence.map((o) => (
                 <div key={o.city} className="grid grid-cols-[1.2fr_1fr_1fr] gap-4 py-5 border-b border-hairline">
-                  <span className="text-ink-900 text-[17px] font-[600] font-display">{o.city}</span>
-                  <span className="text-ink-600 text-[15px] self-center">{o.country}</span>
-                  <span className="text-ink-500 text-[12px] uppercase tracking-[0.12em] self-center">{o.type}</span>
+                  <span className="text-ink-900 h3 nums">{o.city}</span>
+                  <span className="text-ink-600 t-small self-center">{o.country}</span>
+                  <span className="text-ink-500 t-micro uppercase tracking-[0.12em] self-center">{o.type}</span>
                 </div>
               ))}
             </div>
@@ -272,10 +274,10 @@ export default function Home() {
 
           {/* Active Markets — static list, no marquee */}
           <Reveal className="mt-14">
-            <p className="eyebrow max-w-[260px]">Active Markets</p>
+            <p className="eyebrow">Active Markets</p>
             <ul className="mt-8 grid grid-cols-2 sm:grid-cols-3 gap-y-3 gap-x-8">
               {operatingMarkets.map((mk) => (
-                <li key={mk} className="text-ink-700 text-[15px] py-1.5 border-b border-hairline">{mk}</li>
+                <li key={mk} className="text-ink-700 t-small nums py-1.5 border-b border-hairline">{mk}</li>
               ))}
             </ul>
           </Reveal>
@@ -287,7 +289,7 @@ export default function Home() {
         <div className="container-x section-pad">
           <Reveal className="flex flex-wrap items-end justify-between gap-6">
             <div className="measure">
-              <p className="eyebrow max-w-[260px]">Insights</p>
+              <p className="eyebrow">Insights</p>
               <h2 className="h2 mt-8 text-ink-900">
                 Perspectives &amp; Market Intelligence
               </h2>
@@ -298,14 +300,14 @@ export default function Home() {
           <div className="mt-16 grid md:grid-cols-3 gap-x-8 gap-y-12">
             {insights.slice(0, 3).map((n) => (
               <Reveal key={n.id} className="group border-t border-ink-900 pt-6">
-                <div className="flex items-center gap-3 text-[12px] uppercase tracking-[0.12em]">
+                <div className="flex items-center gap-3 t-micro uppercase tracking-[0.12em] nums">
                   <span className="text-ink-600">{n.category}</span>
                   <span className="text-ink-400">{n.date}</span>
                 </div>
                 <h3 className="h3 mt-4 text-ink-900 group-hover:text-accent transition-colors">
                   {n.title}
                 </h3>
-                <p className="mt-4 text-ink-600 text-[15px] leading-relaxed line-clamp-3">{n.excerpt}</p>
+                <p className="mt-4 text-ink-600 t-small line-clamp-3">{n.excerpt}</p>
               </Reveal>
             ))}
           </div>
@@ -317,7 +319,7 @@ export default function Home() {
         <div className="container-x section-pad">
           <div className="grid lg:grid-cols-12 gap-y-12 lg:gap-x-16 items-start">
             <Reveal className="lg:col-span-7">
-              <p className="eyebrow max-w-[260px]">Responsibility</p>
+              <p className="eyebrow">Responsibility</p>
               <h2 className="h2 mt-8 text-ink-900 max-w-[16ch]">
                 Committed to Sustainable Growth
               </h2>
@@ -339,15 +341,15 @@ export default function Home() {
               <div className="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-y-8 border-t border-hairline pt-8">
                 {responsibilityStats.map((s) => (
                   <div key={s.v} className="pl-6 border-l border-hairline [&:nth-child(2n+1)]:border-l-0 [&:nth-child(2n+1)]:pl-0 sm:[&:nth-child(2n+1)]:border-l sm:[&:nth-child(2n+1)]:pl-6 sm:[&:nth-child(4n+1)]:border-l-0 sm:[&:nth-child(4n+1)]:pl-0">
-                    <span className="stat-num block !text-[26px]">{s.v}</span>
-                    <span className="mt-2.5 block text-ink-600 text-[13px] leading-snug">{s.l}</span>
+                    <span className="stat-num-sm">{s.v}</span>
+                    <span className="mt-2.5 block text-ink-600 t-micro leading-snug">{s.l}</span>
                   </div>
                 ))}
               </div>
             </Reveal>
 
             <Reveal delay={100} className="lg:col-span-5">
-              <div className="relative aspect-[4/5] overflow-hidden bg-paper-200 ring-1 ring-hairline">
+              <div className="relative aspect-[4/5] overflow-hidden bg-paper-200 border border-hairline">
                 <Image
                   src="/images/sustainability.jpg"
                   alt="Toronto skyline at dusk"
@@ -377,9 +379,9 @@ export default function Home() {
           className="object-cover object-center"
         />
         <div className="absolute inset-0 bg-ink-900/55" />
-        <div className="relative container-x py-24 lg:py-32">
+        <div className="relative container-x section-pad">
           <Reveal className="max-w-[52ch]">
-            <p className="eyebrow eyebrow-light max-w-[260px]">Get in Touch</p>
+            <p className="eyebrow eyebrow-light">Get in Touch</p>
             <h2 className="h2 mt-8 text-white">
               Explore Partnership &amp; Investment Opportunities
             </h2>

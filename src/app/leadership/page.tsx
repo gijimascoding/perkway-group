@@ -27,7 +27,7 @@ export default function LeadershipPage() {
       <section className="bg-paper-100">
         <div className="container-x section-pad">
           <Reveal>
-            <p className="eyebrow max-w-[260px]">Executive Team</p>
+            <p className="eyebrow">Executive Team</p>
             <h2 className="h2 mt-8 text-ink-900">Executive Leadership</h2>
           </Reveal>
           <Reveal className="mt-16">
@@ -35,7 +35,7 @@ export default function LeadershipPage() {
           </Reveal>
 
           <Reveal className="mt-32">
-            <p className="eyebrow max-w-[260px]">Board of Directors</p>
+            <p className="eyebrow">Board of Directors</p>
             <h2 className="h2 mt-8 text-ink-900">Board &amp; Advisors</h2>
           </Reveal>
           <Reveal className="mt-16">

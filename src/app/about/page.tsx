@@ -8,7 +8,7 @@ import { metrics, globalPresence, operatingMarkets } from "@/data/company";
 const BLUR = "data:image/gif;base64,R0lGODlhAQABAPAAACIkKAAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==";
 
 const btnPrimary =
-  "inline-flex items-center justify-center h-[52px] px-8 bg-ink-900 text-white text-[14px] uppercase tracking-[0.06em] rounded-[2px] hover:bg-ink-800 transition-colors";
+  "inline-flex items-center justify-center h-[52px] px-8 bg-ink-900 text-white t-micro uppercase tracking-[0.06em] hover:bg-ink-800 transition-colors";
 
 export const metadata: Metadata = {
   title: "About | Perkway Group",
@@ -28,7 +28,7 @@ export default function AboutPage() {
 
       {/* Metrics */}
       <section className="bg-paper-50 border-b border-hairline">
-        <div className="container-x py-16 lg:py-20">
+        <div className="container-x band-pad">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-y-12">
             {metrics.map((m, i) => (
               <Reveal
@@ -36,7 +36,7 @@ export default function AboutPage() {
                 delay={i * 60}
                 className="pl-5 border-l border-hairline [&:nth-child(2n+1)]:border-l-0 [&:nth-child(2n+1)]:pl-0 md:[&:nth-child(2n+1)]:border-l md:[&:nth-child(2n+1)]:pl-5 md:[&:nth-child(3n+1)]:border-l-0 md:[&:nth-child(3n+1)]:pl-0 lg:[&:nth-child(3n+1)]:border-l lg:[&:nth-child(3n+1)]:pl-5 lg:[&:nth-child(6n+1)]:border-l-0 lg:[&:nth-child(6n+1)]:pl-0"
               >
-                <p className="stat-num tabular-nums">{m.value}</p>
+                <p className="stat-num">{m.value}</p>
                 <p className="stat-label">{m.label}</p>
               </Reveal>
             ))}
@@ -49,7 +49,7 @@ export default function AboutPage() {
         <div className="container-x section-pad">
           <div className="grid lg:grid-cols-12 gap-y-12 lg:gap-x-16 items-center">
             <Reveal className="lg:col-span-7">
-              <p className="eyebrow max-w-[260px]">Our Approach</p>
+              <p className="eyebrow">Our Approach</p>
               <h2 className="h2 mt-8 text-ink-900 max-w-[18ch]">
                 Disciplined Capital, Operational Excellence
               </h2>
@@ -74,7 +74,7 @@ export default function AboutPage() {
               </div>
             </Reveal>
             <Reveal delay={120} className="lg:col-span-5 order-first lg:order-last">
-              <div className="relative aspect-[4/5] overflow-hidden bg-paper-200 ring-1 ring-hairline">
+              <div className="relative aspect-[4/5] overflow-hidden bg-paper-200 border border-hairline">
                 <Image
                   src="/images/interior.jpg"
                   alt="Interior of a modern residence"
@@ -107,7 +107,7 @@ export default function AboutPage() {
         <div className="absolute inset-0 bg-ink-900/75" />
         <div className="relative container-x section-pad">
           <Reveal className="measure max-w-[52ch]">
-            <p className="eyebrow eyebrow-light max-w-[260px]">Global Presence</p>
+            <p className="eyebrow eyebrow-light">Global Presence</p>
             <h2 className="h2 mt-8 text-white">Operating Across 14 Markets Worldwide</h2>
             <p className="mt-6 text-white/80 lead">
               From our headquarters in London, we have built an international presence with
@@ -117,17 +117,17 @@ export default function AboutPage() {
           <div className="mt-12 border-t border-hairline-dark max-w-3xl">
             {globalPresence.map((o) => (
               <Reveal key={o.city} className="grid grid-cols-[1.2fr_1fr_1fr] gap-4 py-5 border-b border-hairline-dark">
-                <span className="text-white text-[17px] font-[600] font-display">{o.city}</span>
-                <span className="text-white/60 text-[15px] self-center">{o.country}</span>
-                <span className="text-white/40 text-[12px] uppercase tracking-[0.12em] self-center">{o.type}</span>
+                <span className="text-white h3 nums">{o.city}</span>
+                <span className="text-white/60 t-small self-center">{o.country}</span>
+                <span className="text-white/40 t-micro uppercase tracking-[0.12em] self-center">{o.type}</span>
               </Reveal>
             ))}
           </div>
           <Reveal className="mt-14">
-            <p className="eyebrow eyebrow-light max-w-[260px]">Active Markets</p>
+            <p className="eyebrow eyebrow-light">Active Markets</p>
             <div className="mt-8 flex flex-wrap gap-2.5">
               {operatingMarkets.map((mk) => (
-                <span key={mk} className="px-4 py-2 border border-hairline-dark text-white/85 text-[13.5px] font-[600]">{mk}</span>
+                <span key={mk} className="px-4 py-2 border border-hairline-dark text-white/85 t-small font-[600]">{mk}</span>
               ))}
             </div>
           </Reveal>
@@ -142,9 +142,9 @@ export default function AboutPage() {
 function CTASection() {
   return (
     <section className="bg-paper-100">
-      <div className="container-x section-pad text-center">
+      <div className="container-x section-pad">
         <Reveal>
-          <h2 className="h2 text-ink-900 max-w-[24ch] mx-auto">
+          <h2 className="h2 text-ink-900 max-w-[24ch]">
             Explore Partnership &amp; Investment Opportunities
           </h2>
           <Link href="/contact" className={`${btnPrimary} mt-8`}>

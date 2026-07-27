@@ -3,9 +3,14 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   images: {
     // Cap practical delivery so full-bleed images stop requesting w=3840.
-    deviceSizes: [640, 750, 828, 1080, 1200, 1600, 2048],
+    // 1440 added so the most common desktop width gets an exact-fit render
+    // instead of rounding up to 1600 (~20% fewer bytes on the LCP image).
+    deviceSizes: [640, 750, 828, 1080, 1200, 1440, 1600, 2048],
     imageSizes: [16, 32, 64, 96, 128, 256, 384],
-    formats: ["image/webp"],
+    // AVIF first: ~35% fewer bytes than webp at the same q, which is what buys
+    // the hero its LCP budget. Delivery only — q stays at 82.
+    formats: ["image/avif", "image/webp"],
+    qualities: [82],
     remotePatterns: [
       { protocol: "https", hostname: "images.unsplash.com" },
       { protocol: "https", hostname: "www.perkways.com" },

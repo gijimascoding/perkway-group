@@ -52,7 +52,22 @@
 
   a { color: inherit; }
 
-  ::selection { background-color: var(--color-ink-900); color: #ffffff; }
+  /* No default browser bullets anywhere; lists that need a marker draw it. */
+  ul, ol { list-style: none; }
+  li::marker { content: ""; }
+
+  /* Muted tint of the one accent. */
+  ::selection { background-color: rgba(28, 61, 90, 0.18); color: var(--color-ink-900); }
+  .on-dark ::selection { background-color: rgba(255, 255, 255, 0.24); color: #ffffff; }
+
+  /* Palette scrollbar on pointer devices only. */
+  @media (pointer: fine) {
+    * { scrollbar-width: thin; scrollbar-color: var(--color-ink-400) var(--color-paper-200); }
+    ::-webkit-scrollbar { width: 10px; height: 10px; }
+    ::-webkit-scrollbar-track { background: var(--color-paper-200); }
+    ::-webkit-scrollbar-thumb { background: var(--color-ink-400); border: 3px solid var(--color-paper-200); }
+    ::-webkit-scrollbar-thumb:hover { background: var(--color-ink-600); }
+  }
 
   :focus { outline: none; }
   :focus-visible {
@@ -60,9 +75,9 @@
     outline-offset: 2px;
   }
   .on-dark :focus-visible,
-  header :focus-visible { outline-color: #ffffff; }
+  header.is-overlay :focus-visible { outline-color: #ffffff; }
 
-  section[id] { scroll-margin-top: 80px; }
+  section[id] { scroll-margin-top: 96px; }
 }
 
 @layer components {
@@ -76,21 +91,84 @@
   @media (min-width: 768px) { .container-x { padding-inline: 48px; } }
   @media (min-width: 1024px) { .container-x { padding-inline: 80px; } }
 
-  /* ---- Uniform vertical rhythm: 96 mobile / 140 desktop ---- */
+  /* ---- Vertical rhythm: two steps only. Sections get section-pad,
+         hairline bands (stat rows, footer) get band-pad. Nothing else. ---- */
   .section-pad { padding-block: 96px; }
   @media (min-width: 1024px) { .section-pad { padding-block: 140px; } }
+  .band-pad { padding-block: 64px; }
+  @media (min-width: 1024px) { .band-pad { padding-block: 88px; } }
 
-  /* ---- Type scale ---- */
+  /* ---- Type scale: six sizes site-wide. Display family for 22px and up,
+         sans for 17 and below. Nothing outside this list. ----
+         micro  12px  uppercase labels, eyebrows, meta, buttons
+         small  15px  secondary prose, nav, table cells
+         body   17px  default prose and leads
+         h3     22px  card and row headings, small figures
+         h2     clamp(32,2.8vw,44)  section headings, large figures
+         h1     clamp(44,4.4vw,68)  page headings
+     The hero carries two additional values (.hero-h1, .hero-sub), used once. */
   .h1 { font-family: var(--font-display); font-weight: 700; font-size: clamp(44px, 4.4vw, 68px); line-height: 1.05; letter-spacing: -0.02em; }
   .h2 { font-family: var(--font-display); font-weight: 700; font-size: clamp(32px, 2.8vw, 44px); line-height: 1.12; letter-spacing: -0.015em; }
   .h3 { font-family: var(--font-display); font-weight: 600; font-size: 22px; line-height: 1.25; letter-spacing: -0.01em; }
-  .lead { font-size: 19px; line-height: 1.6; }
+  .t-body { font-size: 17px; line-height: 1.65; }
+  .t-small { font-size: 15px; line-height: 1.55; }
+  .t-micro { font-size: 12px; line-height: 1.45; }
+  /* Leads separate from body by measure and colour, not by a seventh size. */
+  .lead { font-size: 17px; line-height: 1.65; }
   .small { font-size: 15px; line-height: 1.55; }
   .measure { max-width: 68ch; }
+
+  /* ---- Hero: full-bleed, first screen, bottom-left on the container grid ---- */
+  /* min-height, not height: the first screen is the floor, and a long stack
+     grows the section instead of clipping under the overlaid nav. */
+  .hero { min-height: 86svh; }
+  @media (min-width: 768px) { .hero { min-height: 88vh; } }
+  @media (min-width: 1024px) { .hero { min-height: max(92vh, 720px); } }
+
+  /* Subpage heroes: same system, one step down from the home hero. */
+  .page-hero { min-height: 58vh; }
+  @media (min-width: 1024px) { .page-hero { min-height: max(62vh, 520px); } }
+
+  .hero-h1 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(3.25rem, 6vw, 6rem);
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+    max-width: 18ch;
+  }
+  .hero-sub {
+    font-size: 1.125rem;
+    line-height: 1.55;
+    max-width: 52ch;
+  }
+  /* 1.25rem is the intended size; below 640 it pushes the CTA row off a phone
+     screen, so the hero keeps its own step there. */
+  @media (min-width: 640px) { .hero-sub { font-size: 1.25rem; } }
+  /* Single bottom gradient for type contrast — nothing else over the flat scrim.
+     Starts at 30%, not 45%: the sunset band in hero.jpg sits directly behind the
+     headline, and 45% left it at 4.5:1 with no margin. Measured, not assumed. */
+  .hero-foot {
+    background: linear-gradient(to bottom, transparent 30%, rgba(20, 22, 26, 0.55) 100%);
+  }
+
+  /* Scroll affordance: 1px x 56px rule, fill travels downward on a 2.4s loop */
+  .hero-scroll {
+    position: absolute;
+    right: 24px;
+    bottom: 0;
+    width: 1px;
+    height: 56px;
+    background: rgba(255, 255, 255, 0.22);
+    overflow: hidden;
+  }
+  @media (min-width: 768px) { .hero-scroll { right: 48px; } }
+  @media (min-width: 1024px) { .hero-scroll { right: 80px; } }
 
   /* ---- Eyebrow: uppercase 12/0.14em muted + 1px hairline 16px beneath ---- */
   .eyebrow {
     display: block;
+    width: fit-content;
     font-family: var(--font-sans);
     font-weight: 600;
     text-transform: uppercase;
@@ -109,16 +187,28 @@
   .eyebrow-light { color: rgba(255, 255, 255, 0.6); }
   .eyebrow-light::after { background: var(--color-hairline-dark); }
 
-  /* ---- Stat block (reused by hero band + responsibility) ---- */
-  .stat-num { font-family: var(--font-display); font-weight: 700; font-size: 40px; line-height: 1; letter-spacing: -0.02em; color: var(--color-ink-900); }
-  .stat-label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--color-ink-500); margin-top: 10px; display: block; }
+  /* ---- Stat block (reused by hero band + responsibility) ----
+         Figures sit on the h2 / h3 steps, never on their own sizes, and always
+         carry tabular lining figures so columns of numbers align like an
+         offering-memorandum exhibit. */
+  .stat-num { font-family: var(--font-display); font-weight: 700; font-size: clamp(32px, 2.8vw, 44px); line-height: 1; letter-spacing: -0.02em; color: var(--color-ink-900); }
+  .stat-num-sm { font-family: var(--font-display); font-weight: 700; font-size: 22px; line-height: 1.1; letter-spacing: -0.015em; color: var(--color-ink-900); display: block; }
+  .stat-label { font-size: 12px; line-height: 1.45; text-transform: uppercase; letter-spacing: 0.12em; color: var(--color-ink-500); margin-top: 10px; display: block; }
+
+  /* Every figure on the site, not just the stat bands. */
+  .stat-num,
+  .stat-num-sm,
+  .stat-label,
+  .nums,
+  address,
+  time { font-variant-numeric: tabular-nums lining-nums; }
 
   .hairline { background: var(--color-hairline); }
 
   /* Text link with hairline underline (accent) */
   .link-underline {
     display: inline-block;
-    font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600;
+    font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600;
     color: var(--color-accent); border-bottom: 1px solid var(--color-accent); padding-bottom: 2px;
     transition: color 200ms ease, border-color 200ms ease;
   }
@@ -134,6 +224,29 @@
 @media (prefers-reduced-motion: no-preference) {
   .reveal { opacity: 0; transform: translateY(12px); transition: opacity 320ms ease-out, transform 320ms ease-out; }
   .reveal.in { opacity: 1; transform: none; }
+
+  /* Ambient hero scale — the one exception to the 400ms motion cap. Once, on load. */
+  .hero-img { animation: hero-ambient 12s ease-out both; }
+  .hero-scroll::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: #ffffff;
+    transform-origin: top;
+    animation: rule-fill 2.4s ease-in-out infinite;
+  }
+}
+
+@keyframes hero-ambient {
+  from { transform: scale(1.06); }
+  to { transform: scale(1); }
+}
+
+@keyframes rule-fill {
+  0% { transform: scaleY(0); opacity: 0; }
+  12% { opacity: 1; }
+  60% { transform: scaleY(1); opacity: 1; }
+  100% { transform: scaleY(1); opacity: 0; }
 }
 
 /* No-JS fallback */

@@ -7,10 +7,10 @@ export function Marquee({ items }: { items: string[] }) {
       <div className="flex w-max animate-[marquee_38s_linear_infinite] motion-reduce:animate-none hover:[animation-play-state:paused]">
         {doubled.map((item, i) => (
           <div key={i} className="flex items-center shrink-0" aria-hidden={i >= items.length}>
-            <span className="px-8 text-white/70 text-[15px] font-[600] tracking-[0.08em] uppercase whitespace-nowrap">
+            <span className="px-8 text-white/70 t-small font-[600] tracking-[0.08em] uppercase whitespace-nowrap">
               {item}
             </span>
-            <span className="h-1 w-1 rounded-full bg-white/25" aria-hidden />
+            <span className="h-1 w-1 bg-white/25" aria-hidden />
           </div>
         ))}
       </div>

@@ -30,20 +30,20 @@ export default function PortfolioPage() {
                 className="scroll-mt-24 grid lg:grid-cols-[0.9fr_1.1fr] gap-8 lg:gap-16 py-12 lg:py-16 border-b border-hairline"
               >
                 <div>
-                  <span className="font-display text-ink-400 font-[700] text-[18px] tabular-nums">
+                  <span className="font-display text-ink-400 font-[700] h3 nums">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <p className="eyebrow max-w-[260px] mt-5">{s.subtitle}</p>
+                  <p className="eyebrow mt-5">{s.subtitle}</p>
                   <h3 className="h3 mt-4 text-ink-900">
                     {s.title}
                   </h3>
                 </div>
                 <div>
-                  <p className="text-ink-700 text-[16px] leading-relaxed measure">{s.description}</p>
+                  <p className="text-ink-700 t-body measure">{s.description}</p>
                   <ul className="mt-8 grid sm:grid-cols-2 gap-x-8 gap-y-3">
                     {s.highlights.map((h) => (
-                      <li key={h} className="flex items-start gap-3 text-ink-700 text-[14.5px] leading-snug">
-                        <span className="mt-[9px] h-[5px] w-[5px] rounded-full bg-ink-900 shrink-0" />
+                      <li key={h} className="flex items-start gap-3 text-ink-700 t-small">
+                        <span className="mt-[10px] h-[5px] w-[5px] bg-ink-900 shrink-0" />
                         {h}
                       </li>
                     ))}
@@ -56,12 +56,12 @@ export default function PortfolioPage() {
       </section>
 
       <section className="on-dark bg-ink-900">
-        <div className="container-x section-pad text-center">
+        <div className="container-x section-pad">
           <Reveal>
-            <h2 className="h2 text-white max-w-[26ch] mx-auto">
+            <h2 className="h2 text-white max-w-[26ch]">
               Partner With a Vertically Integrated Platform
             </h2>
-            <Link href="/contact" className="mt-10 inline-flex items-center justify-center h-[52px] px-8 bg-white text-ink-900 text-[14px] uppercase tracking-[0.06em] rounded-[2px] hover:bg-paper-200 transition-colors">
+            <Link href="/contact" className="mt-10 inline-flex items-center justify-center h-[52px] px-8 bg-white text-ink-900 t-micro uppercase tracking-[0.06em] hover:bg-paper-200 transition-colors">
               Investor Inquiries
             </Link>
           </Reveal>

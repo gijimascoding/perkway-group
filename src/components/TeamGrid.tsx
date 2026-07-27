@@ -13,8 +13,8 @@ function Portrait({ m, className = "" }: { m: LeadershipMember; className?: stri
   return photo ? (
     <Image src={photo} alt={m.name} fill quality={82} sizes="(max-width:768px) 50vw, 320px" className={`object-cover object-top grayscale contrast-[1.02] ${className}`} />
   ) : (
-    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-ink-700 to-ink-900">
-      <span className="text-white/90 text-[44px] font-[800] tracking-tight">{m.initials}</span>
+    <div className="absolute inset-0 flex items-center justify-center bg-ink-800">
+      <span className="text-white/90 h2 tracking-tight">{m.initials}</span>
     </div>
   );
 }
@@ -55,12 +55,12 @@ export function TeamGrid({ members, columns = 4 }: { members: LeadershipMember[]
             className="group text-left"
           >
             {/* Uniform 4:5 grayscale portrait, hairline frame, no radius */}
-            <div className="relative aspect-[4/5] overflow-hidden bg-paper-200 ring-1 ring-hairline">
+            <div className="relative aspect-[4/5] overflow-hidden bg-paper-200 border border-hairline">
               <Portrait m={m} />
             </div>
-            <h3 className="mt-5 text-ink-900 text-[18px] font-[600]">{m.name}</h3>
-            <p className="mt-1 text-ink-500 text-[13px]">{m.title}</p>
-            <span className="mt-3 inline-block link-underline text-[12px] group-hover:text-accent-hover">
+            <h3 className="mt-5 text-ink-900 h3">{m.name}</h3>
+            <p className="mt-1 text-ink-500 t-small">{m.title}</p>
+            <span className="mt-3 inline-block link-underline group-hover:text-accent-hover">
               Read Bio +
             </span>
           </button>
@@ -73,7 +73,7 @@ export function TeamGrid({ members, columns = 4 }: { members: LeadershipMember[]
           className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-8"
           onClick={close}
         >
-          <div className="absolute inset-0 bg-ink-900/80 backdrop-blur-sm" />
+          <div className="absolute inset-0 bg-ink-900/80" />
           <div
             role="dialog"
             aria-modal="true"
@@ -94,10 +94,10 @@ export function TeamGrid({ members, columns = 4 }: { members: LeadershipMember[]
                   <path d="M6 6l12 12M6 18L18 6" />
                 </svg>
               </button>
-              <h3 id="team-modal-title" className="text-ink-900 text-[24px] font-[800] leading-tight pr-8">{active.name}</h3>
-              <p className="mt-1.5 text-ink-600 text-[12px] font-[700] uppercase tracking-[0.12em]">{active.title}</p>
+              <h3 id="team-modal-title" className="text-ink-900 h3 pr-8">{active.name}</h3>
+              <p className="mt-1.5 text-ink-600 t-micro font-[700] uppercase tracking-[0.12em]">{active.title}</p>
               <div className="mt-5 h-px w-12 bg-ink-900" />
-              <p className="mt-5 text-ink-700 text-[15.5px] leading-relaxed">{active.bio}</p>
+              <p className="mt-5 text-ink-700 t-small">{active.bio}</p>
             </div>
           </div>
         </div>

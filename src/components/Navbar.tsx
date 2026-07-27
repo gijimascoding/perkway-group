@@ -2,11 +2,33 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { navigationItems } from "@/data/company";
 import { GlobeMark } from "@/components/GlobeMark";
 
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [solid, setSolid] = useState(false);
+  const pathname = usePathname();
+
+  /* Transparent over the hero, solid ivory past 80% of hero height. */
+  useEffect(() => {
+    const hero = document.querySelector("main section") as HTMLElement | null;
+    const threshold = () => (hero?.offsetHeight ?? window.innerHeight * 0.8) * 0.8;
+    let limit = threshold();
+    const onScroll = () => setSolid(window.scrollY > limit);
+    const onResize = () => {
+      limit = threshold();
+      onScroll();
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onResize);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onResize);
+    };
+  }, [pathname]);
 
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
@@ -25,13 +47,23 @@ export function Navbar() {
   }, [mobileOpen]);
 
   return (
-    <header className="relative z-50 bg-paper-100 border-b border-hairline">
+    <header
+      className={`fixed inset-x-0 top-0 z-50 border-b transition-[background-color,border-color] duration-[240ms] ease-out ${
+        solid
+          ? "bg-paper-100 border-hairline"
+          : "is-overlay bg-transparent border-transparent"
+      }`}
+    >
       <div className="container-x">
         <div className="flex items-center justify-between h-[72px]">
           {/* Logo lockup — monogram + wordmark on a shared baseline */}
           <Link href="/" className="flex items-center gap-3">
             <GlobeMark className="w-9 h-9" />
-            <span className="text-ink-900 text-[16px] font-[700] tracking-[0.06em] uppercase">
+            <span
+              className={`t-body font-[700] tracking-[0.06em] uppercase transition-colors duration-[240ms] ease-out ${
+                solid ? "text-ink-900" : "text-white"
+              }`}
+            >
               Perkway Group
             </span>
           </Link>
@@ -42,14 +74,20 @@ export function Navbar() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-ink-700 text-[14px] tracking-[0.02em] transition-colors duration-200 hover:text-ink-900"
+                className={`t-small tracking-[0.02em] transition-colors duration-[240ms] ease-out ${
+                  solid ? "text-ink-700 hover:text-ink-900" : "text-white/80 hover:text-white"
+                }`}
               >
                 {item.label}
               </Link>
             ))}
             <Link
               href="/contact"
-              className="ml-2 text-[13px] tracking-[0.04em] px-5 h-[40px] inline-flex items-center rounded-[2px] border border-accent text-ink-900 transition-colors duration-200 hover:text-accent hover:border-accent-hover"
+              className={`ml-2 t-micro uppercase tracking-[0.08em] px-5 h-[40px] inline-flex items-center border transition-colors duration-[240ms] ease-out ${
+                solid
+                  ? "border-accent text-ink-900 hover:text-accent hover:border-accent-hover"
+                  : "border-white/50 text-white hover:bg-white/10"
+              }`}
             >
               Investor Inquiries
             </Link>
@@ -59,7 +97,9 @@ export function Navbar() {
           <button
             type="button"
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="lg:hidden -m-1 p-3 text-ink-900"
+            className={`lg:hidden -m-1 p-3 transition-colors duration-[240ms] ease-out ${
+              solid && !mobileOpen ? "text-ink-900" : "text-white"
+            }`}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
             aria-controls="mobile-menu"
@@ -86,7 +126,7 @@ export function Navbar() {
                 key={item.href}
                 href={item.href}
                 onClick={() => setMobileOpen(false)}
-                className="text-white text-[16px] tracking-[0.02em] py-4 border-b border-white/10"
+                className="text-white t-body tracking-[0.02em] py-4 border-b border-white/10"
               >
                 {item.label}
               </Link>
@@ -94,7 +134,7 @@ export function Navbar() {
             <Link
               href="/contact"
               onClick={() => setMobileOpen(false)}
-              className="mt-6 text-center py-4 rounded-[2px] border border-white/40 text-white text-[13px] tracking-[0.06em] uppercase"
+              className="mt-6 text-center py-4 border border-white/40 text-white t-micro tracking-[0.06em] uppercase"
             >
               Investor Inquiries
             </Link>

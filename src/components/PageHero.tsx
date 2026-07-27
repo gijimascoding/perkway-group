@@ -14,7 +14,7 @@ export function PageHero({
   variant?: "photo" | "dark";
 }) {
   return (
-    <section className="on-dark relative overflow-hidden bg-ink-900 h-[58vh] min-h-[420px] flex items-end">
+    <section className="page-hero on-dark relative overflow-hidden bg-ink-900 flex items-end">
       <Image
         src={image}
         alt=""
@@ -27,12 +27,12 @@ export function PageHero({
         blurDataURL="data:image/gif;base64,R0lGODlhAQABAPAAACIkKAAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
         className="object-cover object-[center_45%]"
       />
-      {/* Flat scrim, no gradient mesh */}
-      <div className="absolute inset-0 bg-ink-900/50" />
-      <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-ink-900/70 to-transparent" />
+      {/* Same scrim system as the home hero: one flat value, one gradient */}
+      <div className="absolute inset-0 bg-ink-900/[0.46]" />
+      <div className="hero-foot absolute inset-0" />
 
-      <div className="relative w-full container-x pb-16 lg:pb-24">
-        <p className="eyebrow eyebrow-light max-w-[260px]">{eyebrow}</p>
+      <div className="relative w-full container-x pt-[128px] pb-[88px] lg:pt-[160px] lg:pb-[120px]">
+        <p className="eyebrow eyebrow-light">{eyebrow}</p>
         <h1 className="h1 mt-8 text-white max-w-[20ch] text-balance">{title}</h1>
         {subtitle && (
           <p className="mt-6 measure lead text-white/85">{subtitle}</p>
