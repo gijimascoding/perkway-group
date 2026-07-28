@@ -121,9 +121,9 @@
   /* ---- Hero: full-bleed, first screen, bottom-left on the container grid ---- */
   /* min-height, not height: the first screen is the floor, and a long stack
      grows the section instead of clipping under the overlaid nav. */
-  .hero { min-height: 86svh; }
-  @media (min-width: 768px) { .hero { min-height: 88vh; } }
-  @media (min-width: 1024px) { .hero { min-height: max(92vh, 720px); } }
+  .hero { min-height: 100svh; }
+  @media (min-width: 768px) { .hero { min-height: 100svh; } }
+  @media (min-width: 1024px) { .hero { min-height: max(100svh, 760px); } }
 
   /* Subpage heroes: same system, one step down from the home hero. */
   .page-hero { min-height: 58vh; }
@@ -132,10 +132,10 @@
   .hero-h1 {
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: clamp(3.25rem, 6vw, 6rem);
-    line-height: 1.02;
+    font-size: clamp(2.5rem, 4.6vw, 4.5rem);
+    line-height: 1.04;
     letter-spacing: -0.025em;
-    max-width: 18ch;
+    max-width: 16ch;
   }
   .hero-sub {
     font-size: 1.125rem;
@@ -149,7 +149,7 @@
      Starts at 30%, not 45%: the sunset band in hero.jpg sits directly behind the
      headline, and 45% left it at 4.5:1 with no margin. Measured, not assumed. */
   .hero-foot {
-    background: linear-gradient(to bottom, transparent 30%, rgba(20, 22, 26, 0.55) 100%);
+    background: linear-gradient(to bottom, transparent 38%, rgba(20, 22, 26, 0.78) 100%);
   }
 
   /* Scroll affordance: 1px x 56px rule, fill travels downward on a 2.4s loop */
@@ -222,7 +222,9 @@
 
 /* ---- Motion: opacity + 12px translateY, 320ms, once ---- */
 @media (prefers-reduced-motion: no-preference) {
-  .reveal { opacity: 0; transform: translateY(12px); transition: opacity 320ms ease-out, transform 320ms ease-out; }
+  /* Longer travel + duration than the 400ms body cap: the home page is read by
+     scrolling, so sections should arrive as you reach them rather than snap. */
+  .reveal { opacity: 0; transform: translateY(26px); transition: opacity 560ms cubic-bezier(0.22, 0.61, 0.36, 1), transform 560ms cubic-bezier(0.22, 0.61, 0.36, 1); }
   .reveal.in { opacity: 1; transform: none; }
 
   /* Ambient hero scale — the one exception to the 400ms motion cap. Once, on load. */
@@ -240,6 +242,37 @@
 @keyframes hero-ambient {
   from { transform: scale(1.06); }
   to { transform: scale(1); }
+}
+
+/* ---- Scroll-linked hero: the frame drifts and the copy settles out as the
+   first screen leaves. Native scroll timelines only — no JS, no scroll
+   listener — and the @supports gate means older engines just get the static
+   hero rather than a broken one. ---- */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-media {
+      animation: hero-drift linear both;
+      animation-timeline: view();
+      animation-range: contain 0% exit 100%;
+      will-change: transform;
+    }
+    .hero-copy {
+      animation: hero-settle linear both;
+      animation-timeline: view();
+      animation-range: exit 0% exit 72%;
+      will-change: transform, opacity;
+    }
+  }
+}
+
+@keyframes hero-drift {
+  from { transform: scale(1.05) translate3d(0, 0, 0); }
+  to { transform: scale(1.05) translate3d(0, 7%, 0); }
+}
+
+@keyframes hero-settle {
+  from { opacity: 1; transform: translate3d(0, 0, 0); }
+  to { opacity: 0; transform: translate3d(0, -40px, 0); }
 }
 
 @keyframes rule-fill {

@@ -41,27 +41,32 @@ export default function Home() {
     <>
       {/* ============ HERO ============ */}
       <section className="hero on-dark relative w-full overflow-hidden bg-ink-900 flex items-end">
-        <Image
-          src="/images/hero.jpg"
-          alt="Global metropolitan skyline at dusk"
-          fill
-          priority
-          quality={82}
-          sizes="100vw"
-          placeholder="blur"
-          blurDataURL={BLUR}
-          className="hero-img object-cover object-[center_42%]"
-        />
-        <div className="absolute inset-0 bg-ink-900/[0.46]" />
+        {/* Wrapper carries the scroll-linked drift so the img keeps its load animation. */}
+        <div className="hero-media absolute inset-0">
+          <Image
+            src="/images/hero.jpg"
+            alt="Global metropolitan skyline at dusk"
+            fill
+            priority
+            quality={82}
+            sizes="100vw"
+            placeholder="blur"
+            blurDataURL={BLUR}
+            className="hero-img object-cover object-[center_42%]"
+          />
+        </div>
+        {/* Flat scrim lightened from 0.46: the bottom gradient now carries the
+            type contrast, which leaves the upper two-thirds of the frame open. */}
+        <div className="absolute inset-0 bg-ink-900/[0.30]" />
         <div className="hero-foot absolute inset-0" />
 
-        <div className="relative w-full container-x pt-[128px] pb-[88px] lg:pt-[160px] lg:pb-[140px]">
+        <div className="hero-copy relative w-full container-x pt-[140px] pb-[64px] lg:pt-[200px] lg:pb-[80px]">
           <p className="eyebrow eyebrow-light">{company.legalName}</p>
-          <h1 className="hero-h1 mt-8 text-white text-balance">
+          <h1 className="hero-h1 mt-6 text-white text-balance">
             Building Enduring Value Across Industries
           </h1>
-          <p className="hero-sub mt-6 text-white/[0.82]">{company.description}</p>
-          <div className="mt-9 flex flex-wrap gap-2 sm:gap-3">
+          <p className="hero-sub mt-5 text-white/[0.82]">{company.description}</p>
+          <div className="mt-8 flex flex-wrap gap-2 sm:gap-3">
             <Link href="/portfolio" className={btnPrimaryDark}>Our Portfolio</Link>
             <Link href="/about" className={btnOutlineDark}>About the Group</Link>
           </div>
