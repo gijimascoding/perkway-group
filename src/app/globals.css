@@ -248,26 +248,31 @@
    first screen leaves. Native scroll timelines only — no JS, no scroll
    listener — and the @supports gate means older engines just get the static
    hero rather than a broken one. ---- */
-@supports (animation-timeline: view()) {
+/* Driven off the document scroller, not view(): the hero starts flush with the
+   top of the page, so a view() range is already part-way through at scroll 0 and
+   the frame lands pre-shifted. scroll(root) pins progress 0 to scroll 0. */
+@supports (animation-timeline: scroll()) {
   @media (prefers-reduced-motion: no-preference) {
     .hero-media {
       animation: hero-drift linear both;
-      animation-timeline: view();
-      animation-range: contain 0% exit 100%;
+      animation-timeline: scroll(root block);
+      animation-range: 0 100svh;
       will-change: transform;
     }
     .hero-copy {
       animation: hero-settle linear both;
-      animation-timeline: view();
-      animation-range: exit 0% exit 72%;
+      animation-timeline: scroll(root block);
+      animation-range: 0 70svh;
       will-change: transform, opacity;
     }
   }
 }
 
+/* Overscan must exceed the travel or the drift exposes the frame edge:
+   scale 1.12 gives 6% of height on each side, translate spends 5.6%. */
 @keyframes hero-drift {
-  from { transform: scale(1.05) translate3d(0, 0, 0); }
-  to { transform: scale(1.05) translate3d(0, 7%, 0); }
+  from { transform: scale(1.12) translate3d(0, 0, 0); }
+  to { transform: scale(1.12) translate3d(0, 5%, 0); }
 }
 
 @keyframes hero-settle {
