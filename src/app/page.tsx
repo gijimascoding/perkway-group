@@ -60,7 +60,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-ink-900/[0.30]" />
         <div className="hero-foot absolute inset-0" />
 
-        <div className="hero-copy relative w-full container-x pt-[140px] pb-[64px] lg:pt-[200px] lg:pb-[80px]">
+        <div className="hero-copy relative w-full container-x pt-[120px] pb-[32px] lg:pt-[200px] lg:pb-[56px]">
           <p className="eyebrow eyebrow-light">{company.legalName}</p>
           <h1 className="hero-h1 mt-6 text-white text-balance">
             Building Enduring Value Across Industries

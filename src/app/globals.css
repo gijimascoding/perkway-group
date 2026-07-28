@@ -132,7 +132,7 @@
   .hero-h1 {
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: clamp(2.5rem, 4.6vw, 4.5rem);
+    font-size: clamp(2.125rem, 4.6vw, 4.5rem);
     line-height: 1.04;
     letter-spacing: -0.025em;
     max-width: 16ch;
