@@ -251,10 +251,8 @@
 /* Driven off the document scroller, not view(): the hero starts flush with the
    top of the page, so a view() range is already part-way through at scroll 0 and
    the frame lands pre-shifted. scroll(root) pins progress 0 to scroll 0. */
-/* Base transform lives outside the animation so the frame is painted correctly
-   on the very first frame. With will-change promoting a layer and the scroll
-   timeline not yet resolved at load, the hero rendered black until the first
-   scroll — no will-change here, and the keyframes start from this same value. */
+/* Base transform outside the animation so the frame has a painted resting state
+   if the timeline is unavailable; the keyframes start from this same value. */
 .hero-media { transform: scale(1.12); }
 
 @supports (animation-timeline: scroll()) {
@@ -263,11 +261,13 @@
       animation: hero-drift linear both;
       animation-timeline: scroll(root block);
       animation-range: 0 100svh;
+      will-change: transform;
     }
     .hero-copy {
       animation: hero-settle linear both;
       animation-timeline: scroll(root block);
       animation-range: 0 70svh;
+      will-change: transform, opacity;
     }
   }
 }
