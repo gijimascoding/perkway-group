@@ -28,7 +28,7 @@ export function Footer() {
           {/* Company */}
           <div>
             <p className={colHead}>Company</p>
-            <ul className="mt-6 space-y-3.5">
+            <ul className="tap-list mt-6 space-y-3.5">
               {navigationItems.map((item) => (
                 <li key={item.href}>
                   <Link href={item.href} className={colLink}>{item.label}</Link>
@@ -40,7 +40,7 @@ export function Footer() {
           {/* Segments */}
           <div>
             <p className={colHead}>Business Segments</p>
-            <ul className="mt-6 space-y-3.5">
+            <ul className="tap-list mt-6 space-y-3.5">
               {businessSegments.slice(0, 6).map((s) => (
                 <li key={s.id}>
                   <Link href="/portfolio" className={colLink}>{s.title}</Link>
@@ -59,11 +59,11 @@ export function Footer() {
               <br />
               {company.address.country}
               <br />
-              <a href={`mailto:${company.email}`} className="mt-3 inline-block hover:text-white transition-colors">
+              <a href={`mailto:${company.email}`} className="mt-3 inline-block py-2.5 sm:py-0 hover:text-white transition-colors">
                 {company.email}
               </a>
               <br />
-              <a href={`tel:${company.phone.replace(/[^0-9+]/g, "")}`} className="hover:text-white transition-colors">
+              <a href={`tel:${company.phone.replace(/[^0-9+]/g, "")}`} className="inline-block py-2.5 sm:py-0 hover:text-white transition-colors">
                 {company.phone}
               </a>
             </address>

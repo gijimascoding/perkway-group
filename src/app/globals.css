@@ -93,9 +93,14 @@
 
   /* ---- Vertical rhythm: two steps only. Sections get section-pad,
          hairline bands (stat rows, footer) get band-pad. Nothing else. ---- */
-  .section-pad { padding-block: 96px; }
+  /* Phones get a shorter step. 96px reads as generous on a 1440 canvas and as
+     dead space on a 390 one, where it costs a third of a screen per section
+     boundary and pushes the page past 13,000px. */
+  .section-pad { padding-block: 68px; }
+  @media (min-width: 640px) { .section-pad { padding-block: 96px; } }
   @media (min-width: 1024px) { .section-pad { padding-block: 140px; } }
-  .band-pad { padding-block: 64px; }
+  .band-pad { padding-block: 48px; }
+  @media (min-width: 640px) { .band-pad { padding-block: 64px; } }
   @media (min-width: 1024px) { .band-pad { padding-block: 88px; } }
 
   /* ---- Type scale: six sizes site-wide. Display family for 22px and up,
@@ -112,7 +117,11 @@
   .h3 { font-family: var(--font-display); font-weight: 600; font-size: 22px; line-height: 1.25; letter-spacing: -0.01em; }
   .t-body { font-size: 17px; line-height: 1.65; }
   .t-small { font-size: 15px; line-height: 1.55; }
-  .t-micro { font-size: 12px; line-height: 1.45; }
+  /* 13px under 640: the micro step is nearly always uppercase with wide
+     tracking, and at 12px on a phone that combination is the hardest text on
+     the site to read. Desktop keeps the intended 12. */
+  .t-micro { font-size: 13px; line-height: 1.45; }
+  @media (min-width: 640px) { .t-micro { font-size: 12px; } }
   /* Leads separate from body by measure and colour, not by a seventh size. */
   .lead { font-size: 17px; line-height: 1.65; }
   .small { font-size: 15px; line-height: 1.55; }
@@ -172,9 +181,12 @@
     font-family: var(--font-sans);
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.14em;
-    font-size: 12px;
+    letter-spacing: 0.12em;
+    font-size: 13px;
     color: var(--color-ink-500);
+  }
+  @media (min-width: 640px) {
+    .eyebrow { letter-spacing: 0.14em; font-size: 12px; }
   }
   .eyebrow::after {
     content: "";
@@ -193,7 +205,12 @@
          offering-memorandum exhibit. */
   .stat-num { font-family: var(--font-display); font-weight: 700; font-size: clamp(32px, 2.8vw, 44px); line-height: 1; letter-spacing: -0.02em; color: var(--color-ink-900); }
   .stat-num-sm { font-family: var(--font-display); font-weight: 700; font-size: 22px; line-height: 1.1; letter-spacing: -0.015em; color: var(--color-ink-900); display: block; }
-  .stat-label { font-size: 12px; line-height: 1.45; text-transform: uppercase; letter-spacing: 0.12em; color: var(--color-ink-500); margin-top: 10px; display: block; }
+  /* Tracking, not size, is what makes these labels wrap in a half-width phone
+     column. 0.05em keeps "Residential Units" on one line at a legible size. */
+  .stat-label { font-size: 12.5px; line-height: 1.4; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-ink-500); margin-top: 10px; display: block; }
+  @media (min-width: 640px) {
+    .stat-label { font-size: 12px; line-height: 1.45; letter-spacing: 0.12em; }
+  }
 
   /* Every figure on the site, not just the stat bands. */
   .stat-num,
@@ -208,11 +225,36 @@
   /* Text link with hairline underline (accent) */
   .link-underline {
     display: inline-block;
-    font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600;
-    color: var(--color-accent); border-bottom: 1px solid var(--color-accent); padding-bottom: 2px;
+    font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600;
+    color: var(--color-accent); border-bottom: 1px solid var(--color-accent); padding-bottom: 3px;
     transition: color 200ms ease, border-color 200ms ease;
   }
+  @media (min-width: 640px) { .link-underline { font-size: 12px; padding-bottom: 2px; } }
   .link-underline:hover { color: var(--color-accent-hover); border-color: var(--color-accent-hover); }
+
+  /* ---- Touch targets ----
+     The underline and hairline rules are the design; they must not grow. So the
+     hit area is extended with transparent padding that is cancelled visually by
+     an equal negative margin, leaving the drawn element exactly where it was. */
+  /* Width OR coarse pointer: some Android browsers still report a fine
+     pointer, and a narrow desktop window losing nothing by having roomier
+     targets is a better failure than a phone that is hard to tap. */
+  @media (max-width: 639px), (pointer: coarse) {
+    /* Grown upward only: the underline IS the baseline of the element, so
+       bottom padding would move the rule. There is always empty space above. */
+    .link-underline {
+      padding-top: 18px;
+      margin-top: -18px;
+    }
+    /* Footer and nav link columns: 19px of text is not a tap target. Padding
+       replaces the list gap rather than adding to it, so rows reach ~43px
+       without any two hit areas overlapping. */
+    .tap-list > * + * { margin-top: 0; }
+    .tap-list a {
+      display: block;
+      padding-block: 12px;
+    }
+  }
 }
 
 @layer utilities {

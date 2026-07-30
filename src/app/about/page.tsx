@@ -29,7 +29,7 @@ export default function AboutPage() {
       {/* Metrics */}
       <section className="bg-paper-50 border-b border-hairline">
         <div className="container-x band-pad">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-y-12">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-x-5 gap-y-10 sm:gap-y-12">
             {metrics.map((m, i) => (
               <Reveal
                 key={m.label}
@@ -116,10 +116,10 @@ export default function AboutPage() {
           </Reveal>
           <div className="mt-12 border-t border-hairline-dark max-w-3xl">
             {globalPresence.map((o) => (
-              <Reveal key={o.city} className="grid grid-cols-[1.2fr_1fr_1fr] gap-4 py-5 border-b border-hairline-dark">
-                <span className="text-white h3 nums">{o.city}</span>
-                <span className="text-white/60 t-small self-center">{o.country}</span>
-                <span className="text-white/40 t-micro uppercase tracking-[0.12em] self-center">{o.type}</span>
+              <Reveal key={o.city} className="flex flex-wrap items-baseline gap-x-3 gap-y-1.5 py-5 border-b border-hairline-dark sm:grid sm:grid-cols-[1.2fr_1fr_1fr] sm:gap-4 sm:items-center">
+                <span className="text-white h3 nums basis-full sm:basis-auto">{o.city}</span>
+                <span className="text-white/60 t-small">{o.country}</span>
+                <span className="text-white/40 t-micro uppercase tracking-[0.12em]">{o.type}</span>
               </Reveal>
             ))}
           </div>

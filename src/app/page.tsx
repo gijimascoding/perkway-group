@@ -78,7 +78,7 @@ export default function Home() {
       {/* ============ HERO STAT BAND (6 stats) ============ */}
       <section className="bg-paper-100 border-b border-hairline">
         <div className="container-x band-pad">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-y-12">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-x-5 gap-y-10 sm:gap-y-12">
             {metrics.map((m, i) => (
               <Reveal
                 key={m.label}
@@ -117,7 +117,7 @@ export default function Home() {
               </div>
 
               {/* Sub-stats: hairline-separated row, not boxes */}
-              <div className="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-y-8 border-t border-hairline pt-8">
+              <div className="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-8 border-t border-hairline pt-8">
                 {aboutStats.map((s) => (
                   <div key={s.l} className="pl-6 border-l border-hairline [&:nth-child(2n+1)]:border-l-0 [&:nth-child(2n+1)]:pl-0 sm:[&:nth-child(2n+1)]:border-l sm:[&:nth-child(2n+1)]:pl-6 sm:[&:nth-child(4n+1)]:border-l-0 sm:[&:nth-child(4n+1)]:pl-0">
                     <CountUp value={s.v} className="stat-num-sm" />
@@ -268,10 +268,12 @@ export default function Home() {
             <p className="eyebrow">Principal Offices</p>
             <div className="mt-8 border-t border-hairline">
               {globalPresence.map((o) => (
-                <div key={o.city} className="grid grid-cols-[1.2fr_1fr_1fr] gap-4 py-5 border-b border-hairline">
-                  <span className="text-ink-900 h3 nums">{o.city}</span>
-                  <span className="text-ink-600 t-small self-center">{o.country}</span>
-                  <span className="text-ink-500 t-micro uppercase tracking-[0.12em] self-center">{o.type}</span>
+                <div key={o.city} className="flex flex-wrap items-baseline gap-x-3 gap-y-1.5 py-5 border-b border-hairline sm:grid sm:grid-cols-[1.2fr_1fr_1fr] sm:gap-4 sm:items-center">
+                  {/* basis-full drops city onto its own line on a phone, where
+                      three columns squeeze the type tag against the edge. */}
+                  <span className="text-ink-900 h3 nums basis-full sm:basis-auto">{o.city}</span>
+                  <span className="text-ink-600 t-small">{o.country}</span>
+                  <span className="text-ink-500 t-micro uppercase tracking-[0.12em]">{o.type}</span>
                 </div>
               ))}
             </div>
@@ -343,7 +345,7 @@ export default function Home() {
               </div>
 
               {/* metrics as hairline-separated 4-col row */}
-              <div className="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-y-8 border-t border-hairline pt-8">
+              <div className="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-8 border-t border-hairline pt-8">
                 {responsibilityStats.map((s) => (
                   <div key={s.v} className="pl-6 border-l border-hairline [&:nth-child(2n+1)]:border-l-0 [&:nth-child(2n+1)]:pl-0 sm:[&:nth-child(2n+1)]:border-l sm:[&:nth-child(2n+1)]:pl-6 sm:[&:nth-child(4n+1)]:border-l-0 sm:[&:nth-child(4n+1)]:pl-0">
                     <span className="stat-num-sm">{s.v}</span>

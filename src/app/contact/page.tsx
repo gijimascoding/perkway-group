@@ -60,7 +60,7 @@ export default function ContactPage() {
                     ].map((c) => (
                       <div key={c.l}>
                         <p className="t-micro text-ink-600 uppercase tracking-[0.1em] font-[700] mb-1">{c.l}</p>
-                        <a href={c.href} className="t-small nums text-ink-900 font-[700] hover:text-ink-600 transition-colors">
+                        <a href={c.href} className="inline-block py-2.5 -my-2.5 sm:py-0 sm:my-0 t-small nums text-ink-900 font-[700] hover:text-ink-600 transition-colors">
                           {c.v}
                         </a>
                       </div>
