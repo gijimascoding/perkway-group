@@ -66,7 +66,10 @@ export default function Home() {
             Building Enduring Value Across Industries
           </h1>
           <p className="hero-sub mt-5 text-white/[0.82]">{company.description}</p>
-          <div className="mt-8 flex flex-wrap gap-2 sm:gap-3">
+          {/* The two labels total 357px at 390 and the container is 342, so a
+              wrap row left two stacked buttons at different widths, which reads
+              as a mistake. Below sm they stack deliberately, at equal width. */}
+          <div className="mt-8 grid grid-cols-1 gap-3 sm:flex sm:flex-wrap sm:gap-3">
             <Link href="/portfolio" className={btnPrimaryDark}>Our Portfolio</Link>
             <Link href="/about" className={btnOutlineDark}>About the Group</Link>
           </div>
@@ -397,7 +400,8 @@ export default function Home() {
               partners, and qualified co-investors. Contact our investor relations team to
               learn about current opportunities.
             </p>
-            <div className="mt-10 flex flex-wrap gap-3">
+            {/* Same wrap-into-ragged-widths problem as the hero CTA pair. */}
+            <div className="mt-10 grid grid-cols-1 gap-3 sm:flex sm:flex-wrap sm:gap-3">
               <Link href="/contact" className={btnPrimaryDark}>Investor Inquiries</Link>
               <Link href="/contact" className={btnOutlineDark}>General Contact</Link>
             </div>
