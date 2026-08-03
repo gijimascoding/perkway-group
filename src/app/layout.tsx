@@ -27,6 +27,9 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://www.perkways.com"),
   title,
   description,
+  // The apex 307s to www, so www is the one host Google should consolidate on.
+  // "./" resolves per-route, so every page canonicals to itself, not to home.
+  alternates: { canonical: "./" },
   openGraph: {
     type: "website",
     siteName: "Perkway Group",
