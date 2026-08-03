@@ -3,6 +3,7 @@ import { Inter, Archivo } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { organizationSchema, websiteSchema } from "./structured-data";
 
 // Body: neutral sans. Display: tight grotesk.
 const inter = Inter({
@@ -55,6 +56,10 @@ export default function RootLayout({
     <html lang="en" className={`no-js ${inter.variable} ${archivo.variable}`}>
       <head>
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.remove('no-js')" }} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify([organizationSchema, websiteSchema]) }}
+        />
       </head>
       <body className="min-h-screen flex flex-col">
         <Navbar />
