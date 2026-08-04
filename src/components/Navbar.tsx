@@ -59,8 +59,11 @@ export function Navbar() {
           {/* Logo lockup — monogram + wordmark on a shared baseline */}
           <Link href="/" className="flex items-center gap-3">
             <GlobeMark className="w-9 h-9" />
+            {/* Serif wordmark, mixed case. Blackstone's mark is a serif
+                logotype; the uppercase tracked-out grotesk here read as a
+                tech company's wordmark. */}
             <span
-              className={`t-body font-[700] tracking-[0.06em] uppercase transition-colors duration-[240ms] ease-out ${
+              className={`font-display text-[23px] leading-none tracking-[-0.005em] transition-colors duration-[240ms] ease-out ${
                 solid ? "text-ink-900" : "text-white"
               }`}
             >

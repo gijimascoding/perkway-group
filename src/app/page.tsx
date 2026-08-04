@@ -2,9 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { Reveal } from "@/components/Reveal";
 import { TeamGrid } from "@/components/TeamGrid";
-import { CountUp } from "@/components/CountUp";
+import { AsOf } from "@/components/AsOf";
+import { CircleLink } from "@/components/CircleLink";
+import { Carousel } from "@/components/Carousel";
 import {
   company,
+  figures,
+  figuresAsOf,
   metrics,
   businessSegments,
   leadership,
@@ -22,11 +26,14 @@ const btnPrimaryDark =
 const btnOutlineDark =
   "inline-flex items-center justify-center h-[52px] px-6 sm:px-8 border border-white/50 text-white t-micro uppercase tracking-[0.06em] hover:bg-white/10 transition-colors";
 
-const aboutStats = [
-  { v: "2018", l: "Year Founded" },
-  { v: "$1.2B+", l: "Assets Under Management" },
-  { v: "36", l: "Portfolio Companies" },
-  { v: "4", l: "Countries of Operation" },
+
+/** Sub-row beneath the headline AUM figure — deliberately excludes AUM, which
+    the oversized figure above already states. */
+const secondaryMetrics = [
+  { value: figures.units, label: "Residential Units" },
+  { value: figures.companies, label: "Portfolio Companies" },
+  { value: figures.countries, label: "Countries of Operation" },
+  { value: figures.markets, label: "Markets Worldwide" },
 ];
 
 const responsibilityStats = [
@@ -61,7 +68,10 @@ export default function Home() {
         <div className="hero-foot absolute inset-0" />
 
         <div className="hero-copy relative w-full container-x pt-[120px] pb-[32px] lg:pt-[200px] lg:pb-[56px]">
-          <p className="eyebrow eyebrow-light">{company.legalName}</p>
+          {/* Display name, not legalName: the eyebrow read "Perkway Capital
+              Group" two inches under a logo reading "Perkway Group". The legal
+              entity belongs in the footer copyright line, not the hero. */}
+          <p className="eyebrow eyebrow-light">{company.name}</p>
           <h1 className="hero-h1 mt-6 text-white text-balance">
             Building Enduring Value Across Industries
           </h1>
@@ -88,29 +98,39 @@ export default function Home() {
                 delay={i * 50}
                 className="pl-5 border-l border-hairline [&:nth-child(2n+1)]:border-l-0 [&:nth-child(2n+1)]:pl-0 md:[&:nth-child(2n+1)]:border-l md:[&:nth-child(2n+1)]:pl-5 md:[&:nth-child(3n+1)]:border-l-0 md:[&:nth-child(3n+1)]:pl-0 lg:[&:nth-child(3n+1)]:border-l lg:[&:nth-child(3n+1)]:pl-5 lg:[&:nth-child(6n+1)]:border-l-0 lg:[&:nth-child(6n+1)]:pl-0"
               >
-                <CountUp value={m.value} className="stat-num block" />
+                <span className="stat-num nums block">{m.value}</span>
                 <span className="stat-label">{m.label}</span>
               </Reveal>
             ))}
           </div>
+          <AsOf className="mt-12" />
         </div>
       </section>
 
-      {/* ============ ABOUT THE GROUP — 7/5 split ============ */}
-      <section id="about" className="bg-paper-100">
+      {/* ============ ABOUT THE GROUP ============
+           Blackstone's "Delivering for Investors" block: centered head, then a
+           two-column split with prose on the left and one oversized figure on
+           the right carrying its own footnote. */}
+      <section id="about" className="bg-paper-50">
         <div className="container-x section-pad">
-          <div className="grid lg:grid-cols-12 gap-y-12 lg:gap-x-16 items-start">
-            <Reveal className="lg:col-span-7">
-              <p className="eyebrow">About the Group</p>
-              <h2 className="h2 mt-8 text-ink-900 max-w-[18ch]">
-                A Vertically Integrated Platform for Real Assets
-              </h2>
-              <div className="mt-8 space-y-6 measure text-ink-700">
+          <Reveal className="section-head">
+            <span className="kicker">About the Group</span>
+            <h2 className="display-xl mt-10 mx-auto max-w-[24ch] text-ink-900">
+              A Vertically Integrated Platform for Real Assets
+            </h2>
+          </Reveal>
+
+          <div className="mt-24 lg:mt-32 grid lg:grid-cols-12 gap-y-16 lg:gap-x-24 items-start">
+            <Reveal className="lg:col-span-6">
+              <h3 className="text-[22px] font-[600] text-ink-900 font-sans">
+                Vertically integrated scale
+              </h3>
+              <div className="mt-7 space-y-6 text-ink-700">
                 <p>
-                  Perkway Group is a next-generation holding company operating at the
-                  intersection of real estate, hospitality, and technology, with a
-                  portfolio spanning over 5,000 residential units and 36 portfolio
-                  companies.
+                  Perkway Group is a holding company operating at the intersection of
+                  real estate, hospitality, and technology, with a portfolio spanning
+                  over {figures.units} residential units and {figures.companies} portfolio
+                  companies across {figures.countries} countries.
                 </p>
                 <p>
                   Our approach combines disciplined capital allocation with operational
@@ -118,34 +138,22 @@ export default function Home() {
                   market cycle.
                 </p>
               </div>
-
-              {/* Sub-stats: hairline-separated row, not boxes */}
-              <div className="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-8 border-t border-hairline pt-8">
-                {aboutStats.map((s) => (
-                  <div key={s.l} className="pl-6 border-l border-hairline [&:nth-child(2n+1)]:border-l-0 [&:nth-child(2n+1)]:pl-0 sm:[&:nth-child(2n+1)]:border-l sm:[&:nth-child(2n+1)]:pl-6 sm:[&:nth-child(4n+1)]:border-l-0 sm:[&:nth-child(4n+1)]:pl-0">
-                    <CountUp value={s.v} className="stat-num-sm" />
-                    <span className="stat-label">{s.l}</span>
-                  </div>
-                ))}
-              </div>
-
-              <Link href="/about" className="link-underline mt-12">
-                Learn More About Perkway
-              </Link>
+              <CircleLink href="/about" className="mt-12">Learn More</CircleLink>
             </Reveal>
 
-            <Reveal delay={100} className="lg:col-span-5">
-              <div className="relative aspect-[4/5] overflow-hidden bg-paper-200 border border-hairline">
-                <Image
-                  src="/images/towers.jpg"
-                  alt="Modern glass office towers"
-                  fill
-                  quality={82}
-                  sizes="(max-width: 1024px) 100vw, 40vw"
-                  placeholder="blur"
-                  blurDataURL={BLUR}
-                  className="object-cover"
-                />
+            <Reveal delay={100} className="lg:col-span-5 lg:col-start-8">
+              <span className="stat-hero nums">{figures.aum}</span>
+              <span className="stat-hero-label">Assets Under Management</span>
+              <p className="footnote mt-8 max-w-[34ch]">
+                All figures as of {figuresAsOf}, unless otherwise indicated.
+              </p>
+              <div className="mt-14 grid grid-cols-2 gap-x-8 gap-y-10 border-t border-hairline pt-10">
+                {secondaryMetrics.map((s) => (
+                  <div key={s.label}>
+                    <span className="stat-num-sm nums">{s.value}</span>
+                    <span className="stat-label">{s.label}</span>
+                  </div>
+                ))}
               </div>
             </Reveal>
           </div>
@@ -155,12 +163,12 @@ export default function Home() {
       {/* ============ BUSINESSES — editorial hairline grid ============ */}
       <section id="businesses" className="bg-paper-50 border-t border-hairline">
         <div className="container-x section-pad">
-          <Reveal className="measure">
-            <p className="eyebrow">Our Businesses</p>
-            <h2 className="h2 mt-8 text-ink-900">
+          <Reveal className="section-head">
+            <span className="kicker">Our Businesses</span>
+            <h2 className="display-xl mt-10 mx-auto max-w-[20ch] text-ink-900">
               Diversified Across Eight Core Business Segments
             </h2>
-            <p className="mt-6 text-ink-700 lead">
+            <p className="mt-10 mx-auto max-w-[62ch] text-ink-700 lead">
               Our portfolio companies operate across the full spectrum of real estate and
               related services, from investment and development to technology and financial
               solutions.
@@ -169,7 +177,7 @@ export default function Home() {
 
           <div className="mt-16 grid sm:grid-cols-2 border-t border-l border-hairline">
             {businessSegments.map((s, i) => (
-              <Reveal key={s.id} className="group border-b border-r border-hairline p-8 lg:p-10 hover:bg-paper-100 transition-colors">
+              <Reveal key={s.id} delay={(i % 2) * 90} className="group border-b border-r border-hairline p-8 lg:p-10 transition-colors duration-300 hover:bg-paper-200/60">
                 <div className="flex items-center gap-3">
                   <span className="font-display text-ink-400 t-micro nums">
                     {String(i + 1).padStart(2, "0")}
@@ -180,17 +188,18 @@ export default function Home() {
                   </span>
                 </div>
                 <h3 className="h3 mt-4 text-ink-900 group-hover:text-accent transition-colors">{s.title}</h3>
-                <p className="mt-3 text-ink-600 t-small line-clamp-3">
-                  {s.description}
+                {/* First sentence, not a 3-line clamp. The clamp cut mid-word
+                    ("value-add…", "institutional co-…"), which reads as an
+                    unfinished page. Full copy still lives on /portfolio. */}
+                <p className="mt-3 text-ink-600 t-small">
+                  {s.description.split(". ")[0]}.
                 </p>
               </Reveal>
             ))}
           </div>
 
           <Reveal className="mt-14">
-            <Link href="/portfolio" className="link-underline">
-              Explore All Business Segments
-            </Link>
+            <CircleLink href="/portfolio">Explore All Business Segments</CircleLink>
           </Reveal>
         </div>
       </section>
@@ -198,14 +207,11 @@ export default function Home() {
       {/* ============ PULL QUOTE — dark band ============ */}
       <section className="on-dark bg-ink-900">
         <div className="container-x section-pad">
-          <Reveal className="max-w-[720px]">
-            <div className="h-px w-12 bg-white/30" />
-            <blockquote className="mt-10 h2 text-white max-w-[22ch]">
+          <Reveal className="section-head">
+            <span className="kicker">Investment Philosophy</span>
+            <blockquote className="display-xl mt-10 mx-auto max-w-[19ch] text-white">
               We build businesses designed to compound value across generations, not quarters.
             </blockquote>
-            <p className="mt-10 text-white/50 t-micro uppercase tracking-[0.16em]">
-              Perkway Group &middot; Investment Philosophy
-            </p>
           </Reveal>
         </div>
       </section>
@@ -213,12 +219,12 @@ export default function Home() {
       {/* ============ LEADERSHIP ============ */}
       <section id="leadership" className="bg-paper-100">
         <div className="container-x section-pad">
-          <Reveal className="measure">
-            <p className="eyebrow">Leadership</p>
-            <h2 className="h2 mt-8 text-ink-900">
+          <Reveal className="section-head">
+            <span className="kicker">Leadership</span>
+            <h2 className="display-xl mt-10 mx-auto max-w-[18ch] text-ink-900">
               Guided by Experienced Principals
             </h2>
-            <p className="mt-6 text-ink-700 lead">
+            <p className="mt-10 mx-auto max-w-[62ch] text-ink-700 lead">
               Our leadership team brings decades of combined experience in real estate
               investment, corporate strategy, hospitality operations, and technology
               innovation.
@@ -230,9 +236,7 @@ export default function Home() {
           </div>
 
           <Reveal className="mt-16">
-            <Link href="/leadership" className="link-underline">
-              View Full Leadership Team &amp; Board
-            </Link>
+            <CircleLink href="/leadership">View Full Leadership Team &amp; Board</CircleLink>
           </Reveal>
         </div>
       </section>
@@ -253,12 +257,12 @@ export default function Home() {
       </div>
       <section id="global" className="bg-paper-50 border-t border-hairline">
         <div className="container-x section-pad">
-          <Reveal className="measure">
-            <p className="eyebrow">Global Presence</p>
-            <h2 className="h2 mt-8 text-ink-900 max-w-[16ch]">
-              Operating Across 14 Markets Worldwide
+          <Reveal className="section-head">
+            <span className="kicker">Global Presence</span>
+            <h2 className="display-xl mt-10 mx-auto max-w-[16ch] text-ink-900">
+              Operating Across {figures.markets} Markets Worldwide
             </h2>
-            <p className="mt-6 text-ink-700 lead">
+            <p className="mt-10 mx-auto max-w-[64ch] text-ink-700 lead">
               From our headquarters in London, we have built an international presence with
               regional offices and operations spanning Europe and North America. Our global
               network enables us to source opportunities, deploy capital, and manage assets
@@ -297,30 +301,52 @@ export default function Home() {
       {/* ============ INSIGHTS ============ */}
       <section id="insights" className="bg-paper-100 border-t border-hairline">
         <div className="container-x section-pad">
-          <Reveal className="flex flex-wrap items-end justify-between gap-6">
-            <div className="measure">
-              <p className="eyebrow">Insights</p>
-              <h2 className="h2 mt-8 text-ink-900">
-                Perspectives &amp; Market Intelligence
-              </h2>
-            </div>
-            <Link href="/insights" className="link-underline">View All</Link>
+          <Reveal className="section-head">
+            <span className="kicker">Insights</span>
+            <h2 className="display-xl mt-10 text-ink-900">
+              Perspectives &amp; Market Intelligence
+            </h2>
           </Reveal>
 
-          <div className="mt-16 grid md:grid-cols-3 gap-x-8 gap-y-12">
-            {insights.slice(0, 3).map((n) => (
-              <Reveal key={n.id} className="group border-t border-ink-900 pt-6">
-                <div className="flex items-center gap-3 t-micro uppercase tracking-[0.12em] nums">
-                  <span className="text-ink-600">{n.category}</span>
-                  <span className="text-ink-400">{n.date}</span>
-                </div>
-                <h3 className="h3 mt-4 text-ink-900 group-hover:text-accent transition-colors">
-                  {n.title}
-                </h3>
-                <p className="mt-4 text-ink-600 t-small line-clamp-3">{n.excerpt}</p>
-              </Reveal>
-            ))}
-          </div>
+          {/* Image + title + category + date, no excerpt. The clamped excerpt
+              trailed off mid-sentence on every card; Blackstone runs the same
+              three fields and lets the image carry the row. Presented in their
+              promo-carousel pattern: sliding track, circle arrows, dots. */}
+          <Reveal className="mt-20">
+            <Carousel
+              label="Perspectives and market intelligence"
+              perView={3}
+              items={insights.map((n) => (
+                <article key={n.id} className="group">
+                  <Link href="/insights" className="block">
+                    <div className="relative aspect-[4/3] overflow-hidden bg-paper-200">
+                      <Image
+                        src={n.image}
+                        alt=""
+                        fill
+                        quality={82}
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 30vw"
+                        placeholder="blur"
+                        blurDataURL={BLUR}
+                        className="object-cover card-media"
+                      />
+                    </div>
+                    <h3 className="h3 mt-6 text-ink-900 transition-colors duration-300 group-hover:text-ink-600">
+                      {n.title}
+                    </h3>
+                    <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 t-micro uppercase tracking-[0.12em] nums">
+                      <span className="text-ink-600">{n.category}</span>
+                      <span className="text-ink-400">{n.date}</span>
+                    </div>
+                  </Link>
+                </article>
+              ))}
+            />
+          </Reveal>
+
+          <Reveal className="mt-20 flex justify-center">
+            <CircleLink href="/insights">View All Insights</CircleLink>
+          </Reveal>
         </div>
       </section>
 
@@ -330,7 +356,7 @@ export default function Home() {
           <div className="grid lg:grid-cols-12 gap-y-12 lg:gap-x-16 items-start">
             <Reveal className="lg:col-span-7">
               <p className="eyebrow">Responsibility</p>
-              <h2 className="h2 mt-8 text-ink-900 max-w-[16ch]">
+              <h2 className="h2 mt-8 text-ink-900 max-w-[16ch] font-display">
                 Committed to Sustainable Growth
               </h2>
               <div className="mt-8 space-y-6 measure text-ink-700">

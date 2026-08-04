@@ -1,29 +1,32 @@
 @import "tailwindcss";
 
 @theme {
-  /* Deep neutral — text + dark sections */
-  --color-ink-900: #16181c;
-  --color-ink-800: #24272c;
-  --color-ink-700: #3a3d42;
-  --color-ink-600: #565a61;
-  --color-ink-500: #6c7178;
-  --color-ink-400: #9aa0a8;
+  /* True black, not a soft charcoal. Blackstone's dark sections are #000 and
+     its ground is #fff; the warm ivory previously used here is what made the
+     page read as a boutique brand rather than an institution. */
+  --color-ink-900: #000000;
+  --color-ink-800: #1a1a1a;
+  --color-ink-700: #3d3d3d;
+  --color-ink-600: #595959;
+  --color-ink-500: #757575;
+  --color-ink-400: #9e9e9e;
 
-  /* Ivory ground */
+  /* Neutral ground — no warmth */
   --color-paper-50: #ffffff;
-  --color-paper-100: #f7f5f0;
-  --color-paper-200: #f1eee7;
+  --color-paper-100: #ffffff;
+  --color-paper-200: #f2f2f2;
 
   /* Hairline + muted */
-  --color-hairline: #e4e2dd;
-  --color-hairline-dark: rgba(255, 255, 255, 0.12);
+  --color-hairline: #dcdcdc;
+  --color-hairline-dark: rgba(255, 255, 255, 0.16);
 
-  /* One accent — links + CTA borders only */
-  --color-accent: #1c3d5a;
-  --color-accent-hover: #274f72;
+  /* Links inherit ink; no blue accent. Institutional sites underline in the
+     text colour and let the circle-arrow carry affordance. */
+  --color-accent: #000000;
+  --color-accent-hover: #3d3d3d;
 
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --font-display: var(--font-archivo), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-serif), "Iowan Old Style", Georgia, "Times New Roman", serif;
 }
 
 @layer base {
@@ -44,10 +47,13 @@
     line-height: 1.65;
   }
 
+  /* Serif display wants regular weight at large sizes — a 700 serif at 68px
+     reads as a newspaper masthead, not a balance sheet. Weight climbs only as
+     size drops (see .h3), where the strokes would otherwise get thin. */
   h1, h2, h3, h4 {
     font-family: var(--font-display);
     color: var(--color-ink-900);
-    font-weight: 700;
+    font-weight: 400;
   }
 
   a { color: inherit; }
@@ -96,9 +102,12 @@
   /* Phones get a shorter step. 96px reads as generous on a 1440 canvas and as
      dead space on a 390 one, where it costs a third of a screen per section
      boundary and pushes the page past 13,000px. */
-  .section-pad { padding-block: 68px; }
-  @media (min-width: 640px) { .section-pad { padding-block: 96px; } }
-  @media (min-width: 1024px) { .section-pad { padding-block: 140px; } }
+  /* Desktop step raised 140 -> 200. Air is the loudest institutional signal
+     Blackstone uses: its sections breathe far past what a marketing page
+     would allow, and crowding is what made this page feel like a startup. */
+  .section-pad { padding-block: 80px; }
+  @media (min-width: 640px) { .section-pad { padding-block: 120px; } }
+  @media (min-width: 1024px) { .section-pad { padding-block: 200px; } }
   .band-pad { padding-block: 48px; }
   @media (min-width: 640px) { .band-pad { padding-block: 64px; } }
   @media (min-width: 1024px) { .band-pad { padding-block: 88px; } }
@@ -115,9 +124,11 @@
      the desktop ratio collapsed to h1 34 / h2 32 and the hero ranked below every
      subpage title. The floors carry the hierarchy where the vw term cannot.
      The hero carries two additional values (.hero-h1, .hero-sub), used once. */
-  .h1 { font-family: var(--font-display); font-weight: 700; font-size: clamp(38px, 4.4vw, 68px); line-height: 1.05; letter-spacing: -0.02em; }
-  .h2 { font-family: var(--font-display); font-weight: 700; font-size: clamp(28px, 2.8vw, 44px); line-height: 1.12; letter-spacing: -0.015em; }
-  .h3 { font-family: var(--font-display); font-weight: 600; font-size: 22px; line-height: 1.25; letter-spacing: -0.01em; }
+  /* Tracking relaxes from the grotesk's -0.02em: serifs are drawn with their
+     own sidebearings and negative tracking closes the counters. */
+  .h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(38px, 4.4vw, 68px); line-height: 1.08; letter-spacing: -0.012em; }
+  .h2 { font-family: var(--font-display); font-weight: 400; font-size: clamp(28px, 2.8vw, 44px); line-height: 1.16; letter-spacing: -0.008em; }
+  .h3 { font-family: var(--font-display); font-weight: 600; font-size: 22px; line-height: 1.3; letter-spacing: -0.004em; }
   .t-body { font-size: 17px; line-height: 1.65; }
   .t-small { font-size: 15px; line-height: 1.55; }
   /* 13px under 640: the micro step is nearly always uppercase with wide
@@ -143,11 +154,11 @@
 
   .hero-h1 {
     font-family: var(--font-display);
-    font-weight: 700;
+    font-weight: 400;
     font-size: clamp(2.375rem, 4.6vw, 4.5rem);
-    line-height: 1.04;
-    letter-spacing: -0.025em;
-    max-width: 16ch;
+    line-height: 1.1;
+    letter-spacing: -0.012em;
+    max-width: 17ch;
   }
   .hero-sub {
     font-size: 1.125rem;
@@ -202,12 +213,132 @@
   .eyebrow-light { color: rgba(255, 255, 255, 0.6); }
   .eyebrow-light::after { background: var(--color-hairline-dark); }
 
+  /* ---- Centered section head (Blackstone's primary section device) ----
+         A short rule, then a tracked uppercase kicker, then an oversized
+         centered serif heading with a great deal of air on either side. The
+         left-aligned eyebrow above stays for dense sub-sections. */
+  .section-head { text-align: center; }
+  .section-head .kicker {
+    display: block;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 12px;
+    color: var(--color-ink-900);
+  }
+  .section-head .kicker::before {
+    content: "";
+    display: block;
+    width: 64px;
+    height: 1px;
+    background: var(--color-ink-900);
+    margin: 0 auto 28px;
+  }
+  .on-dark .section-head .kicker { color: #fff; }
+  .on-dark .section-head .kicker::before { background: rgba(255, 255, 255, 0.6); }
+
+  /* Display step above .h1 — reserved for centered section heads. */
+  .display-xl {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(40px, 5.4vw, 76px);
+    line-height: 1.06;
+    letter-spacing: -0.014em;
+  }
+
+  /* ---- Circle-arrow link. Blackstone pairs every "Learn More" with an
+         outlined circle and an arrow; it is the single most recognisable
+         interaction detail on the site. ---- */
+  .link-circle {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    font-family: var(--font-sans);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-ink-900);
+  }
+  .link-circle .dot {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 9999px;
+    border: 1px solid currentColor;
+    flex: none;
+    /* 600ms, matching Blackstone's measured background-color transition. A
+       220ms fill reads as a web button; theirs fills like a weight settling. */
+    transition: background-color 600ms ease, color 600ms ease;
+  }
+  .link-circle:hover .dot { background: var(--color-ink-900); color: #fff; }
+  .on-dark .link-circle { color: #fff; }
+  .on-dark .link-circle:hover .dot { background: #fff; color: var(--color-ink-900); }
+
+  /* ---- Carousel: 600ms ease on the track, matching the heavy transitions
+         measured on blackstone.com. Arrows are the circle-link dot at a
+         larger size; dots are 8px rings that fill when current. ---- */
+  .carousel-track { transition: transform 600ms ease; }
+  /* Image zoom on card hover — 0.3s, the value Blackstone uses on its
+     background-size transitions (130 elements carry it). */
+  .card-media { transition: transform 300ms ease; }
+  .group:hover .card-media { transform: scale(1.04); }
+  .carousel-arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 9999px;
+    border: 1px solid currentColor;
+    color: var(--color-ink-900);
+    transition: background-color 600ms ease, color 600ms ease;
+  }
+  .carousel-arrow:hover { background: var(--color-ink-900); color: #fff; }
+  .on-dark .carousel-arrow { color: #fff; }
+  .on-dark .carousel-arrow:hover { background: #fff; color: var(--color-ink-900); }
+  .carousel-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 9999px;
+    border: 1px solid var(--color-ink-900);
+    transition: background-color 300ms ease;
+  }
+  .carousel-dot.is-active { background: var(--color-ink-900); }
+  .on-dark .carousel-dot { border-color: #fff; }
+  .on-dark .carousel-dot.is-active { background: #fff; }
+
+  /* ---- Oversized single figure. One number carrying a section beats six
+         competing for the same row; $1.3T is the whole right column on
+         blackstone.com. ---- */
+  .stat-hero {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(64px, 8vw, 120px);
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+    color: var(--color-ink-900);
+    display: block;
+  }
+  .stat-hero-label {
+    display: block;
+    margin-top: 14px;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--color-ink-900);
+  }
+  /* Provenance sits directly under the figure it qualifies, in the smallest
+     step on the site, the way a fund exhibit foots its own table. */
+  .footnote { font-size: 12.5px; line-height: 1.5; color: var(--color-ink-500); }
+  .footnote sup { font-size: 9px; vertical-align: super; }
+
   /* ---- Stat block (reused by hero band + responsibility) ----
          Figures sit on the h2 / h3 steps, never on their own sizes, and always
          carry tabular lining figures so columns of numbers align like an
          offering-memorandum exhibit. */
-  .stat-num { font-family: var(--font-display); font-weight: 700; font-size: clamp(32px, 2.8vw, 44px); line-height: 1; letter-spacing: -0.02em; color: var(--color-ink-900); }
-  .stat-num-sm { font-family: var(--font-display); font-weight: 700; font-size: 22px; line-height: 1.1; letter-spacing: -0.015em; color: var(--color-ink-900); display: block; }
+  .stat-num { font-family: var(--font-display); font-weight: 400; font-size: clamp(34px, 3vw, 48px); line-height: 1.05; letter-spacing: -0.008em; color: var(--color-ink-900); }
+  .stat-num-sm { font-family: var(--font-display); font-weight: 600; font-size: 24px; line-height: 1.15; letter-spacing: -0.004em; color: var(--color-ink-900); display: block; }
   /* Tracking, not size, is what makes these labels wrap in a half-width phone
      column. 0.05em keeps "Residential Units" on one line at a legible size. */
   .stat-label { font-size: 12.5px; line-height: 1.4; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-ink-500); margin-top: 10px; display: block; }
@@ -267,9 +398,15 @@
 
 /* ---- Motion: opacity + 12px translateY, 320ms, once ---- */
 @media (prefers-reduced-motion: no-preference) {
-  /* Longer travel + duration than the 400ms body cap: the home page is read by
-     scrolling, so sections should arrive as you reach them rather than snap. */
-  .reveal { opacity: 0; transform: translateY(26px); transition: opacity 560ms cubic-bezier(0.22, 0.61, 0.36, 1), transform 560ms cubic-bezier(0.22, 0.61, 0.36, 1); }
+  /* Motion tuned to blackstone.com's measured values: their content reveals run
+     `opacity 1s ease` and lead with the fade, carrying only a little travel.
+     The previous 560ms + 26px snapped by comparison. Heavy institutions move
+     slowly; the weight of the motion is the point. */
+  .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 1000ms ease, transform 1000ms ease;
+  }
   .reveal.in { opacity: 1; transform: none; }
 
   /* Ambient hero scale — the one exception to the 400ms motion cap. Once, on load. */

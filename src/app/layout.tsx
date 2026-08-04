@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Archivo } from "next/font/google";
+import { Inter, Source_Serif_4 } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
@@ -13,10 +13,14 @@ const inter = Inter({
   display: "swap",
 });
 
-const archivo = Archivo({
+// Display: transitional serif. The tight grotesk (Archivo) read as a tech
+// brand; capital-stewardship brands (Blackstone, Brookfield, KKR) all set
+// display type in a high-contrast serif. Body/UI stays Inter.
+const sourceSerif = Source_Serif_4({
   subsets: ["latin"],
-  weight: ["600", "700"],
-  variable: "--font-archivo",
+  weight: ["400", "600"],
+  style: ["normal", "italic"],
+  variable: "--font-serif",
   display: "swap",
 });
 
@@ -52,8 +56,11 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // suppressHydrationWarning: the inline script in <head> strips `no-js` from
+  // <html> before React hydrates, so server and client className deliberately
+  // differ. Without it, every page load logs a hydration mismatch error.
   return (
-    <html lang="en" className={`no-js ${inter.variable} ${archivo.variable}`}>
+    <html lang="en" className={`no-js ${inter.variable} ${sourceSerif.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.remove('no-js')" }} />
         <script

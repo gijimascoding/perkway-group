@@ -20,13 +20,39 @@ export const company = {
   },
 };
 
+/**
+ * Every figure quoted anywhere on the site resolves to this object, and every
+ * stat block prints `figuresAsOf` beneath it. Institutional readers check the
+ * as-of date before they read the number; a figure without one reads as
+ * decorative. Two hardcoded stat arrays previously let the same metric appear
+ * as both "$1.2B+" and "$1.1B+" on one page.
+ */
+export const figuresAsOf = "June 30, 2026";
+
+export const figures = {
+  aum: "$1.2B+",
+  units: "5,000+",
+  companies: "36",
+  countries: "4",
+  employees: "200+",
+  markets: "14",
+  founded: "2018",
+} as const;
+
 export const metrics = [
-  { value: "$1.2B+", label: "Assets Under Management" },
-  { value: "5,000+", label: "Residential Units" },
-  { value: "36", label: "Portfolio Companies" },
-  { value: "4", label: "Countries" },
-  { value: "200+", label: "Employees Across the Group" },
-  { value: "14", label: "Markets Worldwide" },
+  { value: figures.aum, label: "Assets Under Management" },
+  { value: figures.units, label: "Residential Units" },
+  { value: figures.companies, label: "Portfolio Companies" },
+  { value: figures.countries, label: "Countries" },
+  { value: figures.employees, label: "Employees Across the Group" },
+  { value: figures.markets, label: "Markets Worldwide" },
+];
+
+export const aboutMetrics = [
+  { value: figures.founded, label: "Year Founded" },
+  { value: figures.aum, label: "Assets Under Management" },
+  { value: figures.companies, label: "Portfolio Companies" },
+  { value: figures.countries, label: "Countries of Operation" },
 ];
 
 export interface BusinessSegment {
@@ -257,7 +283,13 @@ export interface InsightItem {
   title: string;
   excerpt: string;
   category: string;
+  /**
+   * Month + year today. Institutional publishers date to the day
+   * ("July 30, 2026") — a month-only stamp reads as undated filler. Set an
+   * exact publication date here once each piece has one.
+   */
   date: string;
+  image: string;
 }
 
 export const insights: InsightItem[] = [
@@ -268,6 +300,7 @@ export const insights: InsightItem[] = [
       "An analysis of macro trends driving institutional investment into residential assets, and how Perkway Group is positioning its portfolio to capture long-term demographic tailwinds.",
     category: "Market Outlook",
     date: "January 2026",
+    image: "/images/residential.jpg",
   },
   {
     id: "2",
@@ -276,6 +309,7 @@ export const insights: InsightItem[] = [
       "How Perkway's development arm is converting aging commercial and heritage buildings into high-performing residential communities, generating superior risk-adjusted returns.",
     category: "Investment Strategy",
     date: "December 2025",
+    image: "/images/architecture.jpg",
   },
   {
     id: "3",
@@ -284,6 +318,7 @@ export const insights: InsightItem[] = [
       "A look inside Perkway's proprietary technology stack and how AI-driven systems are transforming leasing velocity, maintenance efficiency, and resident satisfaction at scale.",
     category: "Technology",
     date: "November 2025",
+    image: "/images/interior.jpg",
   },
   {
     id: "4",
@@ -292,6 +327,7 @@ export const insights: InsightItem[] = [
       "The Group has established a representative office in London as part of its strategic expansion into key European markets, targeting co-living and purpose-built rental opportunities.",
     category: "Press Release",
     date: "October 2025",
+    image: "/images/london.jpg",
   },
 ];
 
