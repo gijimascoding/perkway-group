@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { company, navigationItems, businessSegments, figuresAsOf } from "@/data/company";
+import { company, navigationItems, businessSegments } from "@/data/company";
 import { GlobeMark } from "@/components/GlobeMark";
 
 const colHead = "t-micro uppercase tracking-[0.14em] text-white/45";
@@ -76,10 +76,9 @@ export function Footer() {
             rather than disclosure. */}
         <div className="mt-16 pt-8 border-t border-white/12">
           <p className="t-micro text-white/40 max-w-[68ch]">
-            All figures as of {figuresAsOf} unless otherwise indicated. This
-            website is for informational purposes only and does not constitute
-            an offer to sell or a solicitation of an offer to buy any security.
-            Investing involves risk, including possible loss of capital.
+            This website is for informational purposes only and does not
+            constitute an offer to sell or a solicitation of an offer to buy any
+            security. Investing involves risk, including possible loss of capital.
           </p>
         </div>
 

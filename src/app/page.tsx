@@ -2,13 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { Reveal } from "@/components/Reveal";
 import { TeamGrid } from "@/components/TeamGrid";
-import { AsOf } from "@/components/AsOf";
 import { CircleLink } from "@/components/CircleLink";
 import { Carousel } from "@/components/Carousel";
 import {
   company,
   figures,
-  figuresAsOf,
   metrics,
   businessSegments,
   leadership,
@@ -30,10 +28,10 @@ const btnOutlineDark =
 /** Sub-row beneath the headline AUM figure — deliberately excludes AUM, which
     the oversized figure above already states. */
 const secondaryMetrics = [
+  { value: figures.founded, label: "Year Founded" },
   { value: figures.units, label: "Residential Units" },
   { value: figures.companies, label: "Portfolio Companies" },
   { value: figures.countries, label: "Countries of Operation" },
-  { value: figures.markets, label: "Markets Worldwide" },
 ];
 
 const responsibilityStats = [
@@ -103,7 +101,6 @@ export default function Home() {
               </Reveal>
             ))}
           </div>
-          <AsOf className="mt-12" />
         </div>
       </section>
 
@@ -144,9 +141,6 @@ export default function Home() {
             <Reveal delay={100} className="lg:col-span-5 lg:col-start-8">
               <span className="stat-hero nums">{figures.aum}</span>
               <span className="stat-hero-label">Assets Under Management</span>
-              <p className="footnote mt-8 max-w-[34ch]">
-                All figures as of {figuresAsOf}, unless otherwise indicated.
-              </p>
               <div className="mt-14 grid grid-cols-2 gap-x-8 gap-y-10 border-t border-hairline pt-10">
                 {secondaryMetrics.map((s) => (
                   <div key={s.label}>
@@ -175,9 +169,13 @@ export default function Home() {
             </p>
           </Reveal>
 
-          <div className="mt-16 grid sm:grid-cols-2 border-t border-l border-hairline">
+          {/* Open grid, not eight boxed cells. Blackstone never encloses
+              content in hairline boxes — items are separated by space and a
+              single rule above each, which is what lets a page breathe at
+              this scale. Boxes made the section read as a feature matrix. */}
+          <div className="mt-24 lg:mt-32 grid sm:grid-cols-2 gap-x-16 lg:gap-x-28 gap-y-16 lg:gap-y-24">
             {businessSegments.map((s, i) => (
-              <Reveal key={s.id} delay={(i % 2) * 90} className="group border-b border-r border-hairline p-8 lg:p-10 transition-colors duration-300 hover:bg-paper-200/60">
+              <Reveal key={s.id} delay={(i % 2) * 90} className="group border-t border-ink-900 pt-8">
                 <div className="flex items-center gap-3">
                   <span className="font-display text-ink-400 t-micro nums">
                     {String(i + 1).padStart(2, "0")}
@@ -187,18 +185,20 @@ export default function Home() {
                     {s.subtitle}
                   </span>
                 </div>
-                <h3 className="h3 mt-4 text-ink-900 group-hover:text-accent transition-colors">{s.title}</h3>
+                <h3 className="mt-5 font-display font-[400] text-[28px] leading-[1.22] tracking-[-0.006em] text-ink-900 transition-colors duration-300 group-hover:text-ink-600">
+                  {s.title}
+                </h3>
                 {/* First sentence, not a 3-line clamp. The clamp cut mid-word
                     ("value-add…", "institutional co-…"), which reads as an
                     unfinished page. Full copy still lives on /portfolio. */}
-                <p className="mt-3 text-ink-600 t-small">
-                  {s.description.split(". ")[0]}.
+                <p className="mt-4 text-ink-600 t-small max-w-[46ch]">
+                  {s.description.split(". ")[0].replace(/\.$/, "")}.
                 </p>
               </Reveal>
             ))}
           </div>
 
-          <Reveal className="mt-14">
+          <Reveal className="mt-24 flex justify-center">
             <CircleLink href="/portfolio">Explore All Business Segments</CircleLink>
           </Reveal>
         </div>
