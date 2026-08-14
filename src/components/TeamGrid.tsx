@@ -8,10 +8,16 @@ function usablePhoto(m: LeadershipMember) {
   return m.photo && m.photo.startsWith("/") ? m.photo : null;
 }
 
-function Portrait({ m, className = "" }: { m: LeadershipMember; className?: string }) {
+// Portrait sources are already black and white and lossless, so the only thing
+// standing between the file and the screen is the delivery render: 320px at q82
+// was landing a 640w webp on a 592px-wide retina card and softening every face.
+const CARD_SIZES = "(max-width:768px) 50vw, 400px";
+const MODAL_SIZES = "(max-width:640px) 92vw, 520px";
+
+function Portrait({ m, sizes = CARD_SIZES, className = "" }: { m: LeadershipMember; sizes?: string; className?: string }) {
   const photo = usablePhoto(m);
   return photo ? (
-    <Image src={photo} alt={m.name} fill quality={82} sizes="(max-width:768px) 50vw, 320px" className={`object-cover object-top grayscale contrast-[1.02] ${className}`} />
+    <Image src={photo} alt={m.name} fill quality={95} sizes={sizes} className={`object-cover object-top grayscale contrast-[1.02] ${className}`} />
   ) : (
     <div className="absolute inset-0 flex items-center justify-center bg-ink-800">
       <span className="text-white/90 h2 tracking-tight">{m.initials}</span>
@@ -82,7 +88,7 @@ export function TeamGrid({ members, columns = 4 }: { members: LeadershipMember[]
             onClick={(e) => e.stopPropagation()}
           >
             <div className="relative aspect-[3/4] sm:aspect-auto sm:min-h-[440px] bg-paper-200">
-              <Portrait m={active} />
+              <Portrait m={active} sizes={MODAL_SIZES} />
             </div>
             <div className="p-8 lg:p-10">
               <button

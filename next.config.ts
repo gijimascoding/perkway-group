@@ -8,9 +8,11 @@ const nextConfig: NextConfig = {
     deviceSizes: [640, 750, 828, 1080, 1200, 1440, 1600, 2048],
     imageSizes: [16, 32, 64, 96, 128, 256, 384],
     // AVIF first: ~35% fewer bytes than webp at the same q, which is what buys
-    // the hero its LCP budget. Delivery only — q stays at 82.
+    // the hero its LCP budget. Delivery only.
     formats: ["image/avif", "image/webp"],
-    qualities: [82],
+    // 82 is the site default; 95 is reserved for the leadership portraits,
+    // where faces show codec softness at 82 and the files are small anyway.
+    qualities: [82, 95],
     remotePatterns: [
       { protocol: "https", hostname: "images.unsplash.com" },
       { protocol: "https", hostname: "www.perkways.com" },
