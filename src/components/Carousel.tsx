@@ -24,6 +24,7 @@ export function Carousel({
   const [index, setIndex] = useState(0);
   const [view, setView] = useState(perView);
   const [paused, setPaused] = useState(false);
+  const [stopped, setStopped] = useState(false); // the visitor's explicit pause
   const trackRef = useRef<HTMLDivElement>(null);
 
   // One item on phones, two on tablets, `perView` above that.
@@ -47,11 +48,11 @@ export function Carousel({
   // timer — otherwise a click made moments before a tick gets overridden a
   // fraction of a second later, which feels like the carousel fighting you.
   useEffect(() => {
-    if (paused || pages < 2) return;
+    if (paused || stopped || pages < 2) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const t = setTimeout(() => setIndex((i) => (i + 1) % pages), autoplayMs);
     return () => clearTimeout(t);
-  }, [paused, pages, autoplayMs, clamped]);
+  }, [paused, stopped, pages, autoplayMs, clamped]);
 
   const arrow = (dir: "prev" | "next") => (
     <button
@@ -96,11 +97,27 @@ export function Carousel({
         </div>
       </div>
 
+      {/* Position for assistive tech; polite so it never interrupts. */}
+      <p className="sr-only" aria-live="polite">Slide {clamped + 1} of {pages}</p>
+
       {pages > 1 && (
         <div className="mt-14 flex items-center gap-8">
           <div className="flex items-center gap-3">
             {arrow("prev")}
             {arrow("next")}
+            <button
+              type="button"
+              aria-pressed={stopped}
+              aria-label={stopped ? "Resume automatic rotation" : "Pause automatic rotation"}
+              onClick={() => setStopped((v) => !v)}
+              className="carousel-arrow"
+            >
+              {stopped ? (
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" aria-hidden><path d="M3 1.5l9 5.5-9 5.5z" /></svg>
+              ) : (
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" aria-hidden><path d="M3 1.5h3v11H3zM8 1.5h3v11H8z" /></svg>
+              )}
+            </button>
           </div>
           <div className="flex items-center gap-2.5">
             {Array.from({ length: pages }).map((_, i) => (
