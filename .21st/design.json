@@ -130,6 +130,11 @@
       "date": "2026-09-07",
       "decision": "No dark mode. The site is always the paper background; do not add prefers-color-scheme handling.",
       "source": "user request"
+    },
+    {
+      "date": "2026-09-07",
+      "decision": "Home hero: paper ground, three-line serif headline left, framed 4:5 colour photograph right, office clocks (London, Toronto, New York) on the foot rule in mono accent. One page-load sequence, no ambient motion.",
+      "source": "/frontend-design"
     }
   ],
   "evidence": [
