@@ -57,6 +57,9 @@
   }
 
   a { color: inherit; }
+  /* Tailwind v4 leaves buttons on the default cursor; a control should read as one. */
+  button, [role="button"], summary { cursor: pointer; }
+  button:disabled { cursor: not-allowed; }
 
   /* No default browser bullets anywhere; lists that need a marker draw it. */
   ul, ol { list-style: none; }
