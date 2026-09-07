@@ -7,6 +7,7 @@ import { Carousel } from "@/components/Carousel";
 import {
   company,
   figures,
+  figuresAsOf,
   metrics,
   businessSegments,
   leadership,
@@ -101,6 +102,7 @@ export default function Home() {
               </Reveal>
             ))}
           </div>
+          <p className="footnote mt-10 nums">Figures as of {figuresAsOf}. Unaudited; see <Link href="/disclosures" className="link-underline">Disclosures</Link>.</p>
         </div>
       </section>
 
@@ -177,7 +179,7 @@ export default function Home() {
             {businessSegments.map((s, i) => (
               <Reveal key={s.id} delay={(i % 2) * 90} className="group border-t border-ink-900 pt-8">
                 <div className="flex items-center gap-3">
-                  <span className="font-display text-ink-400 t-micro nums">
+                  <span className="font-display text-ink-500 t-micro nums">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <span className="h-px w-6 bg-hairline" />
@@ -318,7 +320,7 @@ export default function Home() {
               perView={3}
               items={insights.map((n) => (
                 <article key={n.id} className="group">
-                  <Link href="/insights" className="block">
+                  <Link href={`/insights#${n.id}`} className="block">
                     <div className="relative aspect-[4/3] overflow-hidden bg-paper-200">
                       <Image
                         src={n.image}
@@ -336,7 +338,7 @@ export default function Home() {
                     </h3>
                     <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 t-micro uppercase tracking-[0.12em] nums">
                       <span className="text-ink-600">{n.category}</span>
-                      <span className="text-ink-400">{n.date}</span>
+                      <span className="text-ink-500">{n.date}</span>
                     </div>
                   </Link>
                 </article>

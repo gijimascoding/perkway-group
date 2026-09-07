@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
-import { metrics, globalPresence, operatingMarkets } from "@/data/company";
+import { metrics, figuresAsOf, globalPresence, operatingMarkets } from "@/data/company";
 
 const BLUR = "data:image/gif;base64,R0lGODlhAQABAPAAACIkKAAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==";
 
@@ -41,6 +41,7 @@ export default function AboutPage() {
               </Reveal>
             ))}
           </div>
+          <p className="footnote mt-10 nums">Figures as of {figuresAsOf}. Unaudited; see <Link href="/disclosures" className="link-underline">Disclosures</Link>.</p>
         </div>
       </section>
 

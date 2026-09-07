@@ -30,7 +30,7 @@ export default function PortfolioPage() {
                 className="scroll-mt-24 grid lg:grid-cols-[0.9fr_1.1fr] gap-8 lg:gap-16 py-12 lg:py-16 border-b border-hairline"
               >
                 <div>
-                  <span className="font-display text-ink-400 font-[700] h3 nums">
+                  <span className="font-display text-ink-500 font-[700] h3 nums">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <p className="eyebrow mt-5">{s.subtitle}</p>
