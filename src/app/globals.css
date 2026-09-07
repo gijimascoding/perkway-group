@@ -25,6 +25,10 @@
   --color-accent: #2f6b5c;
   --color-accent-hover: #25574a;
 
+  /* Semantic colours (DESIGN.md, Color). Error is the only one in use today;
+     rendered as text and a 1px rule, never a filled banner. */
+  --color-error: #b42318;
+
   --font-sans: var(--font-source-sans), ui-sans-serif, system-ui, -apple-system, sans-serif;
   --font-display: var(--font-serif), "Iowan Old Style", Georgia, "Times New Roman", serif;
   --font-mono: var(--font-mono), ui-monospace, "SF Mono", Menlo, monospace;
