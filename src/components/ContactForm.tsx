@@ -32,7 +32,7 @@ const INQUIRY_TYPES = [
 ];
 
 const inputClass = (invalid: boolean) =>
-  `w-full px-4 py-3 border t-body bg-paper-50 focus:outline-none transition-colors ${invalid ? "border-red-700" : "border-hairline focus:border-accent"}`;
+  `w-full px-4 py-3 border t-body bg-paper-50 transition-colors ${invalid ? "border-error" : "border-hairline focus:border-accent"}`;
 const labelClass = "block t-micro font-semibold text-ink-500 uppercase tracking-[0.08em] mb-2";
 
 function validate(data: FormData): Partial<Record<FieldKey, string>> {
@@ -97,7 +97,7 @@ export function ContactForm() {
   const describedBy = (k: FieldKey) => (errors[k] ? `${FIELDS[k].id}-error` : undefined);
   const ErrorLine = ({ k }: { k: FieldKey }) =>
     errors[k] ? (
-      <p id={`${FIELDS[k].id}-error`} className="mt-2 t-small text-red-700">{errors[k]}</p>
+      <p id={`${FIELDS[k].id}-error`} className="mt-2 t-small text-error">{errors[k]}</p>
     ) : null;
 
   if (status === "success") {
@@ -126,7 +126,7 @@ export function ContactForm() {
 
       {/* Error summary: focusable, lists each problem, links to the field. */}
       {(errorEntries.length > 0 || status === "error") && (
-        <div ref={summaryRef} tabIndex={-1} role="alert" aria-labelledby="cf-error-title" className="border border-red-700 p-5">
+        <div ref={summaryRef} tabIndex={-1} role="alert" aria-labelledby="cf-error-title" className="border border-error p-5">
           <p id="cf-error-title" className="h3 text-ink-900">
             {status === "error" ? "The message was not sent" : `There ${errorEntries.length === 1 ? "is one problem" : `are ${errorEntries.length} problems`} with the form`}
           </p>
@@ -135,7 +135,7 @@ export function ContactForm() {
             <ul className="mt-3 space-y-1.5">
               {errorEntries.map((k) => (
                 <li key={k}>
-                  <a href={`#${FIELDS[k].id}`} className="t-small text-red-700 underline underline-offset-4">{errors[k]}</a>
+                  <a href={`#${FIELDS[k].id}`} className="t-small text-error underline underline-offset-4">{errors[k]}</a>
                 </li>
               ))}
             </ul>
