@@ -3,7 +3,8 @@ import Link from "next/link";
 import { navigationItems } from "@/data/company";
 
 export const metadata: Metadata = {
-  title: "Page Not Found | Perkway Group",
+  // Bare title: the layout template appends the firm's name.
+  title: "Page Not Found",
   robots: { index: false },
 };
 
