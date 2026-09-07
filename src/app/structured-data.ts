@@ -29,7 +29,9 @@ export const organizationSchema = {
   image: `${BASE_URL}/images/og.jpg`,
   description: company.description,
   foundingDate: figures.founded,
-  numberOfEmployees: { "@type": "QuantitativeValue", minValue: 200 },
+  // A single value, not a min/max pair: the site says "200+" with no ceiling,
+  // and Google flags a minValue without a maxValue. 200 is the stated floor.
+  numberOfEmployees: { "@type": "QuantitativeValue", value: 200 },
   email: company.email,
   telephone: company.phone,
   address: {
