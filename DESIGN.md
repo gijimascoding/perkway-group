@@ -93,15 +93,11 @@ otherwise equal, pick the one that reads older, slower and quieter.
   user as depressing; do not reintroduce it. Until owned-asset photography
   exists, keep the set coherent by subject (architecture, cities at dusk) rather
   than by filter.
-- **Dark mode:** redesign the surfaces, do not invert. Base `#141518`, raised
-  `#1c1e23`, text `rgba(247,245,240,.82)`, headings paper-100, hairline
-  `rgba(255,255,255,.14)`, accent lifted to `#4f9a86` for contrast. Shipped
-  2026-09-07: tokens remap on `:root[data-theme]` and on the system preference;
-  sections designed dark (`.on-dark`, the overlaid header) keep the light
-  palette in both modes so `bg-ink-900 text-white` inside them stays true. In
-  a filled ink control, "white" text is `text-paper-100`, never `text-white`.
-  The control is Light / Dark / Auto in the footer bar; a stored choice is set
-  before first paint by the inline script in `layout.tsx`.
+- **Dark mode:** none. The site is always paper. A token-remapped dark mode
+  following the system preference shipped on 2026-09-07 and was removed the
+  same day: the user wants the one paper background in every setting. Do not
+  add a dark scheme or a `prefers-color-scheme` block; `color-scheme: light`
+  stays in the viewport export.
 
 ## Spacing
 - **Base unit:** 8px. 4px allowed only inside components (label to input,
@@ -164,7 +160,7 @@ otherwise equal, pick the one that reads older, slower and quieter.
 | 2026-09-07 | Keep Source Serif 4; move body from Inter to Source Sans 3; add JetBrains Mono for figures | One drawing hand for serif and sans; mono makes dates and figures read as record, not copy. |
 | 2026-09-07 | Accent verdigris `#2F6B5C` replaces navy `#1c3d5a`, rationed to time elements, active nav, focus and links | All five peers use navy. Verdigris is the color of aged bronze and it is the one thing that says "time" without a word. Agent default, confirmed by the user at D7. |
 | 2026-09-07 | Time before size: founding year is the first figure in the story; AUM stays in the stats band | The screener still finds AUM in the first fold; the narrative leads with the horizon. |
-| 2026-09-07 | Dark mode, section rail and dialog motion shipped | Built with the project's own primitives (the 21st catalogue needs a login that was not available). Rail ticks and the theme control follow the accent ration: only the active mark carries the accent. |
+| 2026-09-07 | Dark mode removed; section rail and dialog motion stay | Dark mode followed the system preference and turned the site black for the user, who wants the paper background everywhere. Rail and dialog built with the project's own primitives; only the active rail tick carries the accent. |
 | 2026-09-07 | Photography stays in colour; grayscale rejected | The duotone was shipped in b1319ce and reverted the same day: the user found the black-and-white hero depressing. Portraits remain grayscale. |
 | 2026-09-07 | Border radius 0; hairlines and air instead of cards and shadows | Annual-report register; the SaaS card kit is the generic default. |
 | 2026-09-07 | Second-voice divergences recorded, not adopted | Subagent proposed no motion at all, bone paper `#ECE7DC`, Klim faces (Signifier / Untitled Sans / Söhne Mono) and a live day-counter. Kept as notes: Klim licensing is a client decision, the counter is a gimmick until the year is on the page, the motion budget above is already small. |

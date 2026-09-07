@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { company, navigationItems, businessSegments } from "@/data/company";
 import { GlobeMark } from "@/components/GlobeMark";
-import { ThemeToggle } from "@/components/ThemeToggle";
 
 const colHead = "t-micro uppercase tracking-[0.14em] text-white/60";
 const colLink = "t-small text-white/65 hover:text-white transition-colors";
@@ -89,7 +88,6 @@ export function Footer() {
             <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
             <Link href="/terms" className="hover:text-white transition-colors">Terms of Use</Link>
             <Link href="/disclosures" className="hover:text-white transition-colors">Disclosures</Link>
-            <ThemeToggle />
           </div>
         </div>
       </div>

@@ -37,61 +37,6 @@
     text-rendering: optimizeLegibility;
     color-scheme: light;
   }
-
-  /* ---- Dark mode (DESIGN.md, Color): the surfaces are redesigned, not
-         inverted. Ink and paper swap roles on a cool near-black base, the
-         accent lifts for contrast. `data-theme` is set before first paint by
-         the inline script in layout.tsx; with no stored choice the system
-         preference decides. ---- */
-  :root[data-theme="dark"] {
-    color-scheme: dark;
-    --color-ink-900: #f7f5f0;
-    --color-ink-800: #e3e1dc;
-    --color-ink-700: #cfccc6;
-    --color-ink-600: #b3b0aa;
-    --color-ink-500: #9a9e9a;
-    --color-ink-400: #6e7278;
-    --color-paper-50: #1c1e23;
-    --color-paper-100: #141518;
-    --color-paper-200: #24272c;
-    --color-hairline: rgba(255, 255, 255, 0.14);
-    --color-accent: #4f9a86;
-    --color-accent-hover: #6db3a0;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      color-scheme: dark;
-      --color-ink-900: #f7f5f0;
-      --color-ink-800: #e3e1dc;
-      --color-ink-700: #cfccc6;
-      --color-ink-600: #b3b0aa;
-      --color-ink-500: #9a9e9a;
-      --color-ink-400: #6e7278;
-      --color-paper-50: #1c1e23;
-      --color-paper-100: #141518;
-      --color-paper-200: #24272c;
-      --color-hairline: rgba(255, 255, 255, 0.14);
-      --color-accent: #4f9a86;
-      --color-accent-hover: #6db3a0;
-    }
-  }
-  /* Sections designed dark (hero, pull quote, footer, mobile menu, the nav
-     while it overlays the hero) keep the light-mode palette in both modes, so
-     `bg-ink-900 text-white` inside them means what it says. Keep these values
-     in step with @theme above. */
-  .on-dark,
-  header.is-overlay {
-    --color-ink-900: #16181c;
-    --color-ink-800: #24272c;
-    --color-ink-700: #3a3d42;
-    --color-ink-600: #565a61;
-    --color-ink-500: #6c7178;
-    --color-ink-400: #9aa0a8;
-    --color-paper-50: #ffffff;
-    --color-paper-100: #f7f5f0;
-    --color-paper-200: #f1eee7;
-    --color-hairline: #e4e2dd;
-  }
   @media (prefers-reduced-motion: no-preference) {
     html { scroll-behavior: smooth; }
   }
@@ -513,17 +458,6 @@
   .dialog-open .dialog-scrim { opacity: 1; }
   .dialog-open .dialog-panel { opacity: 1; transform: none; }
 
-  /* ---- Theme control: three quiet words in the footer bar. The chosen one
-         carries the accent underline, like the active nav link. ---- */
-  .theme-control { display: inline-flex; align-items: center; gap: 16px; }
-  .theme-control button {
-    font: inherit; color: inherit; background: none; border: 0; padding: 4px 0;
-    border-bottom: 1px solid transparent; letter-spacing: inherit; text-transform: inherit;
-    transition: color 200ms ease, border-color 200ms ease;
-  }
-  .theme-control button:hover { color: #fff; }
-  .theme-control button[aria-pressed="true"] { color: #fff; border-bottom-color: #8fc4b4; }
-
   /* ---- Touch targets ----
      The underline and hairline rules are the design; they must not grow. So the
      hit area is extended with transparent padding that is cancelled visually by
@@ -581,7 +515,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .rail, .rail .label, .rail .tick, .dialog-scrim, .dialog-panel, .theme-control button { transition: none; }
+  .rail, .rail .label, .rail .tick, .dialog-scrim, .dialog-panel { transition: none; }
   .dialog-panel { transform: none; }
 }
 

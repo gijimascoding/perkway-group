@@ -111,15 +111,11 @@
     "avoid": [
       "Grayscale or duotone photography (rejected 2026-09-07)",
       "Border radius other than 0 (the circle-arrow link is the one exception)",
-      "Cards with shadows, gradients as decoration"
+      "Cards with shadows, gradients as decoration",
+      "Any dark colour scheme or prefers-color-scheme block (removed 2026-09-07 at the user's request)"
     ]
   },
   "decisions": [
-    {
-      "date": "2026-09-07",
-      "decision": "Dark mode remaps ink/paper tokens on :root[data-theme] and prefers-color-scheme; .on-dark sections and the overlaid header keep the light palette. Filled ink controls use text-paper-100, not text-white.",
-      "source": "DESIGN.md Color"
-    },
     {
       "date": "2026-09-07",
       "decision": "Home section rail: fixed right-edge ticks at 1280px+, active tick in the accent, labels on hover/focus, visible only between first and last section.",
@@ -129,6 +125,11 @@
       "date": "2026-09-07",
       "decision": "Dialogs: 400ms fade+rise enter, instant exit, inert page behind, scrim is a real button.",
       "source": "DESIGN.md Layout"
+    },
+    {
+      "date": "2026-09-07",
+      "decision": "No dark mode. The site is always the paper background; do not add prefers-color-scheme handling.",
+      "source": "user request"
     }
   ],
   "evidence": [
