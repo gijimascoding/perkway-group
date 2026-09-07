@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/app/seo";
 import { LegalPage } from "@/components/LegalPage";
 import { company } from "@/data/company";
 
-export const metadata: Metadata = {
-  title: "Privacy Policy | Perkway Group",
-  description: "How Perkway Group collects, uses and protects personal information submitted through this website.",
-};
+export const metadata: Metadata = pageMetadata({
+  title: "Privacy Policy",
+  description:
+    "How Perkway Group collects, uses and protects personal information submitted through this website.",
+  path: "/privacy",
+});
 
 export default function PrivacyPage() {
   return (

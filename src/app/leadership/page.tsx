@@ -1,21 +1,32 @@
 import type { Metadata } from "next";
+import { pageMetadata, breadcrumbSchema, webPageSchema } from "@/app/seo";
+import { JsonLd } from "@/components/JsonLd";
+import { personSchema } from "@/app/structured-data";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
 import { TeamGrid } from "@/components/TeamGrid";
 import { leadership } from "@/data/company";
 
-export const metadata: Metadata = {
-  title: "Leadership | Perkway Group",
+export const metadata: Metadata = pageMetadata({
+  title: "Leadership",
   description:
-    "Meet the leadership team and board guiding Perkway Group across real estate investment, corporate strategy, hospitality operations, and technology innovation.",
-};
+    "The executive team and board of Perkway Group: Alexander Reinhardt, Catherine Morel, David Chen and Sarah Whitfield, with directors Nancy Wisner, Ariel Rosenberg and Terry Leppla.",
+  path: "/leadership",
+});
 
 const executives = leadership.filter((m) => m.role === "executive");
 const board = leadership.filter((m) => m.role === "board");
 
+const leadershipSchema = [
+  webPageSchema({ type: "ProfilePage", name: "Perkway Group leadership", description: String(metadata.description), path: "/leadership" }),
+  breadcrumbSchema([{ name: "Leadership", path: "/leadership" }]),
+  ...leadership.map(personSchema),
+];
+
 export default function LeadershipPage() {
   return (
     <>
+      <JsonLd data={leadershipSchema} />
       <PageHero
         eyebrow="Leadership"
         title="Guided by Experienced Principals"

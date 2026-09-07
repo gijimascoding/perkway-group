@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/app/seo";
 import { LegalPage } from "@/components/LegalPage";
 import { company, figuresAsOf } from "@/data/company";
 
-export const metadata: Metadata = {
-  title: "Disclosures | Perkway Group",
-  description: "Important disclosures about the figures, statements and offerings referred to on the Perkway Group website.",
-};
+export const metadata: Metadata = pageMetadata({
+  title: "Disclosures",
+  description:
+    "Important disclosures about the figures, statements and offerings referred to on the Perkway Group website.",
+  path: "/disclosures",
+});
 
 export default function DisclosuresPage() {
   return (

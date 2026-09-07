@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import { pageMetadata, breadcrumbSchema, webPageSchema } from "@/app/seo";
+import { JsonLd } from "@/components/JsonLd";
+import { faqs } from "@/data/faq";
 import Image from "next/image";
 import Link from "next/link";
 import { PageHero } from "@/components/PageHero";
@@ -10,15 +13,31 @@ const BLUR = "data:image/gif;base64,R0lGODlhAQABAPAAACIkKAAAACH5BAAAAAAALAAAAAAB
 const btnPrimary =
   "inline-flex items-center justify-center h-[52px] px-8 bg-ink-900 text-paper-100 t-micro uppercase tracking-[0.06em] hover:bg-ink-800 transition-colors";
 
-export const metadata: Metadata = {
-  title: "About | Perkway Group",
+export const metadata: Metadata = pageMetadata({
+  title: "About",
   description:
-    "Perkway Group is a diversified holding company with principal investments in real estate, hospitality, technology, and financial services.",
-};
+    "Perkway Group is a diversified holding company founded in 2018 and headquartered in London, with principal investments in real estate, hospitality, technology and financial services across four countries.",
+  path: "/about",
+});
+
+const aboutSchema = [
+  webPageSchema({ type: "AboutPage", name: "About Perkway Group", description: String(metadata.description), path: "/about" }),
+  breadcrumbSchema([{ name: "About", path: "/about" }]),
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.question,
+      acceptedAnswer: { "@type": "Answer", text: f.answer },
+    })),
+  },
+];
 
 export default function AboutPage() {
   return (
     <>
+      <JsonLd data={aboutSchema} />
       <PageHero
         eyebrow="About the Group"
         title="A Vertically Integrated Platform for Real Assets"
@@ -88,6 +107,30 @@ export default function AboutPage() {
                 />
               </div>
             </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* Questions: the same seven answers an allocator asks on a first call,
+          visible here and emitted as FAQPage data from the same array. */}
+      <section id="questions" className="bg-paper-50 border-t border-hairline">
+        <div className="container-x section-pad">
+          <div className="grid lg:grid-cols-12 gap-y-12 lg:gap-x-16">
+            <Reveal className="lg:col-span-4">
+              <p className="eyebrow">Questions</p>
+              <h2 className="h2 mt-8 text-ink-900 max-w-[14ch]">What people ask first</h2>
+              <p className="mt-6 text-ink-600 t-small measure">
+                Short answers, each backed by a page on this site. Figures carry the same as-of date as every stat block.
+              </p>
+            </Reveal>
+            <div className="lg:col-span-7 lg:col-start-6 border-t border-ink-900">
+              {faqs.map((f, i) => (
+                <Reveal key={f.question} delay={i * 60} as="article" className="py-8 border-b border-hairline">
+                  <h3 className="h3 text-ink-900">{f.question}</h3>
+                  <p className="mt-4 text-ink-700 measure">{f.answer}</p>
+                </Reveal>
+              ))}
+            </div>
           </div>
         </div>
       </section>

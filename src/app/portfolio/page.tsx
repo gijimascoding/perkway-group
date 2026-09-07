@@ -1,18 +1,39 @@
 import type { Metadata } from "next";
+import { pageMetadata, breadcrumbSchema, webPageSchema } from "@/app/seo";
+import { JsonLd } from "@/components/JsonLd";
 import Link from "next/link";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
 import { businessSegments } from "@/data/company";
 
-export const metadata: Metadata = {
-  title: "Portfolio | Perkway Group",
+export const metadata: Metadata = pageMetadata({
+  title: "Portfolio",
   description:
-    "Perkway Group operates across eight core business segments spanning real estate investment, hospitality, technology, property management, development, lending, and advisory.",
-};
+    "Perkway Group operates across eight business segments: real estate investment, hospitality and hybrid living, technology, property management, development, asset management, real estate lending and advisory.",
+  path: "/portfolio",
+});
+
+const portfolioSchema = [
+  webPageSchema({ type: "CollectionPage", name: "Perkway Group business segments", description: String(metadata.description), path: "/portfolio" }),
+  breadcrumbSchema([{ name: "Portfolio", path: "/portfolio" }]),
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Perkway Group business segments",
+    itemListElement: businessSegments.map((s, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: s.title,
+      description: s.description,
+      url: `https://www.perkways.com/portfolio#${s.id}`,
+    })),
+  },
+];
 
 export default function PortfolioPage() {
   return (
     <>
+      <JsonLd data={portfolioSchema} />
       <PageHero
         eyebrow="Our Businesses"
         title="Diversified Across Eight Core Business Segments"

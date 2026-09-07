@@ -1,17 +1,26 @@
 import type { Metadata } from "next";
+import { pageMetadata, breadcrumbSchema, webPageSchema } from "@/app/seo";
+import { JsonLd } from "@/components/JsonLd";
 import { company } from "@/data/company";
 import { ContactForm } from "@/components/ContactForm";
 import { PageHero } from "@/components/PageHero";
 
-export const metadata: Metadata = {
-  title: "Contact | Perkway Group",
+export const metadata: Metadata = pageMetadata({
+  title: "Contact",
   description:
-    "Contact Perkway Group for investor inquiries, partnership opportunities, and general information.",
-};
+    "Contact Perkway Group in London for investor relations, co-investment and partnership inquiries, property management services, advisory, press and careers.",
+  path: "/contact",
+});
+
+const contactSchema = [
+  webPageSchema({ type: "ContactPage", name: "Contact Perkway Group", description: String(metadata.description), path: "/contact" }),
+  breadcrumbSchema([{ name: "Contact", path: "/contact" }]),
+];
 
 export default function ContactPage() {
   return (
     <>
+      <JsonLd data={contactSchema} />
       <PageHero
         eyebrow="Contact"
         title="Get in Touch"

@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/app/seo";
 import { LegalPage } from "@/components/LegalPage";
 import { company } from "@/data/company";
 
-export const metadata: Metadata = {
-  title: "Terms of Use | Perkway Group",
-  description: "The terms on which Perkway Group makes this website available.",
-};
+export const metadata: Metadata = pageMetadata({
+  title: "Terms of Use",
+  description:
+    "The terms on which Perkway Group makes this website available.",
+  path: "/terms",
+});
 
 export default function TermsPage() {
   return (

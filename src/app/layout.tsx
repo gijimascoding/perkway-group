@@ -40,7 +40,7 @@ const description =
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.perkways.com"),
-  title,
+  title: { default: title, template: `%s | ${"Perkway Group"}` },
   description,
   // The apex 307s to www, so www is the one host Google should consolidate on.
   // "./" resolves per-route, so every page canonicals to itself, not to home.

@@ -1,18 +1,39 @@
 import type { Metadata } from "next";
+import { pageMetadata, breadcrumbSchema, webPageSchema } from "@/app/seo";
+import { JsonLd } from "@/components/JsonLd";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
 import { insights } from "@/data/company";
 
-export const metadata: Metadata = {
-  title: "Insights | Perkway Group",
+export const metadata: Metadata = pageMetadata({
+  title: "Insights",
   description:
-    "Perspectives and market intelligence from Perkway Group on institutional real estate, adaptive reuse, technology-enabled operations, and market strategy.",
-};
+    "Perspectives and market intelligence from Perkway Group on institutional residential real estate, adaptive reuse, technology-enabled operations and market expansion.",
+  path: "/insights",
+});
+
+const insightsSchema = [
+  webPageSchema({ type: "CollectionPage", name: "Perkway Group insights", description: String(metadata.description), path: "/insights" }),
+  breadcrumbSchema([{ name: "Insights", path: "/insights" }]),
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Perkway Group insights",
+    itemListElement: insights.map((n, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: n.title,
+      description: n.excerpt,
+      url: `https://www.perkways.com/insights#${n.id}`,
+    })),
+  },
+];
 
 export default function InsightsPage() {
   const [feature, ...rest] = insights;
   return (
     <>
+      <JsonLd data={insightsSchema} />
       <PageHero
         eyebrow="Insights"
         title="Perspectives & Market Intelligence"
