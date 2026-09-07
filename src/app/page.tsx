@@ -66,7 +66,7 @@ export default function Home() {
             sizes="100vw"
             placeholder="blur"
             blurDataURL={BLUR}
-            className="hero-img object-cover object-[center_42%] grayscale contrast-[1.02]"
+            className="hero-img object-cover object-[center_42%]"
           />
         </div>
         {/* Flat scrim lightened from 0.46: the bottom gradient now carries the
@@ -341,7 +341,7 @@ export default function Home() {
               items={insights.map((n) => (
                 <article key={n.id} className="group">
                   <Link href={`/insights#${n.id}`} className="block">
-                    <div className="duotone relative aspect-[4/3] overflow-hidden">
+                    <div className="relative aspect-[4/3] overflow-hidden bg-paper-200">
                       <Image
                         src={n.image}
                         alt=""

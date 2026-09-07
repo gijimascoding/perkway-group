@@ -393,10 +393,6 @@
   .ledger-ticks > :first-child, .ledger-ticks > :last-child { color: var(--color-accent); }
   @media (max-width: 639px) { .ledger-ticks > .tick-mid { display: none; } }
 
-  /* ---- Photography: until owned-asset photography exists every image carries
-         the same ink duotone, so the set reads as one (DESIGN.md, Color). ---- */
-  .duotone { background: var(--color-ink-900); }
-  .duotone img { filter: grayscale(1) contrast(1.02); opacity: 0.75; }
 
   .hairline { background: var(--color-hairline); }
 

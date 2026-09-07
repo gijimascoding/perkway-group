@@ -87,11 +87,12 @@ otherwise equal, pick the one that reads older, slower and quieter.
   thing that happened at a moment in time), warning `#8a6d3b`, error `#b42318`,
   info ink-700. Rendered as a 2px left rule on a hairline box, never a filled
   banner.
-- **Photography:** until owned-asset photography exists, every image carries the
-  same treatment: grayscale, contrast 1.02, multiplied over ink-900 at 75%
-  opacity for hero and insight images, plain grayscale for portraits. No color
-  skylines, no stock people, no drone dusk shots. The set reads as one because
-  the treatment is one.
+- **Photography:** hero, subpage and insight images run in full colour with the
+  existing ink scrim for type contrast. Portraits only are grayscale. A
+  site-wide grayscale treatment was tried on 2026-09-07 and rejected by the
+  user as depressing; do not reintroduce it. Until owned-asset photography
+  exists, keep the set coherent by subject (architecture, cities at dusk) rather
+  than by filter.
 - **Dark mode:** redesign the surfaces, do not invert. Base `#141518`, raised
   `#1c1e23`, text `rgba(247,245,240,.82)`, headings paper-100, hairline
   `rgba(255,255,255,.14)`, accent lifted to `#4f9a86` for contrast. Not shipped
@@ -151,6 +152,6 @@ otherwise equal, pick the one that reads older, slower and quieter.
 | 2026-09-07 | Keep Source Serif 4; move body from Inter to Source Sans 3; add JetBrains Mono for figures | One drawing hand for serif and sans; mono makes dates and figures read as record, not copy. |
 | 2026-09-07 | Accent verdigris `#2F6B5C` replaces navy `#1c3d5a`, rationed to time elements, active nav, focus and links | All five peers use navy. Verdigris is the color of aged bronze and it is the one thing that says "time" without a word. Agent default, confirmed by the user at D7. |
 | 2026-09-07 | Time before size: founding year is the first figure in the story; AUM stays in the stats band | The screener still finds AUM in the first fold; the narrative leads with the horizon. |
-| 2026-09-07 | Uniform ink duotone on all photography until owned assets exist | Stock skylines are the peer default and signal nothing about Perkway. |
+| 2026-09-07 | Photography stays in colour; grayscale rejected | The duotone was shipped in b1319ce and reverted the same day: the user found the black-and-white hero depressing. Portraits remain grayscale. |
 | 2026-09-07 | Border radius 0; hairlines and air instead of cards and shadows | Annual-report register; the SaaS card kit is the generic default. |
 | 2026-09-07 | Second-voice divergences recorded, not adopted | Subagent proposed no motion at all, bone paper `#ECE7DC`, Klim faces (Signifier / Untitled Sans / Söhne Mono) and a live day-counter. Kept as notes: Klim licensing is a client decision, the counter is a gimmick until the year is on the page, the motion budget above is already small. |
