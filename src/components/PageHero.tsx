@@ -25,7 +25,7 @@ export function PageHero({
         sizes="100vw"
         placeholder="blur"
         blurDataURL="data:image/gif;base64,R0lGODlhAQABAPAAACIkKAAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
-        className="object-cover object-[center_45%]"
+        className="object-cover object-[center_45%] grayscale contrast-[1.02]"
       />
       {/* Same scrim system as the home hero: one flat value, one gradient */}
       <div className="absolute inset-0 bg-ink-900/[0.46]" />

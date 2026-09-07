@@ -27,10 +27,10 @@ export default function InsightsPage() {
             <div className="grid lg:grid-cols-[1fr_1.4fr] gap-8 lg:gap-16">
               <div className="flex items-center gap-3 t-micro uppercase tracking-[0.12em] nums">
                 <span className="text-ink-600">{feature.category}</span>
-                <span className="text-ink-500">{feature.date}</span>
+                <time className="mono time normal-case tracking-normal">{feature.date}</time>
               </div>
               <div>
-                <h2 className="h2 text-ink-900 group-hover:text-accent transition-colors">
+                <h2 className="h2 text-ink-900 group-hover:text-ink-600 transition-colors">
                   {feature.title}
                 </h2>
                 <p className="mt-5 lead text-ink-700 measure">{feature.excerpt}</p>
@@ -44,9 +44,9 @@ export default function InsightsPage() {
               <Reveal key={n.id} id={n.id} delay={i * 90} className="group scroll-mt-28 border-t border-ink-900 pt-6">
                 <div className="flex items-center gap-3 t-micro uppercase tracking-[0.12em] nums">
                   <span className="text-ink-600">{n.category}</span>
-                  <span className="text-ink-500">{n.date}</span>
+                  <time className="mono time normal-case tracking-normal">{n.date}</time>
                 </div>
-                <h3 className="h3 mt-4 text-ink-900 group-hover:text-accent transition-colors">
+                <h3 className="h3 mt-4 text-ink-900 group-hover:text-ink-600 transition-colors">
                   {n.title}
                 </h3>
                 <p className="mt-4 text-ink-600 t-small line-clamp-3">{n.excerpt}</p>

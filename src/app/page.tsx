@@ -26,14 +26,22 @@ const btnOutlineDark =
   "inline-flex items-center justify-center h-[52px] px-6 sm:px-8 border border-white/50 text-white t-micro uppercase tracking-[0.06em] hover:bg-white/10 transition-colors";
 
 
-/** Sub-row beneath the headline AUM figure — deliberately excludes AUM, which
-    the oversized figure above already states. */
+/** Sub-row beneath the founding-year figure. The year is the first number in
+    the story (DESIGN.md: time before size); AUM sits here and in the band above,
+    where a screener expects it. */
 const secondaryMetrics = [
-  { value: figures.founded, label: "Year Founded" },
+  { value: figures.aum, label: "Assets Under Management" },
   { value: figures.units, label: "Residential Units" },
   { value: figures.companies, label: "Portfolio Companies" },
   { value: figures.countries, label: "Countries of Operation" },
 ];
+
+/** Year ticks under the founding figure: founding year to the "as of" year. */
+const asOfYear = Number(figuresAsOf.match(/\d{4}/)?.[0] ?? new Date().getFullYear());
+const ledgerYears = Array.from(
+  { length: Math.max(2, asOfYear - Number(figures.founded) + 1) },
+  (_, i) => String(Number(figures.founded) + i),
+);
 
 const responsibilityStats = [
   { v: "LEED", l: "Aligned design standards across new development and major renovation projects" },
@@ -58,7 +66,7 @@ export default function Home() {
             sizes="100vw"
             placeholder="blur"
             blurDataURL={BLUR}
-            className="hero-img object-cover object-[center_42%]"
+            className="hero-img object-cover object-[center_42%] grayscale contrast-[1.02]"
           />
         </div>
         {/* Flat scrim lightened from 0.46: the bottom gradient now carries the
@@ -141,9 +149,21 @@ export default function Home() {
             </Reveal>
 
             <Reveal delay={100} className="lg:col-span-5 lg:col-start-8">
-              <span className="stat-hero nums">{figures.aum}</span>
-              <span className="stat-hero-label">Assets Under Management</span>
-              <div className="mt-14 grid grid-cols-2 gap-x-8 gap-y-10 border-t border-hairline pt-10">
+              <span className="stat-hero nums">
+                Since <span className="time">{figures.founded}</span>
+              </span>
+              <span className="stat-hero-label">Holding and operating real assets across {figures.countries} countries</span>
+              <div className="ledger" aria-hidden>
+                <div className="ledger-ticks">
+                  {ledgerYears.map((y, i) => (
+                    <span key={y} className={i === 0 || i === ledgerYears.length - 1 ? "" : "tick-mid"}>{y}</span>
+                  ))}
+                </div>
+              </div>
+              <p className="mono mt-4 text-ink-500">
+                {figures.units} residential units · {figures.companies} portfolio companies · {figures.markets} markets
+              </p>
+              <div className="mt-12 grid grid-cols-2 gap-x-8 gap-y-10 border-t border-hairline pt-10">
                 {secondaryMetrics.map((s) => (
                   <div key={s.label}>
                     <span className="stat-num-sm nums">{s.value}</span>
@@ -321,7 +341,7 @@ export default function Home() {
               items={insights.map((n) => (
                 <article key={n.id} className="group">
                   <Link href={`/insights#${n.id}`} className="block">
-                    <div className="relative aspect-[4/3] overflow-hidden bg-paper-200">
+                    <div className="duotone relative aspect-[4/3] overflow-hidden">
                       <Image
                         src={n.image}
                         alt=""
@@ -338,7 +358,7 @@ export default function Home() {
                     </h3>
                     <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 t-micro uppercase tracking-[0.12em] nums">
                       <span className="text-ink-600">{n.category}</span>
-                      <span className="text-ink-500">{n.date}</span>
+                      <time className="mono time normal-case tracking-normal">{n.date}</time>
                     </div>
                   </Link>
                 </article>

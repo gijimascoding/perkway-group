@@ -1,32 +1,33 @@
 @import "tailwindcss";
 
 @theme {
-  /* True black, not a soft charcoal. Blackstone's dark sections are #000 and
-     its ground is #fff; the warm ivory previously used here is what made the
-     page read as a boutique brand rather than an institution. */
-  --color-ink-900: #000000;
-  --color-ink-800: #1a1a1a;
-  --color-ink-700: #3d3d3d;
-  --color-ink-600: #595959;
-  --color-ink-500: #757575;
-  --color-ink-400: #9e9e9e;
+  /* Tokens from DESIGN.md. Ink is a cool near-black, not #000: true black on
+     white is the peer default and reads as a screen, not a page. Paper is a
+     warm off-white so the serif sits on it the way it sits on stock. */
+  --color-ink-900: #16181c;
+  --color-ink-800: #24272c;
+  --color-ink-700: #3a3d42;
+  --color-ink-600: #565a61;
+  --color-ink-500: #6c7178;
+  --color-ink-400: #9aa0a8;
 
-  /* Neutral ground — no warmth */
   --color-paper-50: #ffffff;
-  --color-paper-100: #ffffff;
-  --color-paper-200: #f2f2f2;
+  --color-paper-100: #f7f5f0;
+  --color-paper-200: #f1eee7;
 
-  /* Hairline + muted */
-  --color-hairline: #dcdcdc;
-  --color-hairline-dark: rgba(255, 255, 255, 0.16);
+  --color-hairline: #e4e2dd;
+  --color-hairline-dark: rgba(255, 255, 255, 0.14);
 
-  /* Links inherit ink; no blue accent. Institutional sites underline in the
-     text colour and let the circle-arrow carry affordance. */
-  --color-accent: #000000;
-  --color-accent-hover: #3d3d3d;
+  /* The one accent: verdigris, the colour of a bronze plaque that has been
+     outside for a century. Rationed (DESIGN.md, Color): time elements, the
+     active nav underline, focus rings, link underlines and link hover. It never
+     fills a button, colours an icon, tints a background or becomes a hover fill. */
+  --color-accent: #2f6b5c;
+  --color-accent-hover: #25574a;
 
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-sans: var(--font-source-sans), ui-sans-serif, system-ui, -apple-system, sans-serif;
   --font-display: var(--font-serif), "Iowan Old Style", Georgia, "Times New Roman", serif;
+  --font-mono: var(--font-mono), ui-monospace, "SF Mono", Menlo, monospace;
 }
 
 @layer base {
@@ -66,7 +67,7 @@
   li::marker { content: ""; }
 
   /* Muted tint of the one accent. */
-  ::selection { background-color: rgba(28, 61, 90, 0.18); color: var(--color-ink-900); }
+  ::selection { background-color: rgba(47, 107, 92, 0.18); color: var(--color-ink-900); }
   .on-dark ::selection { background-color: rgba(255, 255, 255, 0.24); color: #ffffff; }
 
   /* Palette scrollbar on pointer devices only. */
@@ -366,17 +367,50 @@
   address,
   time { font-variant-numeric: tabular-nums lining-nums; }
 
+  /* Record type: dates, "as of" lines, year ticks, addresses, footnotes and
+     table cells set in the mono at 12 to 13px (DESIGN.md, Typography). A date
+     in the mono reads as a record; the same date in the sans reads as copy. */
+  .mono,
+  .footnote,
+  address,
+  time {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums lining-nums;
+    letter-spacing: 0;
+  }
+  .mono { font-size: 13px; line-height: 1.5; }
+  @media (min-width: 640px) { .mono { font-size: 12px; } }
+  /* Anything that represents time carries the accent. */
+  .time { color: var(--color-accent); }
+  .on-dark .time { color: #8fc4b4; }
+
+  /* ---- Founding-year ledger: the About figure on the home page. The year is
+         the first number in the story; AUM stays in the band above where the
+         screener expects it. A ruled line in the accent, year ticks in the
+         mono, first and last tick in the accent. ---- */
+  .ledger { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--color-accent); }
+  .ledger-ticks { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 12px; line-height: 1; color: var(--color-ink-500); font-variant-numeric: tabular-nums lining-nums; }
+  .ledger-ticks > :first-child, .ledger-ticks > :last-child { color: var(--color-accent); }
+  @media (max-width: 639px) { .ledger-ticks > .tick-mid { display: none; } }
+
+  /* ---- Photography: until owned-asset photography exists every image carries
+         the same ink duotone, so the set reads as one (DESIGN.md, Color). ---- */
+  .duotone { background: var(--color-ink-900); }
+  .duotone img { filter: grayscale(1) contrast(1.02); opacity: 0.75; }
+
   .hairline { background: var(--color-hairline); }
 
   /* Text link with hairline underline (accent) */
   .link-underline {
     display: inline-block;
     font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600;
-    color: var(--color-accent); border-bottom: 1px solid var(--color-accent); padding-bottom: 3px;
+    color: var(--color-ink-900); border-bottom: 1px solid var(--color-accent); padding-bottom: 3px;
     transition: color 200ms ease, border-color 200ms ease;
   }
   @media (min-width: 640px) { .link-underline { font-size: 12px; padding-bottom: 2px; } }
-  .link-underline:hover { color: var(--color-accent-hover); border-color: var(--color-accent-hover); }
+  .link-underline:hover { color: var(--color-accent); border-color: var(--color-accent-hover); }
+  .on-dark .link-underline { color: #fff; border-color: rgba(255, 255, 255, 0.5); }
+  .on-dark .link-underline:hover { color: #fff; border-color: #fff; }
 
   /* ---- Touch targets ----
      The underline and hairline rules are the design; they must not grow. So the
@@ -406,6 +440,7 @@
 @layer utilities {
   .text-balance { text-wrap: balance; }
   .font-display { font-family: var(--font-display); }
+  .font-mono { font-family: var(--font-mono); }
 }
 
 /* ---- Motion: opacity + 12px translateY, 320ms, once ---- */

@@ -52,7 +52,7 @@ export function Footer() {
           {/* Contact */}
           <div>
             <p className={colHead}>Contact</p>
-            <address className="mt-6 not-italic t-small">
+            <address className="mt-6 not-italic mono leading-[1.8]">
               {company.address.street}
               <br />
               {company.address.city}, {company.address.province}

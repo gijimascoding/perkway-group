@@ -1,21 +1,31 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Source_Serif_4 } from "next/font/google";
+import { JetBrains_Mono, Source_Sans_3, Source_Serif_4 } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { organizationSchema, websiteSchema } from "./structured-data";
 
-// Body: neutral sans. Display: tight grotesk.
-const inter = Inter({
+// Body and UI: Source Sans 3, drawn by the same hand as the display serif so
+// paragraphs and headings read as one supplier (DESIGN.md, Typography).
+const sourceSans = Source_Sans_3({
   subsets: ["latin"],
   weight: ["400", "500", "600"],
-  variable: "--font-inter",
+  variable: "--font-source-sans",
+  display: "swap",
+});
+
+// Figures: dates, year ticks, "as of" lines, addresses, footnotes. Never
+// headings, never prose.
+const mono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-mono",
   display: "swap",
 });
 
 // Display: transitional serif. The tight grotesk (Archivo) read as a tech
 // brand; capital-stewardship brands (Blackstone, Brookfield, KKR) all set
-// display type in a high-contrast serif. Body/UI stays Inter.
+// display type in a high-contrast serif. Body/UI is Source Sans 3.
 const sourceSerif = Source_Serif_4({
   subsets: ["latin"],
   weight: ["400", "600"],
@@ -65,7 +75,7 @@ export default function RootLayout({
   // <html> before React hydrates, so server and client className deliberately
   // differ. Without it, every page load logs a hydration mismatch error.
   return (
-    <html lang="en" className={`no-js ${inter.variable} ${sourceSerif.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`no-js ${sourceSans.variable} ${sourceSerif.variable} ${mono.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.remove('no-js')" }} />
         <script

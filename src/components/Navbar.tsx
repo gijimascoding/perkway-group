@@ -82,7 +82,7 @@ export function Navbar() {
                   aria-current={current ? "page" : undefined}
                   className={`t-small tracking-[0.02em] py-1 border-b transition-colors duration-[240ms] ease-out ${
                     current
-                      ? solid ? "text-ink-900 border-ink-900" : "text-white border-white"
+                      ? solid ? "text-ink-900 border-accent" : "text-white border-white"
                       : solid ? "text-ink-700 hover:text-ink-900 border-transparent" : "text-white/80 hover:text-white border-transparent"
                   }`}
                 >
@@ -94,7 +94,7 @@ export function Navbar() {
               href="/contact"
               className={`ml-2 t-micro uppercase tracking-[0.08em] px-5 h-[40px] inline-flex items-center border transition-colors duration-[240ms] ease-out ${
                 solid
-                  ? "border-accent text-ink-900 hover:text-accent hover:border-accent-hover"
+                  ? "border-ink-900 text-ink-900 hover:bg-ink-900 hover:text-white"
                   : "border-white/50 text-white hover:bg-white/10"
               }`}
             >
