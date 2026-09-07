@@ -5,7 +5,6 @@ import { TeamGrid } from "@/components/TeamGrid";
 import { CircleLink } from "@/components/CircleLink";
 import { Carousel } from "@/components/Carousel";
 import { SectionRail } from "@/components/SectionRail";
-import { OfficeClocks } from "@/components/OfficeClocks";
 import {
   company,
   figures,
@@ -22,11 +21,6 @@ const execs = leadership.filter((m) => m.role === "executive");
 
 const BLUR = "data:image/gif;base64,R0lGODlhAQABAPAAACIkKAAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==";
 
-const btnPrimary =
-  "inline-flex items-center justify-center h-[52px] px-6 sm:px-8 bg-ink-900 text-paper-100 t-micro uppercase tracking-[0.06em] hover:bg-ink-800 transition-colors";
-const btnOutline =
-  "inline-flex items-center justify-center h-[52px] px-6 sm:px-8 border border-ink-900 text-ink-900 t-micro uppercase tracking-[0.06em] hover:bg-ink-900 hover:text-paper-100 transition-colors";
-/* The contact band at the foot of the page is still dark. */
 const btnPrimaryDark =
   "inline-flex items-center justify-center h-[52px] px-6 sm:px-8 bg-white text-ink-900 t-micro uppercase tracking-[0.06em] hover:bg-paper-200 transition-colors";
 const btnOutlineDark =
@@ -70,48 +64,46 @@ const responsibilityStats = [
 export default function Home() {
   return (
     <>
-      {/* ============ HERO ============
-           Paper, not a full-bleed photograph. The headline stacks in three
-           lines on the left, the dusk skyline sits as a framed panel on the
-           right, and the foot of the hero carries the firm's day across its
-           three offices. Time is the one idea the whole system is built on. */}
-      <section className="hero relative w-full overflow-hidden bg-paper-100 border-b border-hairline">
-        <div className="container-x pt-[112px] pb-10 lg:pt-[168px] lg:pb-14 flex flex-col">
-          <div className="grid gap-y-12 lg:grid-cols-12 lg:gap-x-16 items-end flex-1">
-            <div className="lg:col-span-7">
-              <h1 className="hero-h1 text-ink-900">
-                <span className="hero-line">Building</span>
-                <span className="hero-line">Enduring Value</span>
-                <span className="hero-line">Across Industries</span>
-              </h1>
-              <p className="hero-sub hero-late mt-8 text-ink-700">{company.description}</p>
-              {/* Below sm the two buttons stack at equal width on purpose. */}
-              <div className="hero-late mt-10 grid grid-cols-1 gap-3 sm:flex sm:flex-wrap sm:gap-3">
-                <Link href="/portfolio" className={btnPrimary}>Our Portfolio</Link>
-                <Link href="/about" className={btnOutline}>About the Group</Link>
-              </div>
-            </div>
-            <div className="hero-late lg:col-span-4 lg:col-start-9">
-              <div className="relative aspect-[16/10] lg:aspect-[4/5] overflow-hidden bg-paper-200 border border-hairline">
-                <Image
-                  src="/images/hero.jpg"
-                  alt="Global metropolitan skyline at dusk"
-                  fill
-                  priority
-                  quality={82}
-                  sizes="(max-width:1024px) 100vw, 32vw"
-                  placeholder="blur"
-                  blurDataURL={BLUR}
-                  className="object-cover object-[62%_40%]"
-                />
-              </div>
-            </div>
-          </div>
+      {/* ============ HERO ============ */}
+      <section className="hero on-dark relative w-full overflow-hidden bg-ink-900 flex items-end">
+        {/* Wrapper carries the scroll-linked drift so the img keeps its load animation. */}
+        <div className="hero-media absolute inset-0">
+          <Image
+            src="/images/hero.jpg"
+            alt="Global metropolitan skyline at dusk"
+            fill
+            priority
+            quality={82}
+            sizes="100vw"
+            placeholder="blur"
+            blurDataURL={BLUR}
+            className="hero-img object-cover object-[center_42%]"
+          />
+        </div>
+        {/* Flat scrim lightened from 0.46: the bottom gradient now carries the
+            type contrast, which leaves the upper two-thirds of the frame open. */}
+        <div className="absolute inset-0 bg-ink-900/[0.30]" />
+        <div className="hero-foot absolute inset-0" />
 
-          <div className="hero-late mt-14 lg:mt-16 pt-6 border-t border-ink-900">
-            <OfficeClocks />
+        <div className="hero-copy relative w-full container-x pt-[120px] pb-[32px] lg:pt-[200px] lg:pb-[56px]">
+          {/* Display name, not legalName: the eyebrow read "Perkway Capital
+              Group" two inches under a logo reading "Perkway Group". The legal
+              entity belongs in the footer copyright line, not the hero. */}
+          <p className="eyebrow eyebrow-light">{company.name}</p>
+          <h1 className="hero-h1 mt-6 text-white text-balance">
+            Building Enduring Value Across Industries
+          </h1>
+          <p className="hero-sub mt-5 text-white/[0.82]">{company.description}</p>
+          {/* The two labels total 357px at 390 and the container is 342, so a
+              wrap row left two stacked buttons at different widths, which reads
+              as a mistake. Below sm they stack deliberately, at equal width. */}
+          <div className="mt-8 grid grid-cols-1 gap-3 sm:flex sm:flex-wrap sm:gap-3">
+            <Link href="/portfolio" className={btnPrimaryDark}>Our Portfolio</Link>
+            <Link href="/about" className={btnOutlineDark}>About the Group</Link>
           </div>
         </div>
+
+        <span className="hero-scroll" aria-hidden />
       </section>
 
       <SectionRail sections={railSections} />

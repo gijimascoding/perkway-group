@@ -129,14 +129,6 @@ otherwise equal, pick the one that reads older, slower and quieter.
 - **Nav:** 72px bar, wordmark left with the PG monogram in a 36px box, five
   links, outlined "Investor Inquiries" button. Active link gets the verdigris
   underline. Phone: full-screen menu, same order.
-- **Home hero:** paper, not a full-bleed photograph. The headline stacks in
-  three lines on the left seven columns at clamp(40px, 5.4vw, 80px); the dusk
-  skyline sits as a 4:5 panel with a hairline frame on the right four columns
-  (16:10 on phones, below the buttons); the foot of the hero is a 1px ink rule
-  carrying the office clocks: London, Toronto and New York to the minute, city
-  in the sans, time in the mono in the accent. One page-load moment: the three
-  lines rise in turn, then everything else fades in. Nothing ambient. The nav
-  is solid from the top on this page because the first section is paper.
 - **Section rail (home, 1280px and up):** a column of 20px ticks fixed at the
   right edge, one per section, the active one 32px in the accent. Labels appear
   on hover or focus, and the active label stays at 1600px and wider. Visible
@@ -168,7 +160,7 @@ otherwise equal, pick the one that reads older, slower and quieter.
 | 2026-09-07 | Keep Source Serif 4; move body from Inter to Source Sans 3; add JetBrains Mono for figures | One drawing hand for serif and sans; mono makes dates and figures read as record, not copy. |
 | 2026-09-07 | Accent verdigris `#2F6B5C` replaces navy `#1c3d5a`, rationed to time elements, active nav, focus and links | All five peers use navy. Verdigris is the color of aged bronze and it is the one thing that says "time" without a word. Agent default, confirmed by the user at D7. |
 | 2026-09-07 | Time before size: founding year is the first figure in the story; AUM stays in the stats band | The screener still finds AUM in the first fold; the narrative leads with the horizon. |
-| 2026-09-07 | Home hero rebuilt on paper with the office clocks | The full-bleed dusk skyline with a white headline is the opening every peer uses. The firm's day across its three offices is the one thing no peer shows and it says time without a word. The photograph stays, framed, in colour. |
+| 2026-09-07 | Home hero stays full-bleed photograph; paper hero rejected | A paper hero with a framed photo panel and office clocks shipped and was reverted within the hour: the user wants the full-bleed dusk skyline under the white headline. Do not move the photograph out of the first screen again. |
 | 2026-09-07 | Dark mode removed; section rail and dialog motion stay | Dark mode followed the system preference and turned the site black for the user, who wants the paper background everywhere. Rail and dialog built with the project's own primitives; only the active rail tick carries the accent. |
 | 2026-09-07 | Photography stays in colour; grayscale rejected | The duotone was shipped in b1319ce and reverted the same day: the user found the black-and-white hero depressing. Portraits remain grayscale. |
 | 2026-09-07 | Border radius 0; hairlines and air instead of cards and shadows | Annual-report register; the SaaS card kit is the generic default. |

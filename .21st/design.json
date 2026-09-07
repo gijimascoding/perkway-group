@@ -112,7 +112,8 @@
       "Grayscale or duotone photography (rejected 2026-09-07)",
       "Border radius other than 0 (the circle-arrow link is the one exception)",
       "Cards with shadows, gradients as decoration",
-      "Any dark colour scheme or prefers-color-scheme block (removed 2026-09-07 at the user's request)"
+      "Any dark colour scheme or prefers-color-scheme block (removed 2026-09-07 at the user's request)",
+      "Moving the home hero photograph out of full-bleed (rejected 2026-09-07)"
     ]
   },
   "decisions": [
@@ -133,8 +134,8 @@
     },
     {
       "date": "2026-09-07",
-      "decision": "Home hero: paper ground, three-line serif headline left, framed 4:5 colour photograph right, office clocks (London, Toronto, New York) on the foot rule in mono accent. One page-load sequence, no ambient motion.",
-      "source": "/frontend-design"
+      "decision": "Home hero is the full-bleed colour skyline with the white headline. A paper hero was rejected by the user; do not propose it again.",
+      "source": "user request"
     }
   ],
   "evidence": [

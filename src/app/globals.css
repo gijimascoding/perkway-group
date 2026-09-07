@@ -155,10 +155,11 @@
   .small { font-size: 15px; line-height: 1.55; }
   .measure { max-width: 68ch; }
 
-  /* ---- Hero: paper first screen. Floor at the viewport so the clocks sit
-         at the fold on desktop; a long stack grows the section. ---- */
-  .hero { min-height: 100svh; display: flex; flex-direction: column; }
-  .hero > .container-x { flex: 1; }
+  /* ---- Hero: full-bleed, first screen, bottom-left on the container grid ---- */
+  /* min-height, not height: the first screen is the floor, and a long stack
+     grows the section instead of clipping under the overlaid nav. */
+  .hero { min-height: 100svh; }
+  @media (min-width: 768px) { .hero { min-height: 100svh; } }
   @media (min-width: 1024px) { .hero { min-height: max(100svh, 760px); } }
 
   /* Subpage heroes: same system, one step down from the home hero. */
@@ -168,35 +169,38 @@
   .hero-h1 {
     font-family: var(--font-display);
     font-weight: 400;
-    font-size: clamp(2.5rem, 5.4vw, 5rem);
-    line-height: 1.04;
-    letter-spacing: -0.016em;
+    font-size: clamp(2.375rem, 4.6vw, 4.5rem);
+    line-height: 1.1;
+    letter-spacing: -0.012em;
     max-width: 17ch;
   }
-  .hero-line { display: block; }
-  /* Three lines on a desktop, as written; phones may wrap the longest. */
-  @media (min-width: 1024px) { .hero-line { white-space: nowrap; } }
   .hero-sub {
     font-size: 1.125rem;
     line-height: 1.55;
-    max-width: 48ch;
+    max-width: 52ch;
   }
+  /* 1.25rem is the intended size; below 640 it pushes the CTA row off a phone
+     screen, so the hero keeps its own step there. */
   @media (min-width: 640px) { .hero-sub { font-size: 1.25rem; } }
-  /* Subpage heroes keep the photographic scrim. */
+  /* Single bottom gradient for type contrast — nothing else over the flat scrim.
+     Starts at 30%, not 45%: the sunset band in hero.jpg sits directly behind the
+     headline, and 45% left it at 4.5:1 with no margin. Measured, not assumed. */
   .hero-foot {
     background: linear-gradient(to bottom, transparent 38%, rgba(20, 22, 26, 0.78) 100%);
   }
 
-  /* ---- Office clocks: three ruled columns, city in the sans, time in the
-         mono in the accent. Blank until the browser sets them. ---- */
-  .clocks { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
-  @media (min-width: 640px) { .clocks { max-width: 640px; } }
-  .clock { border-left: 1px solid var(--color-hairline); padding-left: 16px; min-height: 52px; }
-  .clock:first-child { border-left: 0; padding-left: 0; }
-  .clock dt { font-size: 15px; line-height: 1.4; color: var(--color-ink-900); font-weight: 600; }
-  .clock dd { margin-top: 4px; display: flex; align-items: baseline; gap: 8px; }
-  .clock-time { font-family: var(--font-mono); font-size: 22px; line-height: 1.2; color: var(--color-accent); font-variant-numeric: tabular-nums lining-nums; letter-spacing: 0.02em; }
-  .clock-zone { font-family: var(--font-mono); font-size: 12px; color: var(--color-ink-500); }
+  /* Scroll affordance: 1px x 56px rule, fill travels downward on a 2.4s loop */
+  .hero-scroll {
+    position: absolute;
+    right: 24px;
+    bottom: 0;
+    width: 1px;
+    height: 56px;
+    background: rgba(255, 255, 255, 0.22);
+    overflow: hidden;
+  }
+  @media (min-width: 768px) { .hero-scroll { right: 48px; } }
+  @media (min-width: 1024px) { .hero-scroll { right: 80px; } }
 
   /* ---- Eyebrow: uppercase 12/0.14em muted + 1px hairline 16px beneath ---- */
   .eyebrow {
@@ -498,8 +502,67 @@
   }
   .reveal.in { opacity: 1; transform: none; }
 
+  /* Ambient hero scale — the one exception to the 400ms motion cap. Once, on load. */
+  .hero-img { animation: hero-ambient 12s ease-out both; }
+  .hero-scroll::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: #ffffff;
+    transform-origin: top;
+    animation: rule-fill 2.4s ease-in-out infinite;
+  }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .rail, .rail .label, .rail .tick, .dialog-scrim, .dialog-panel { transition: none; }
+  .dialog-panel { transform: none; }
+}
+
+@keyframes hero-ambient {
+  from { transform: scale(1.06); }
+  to { transform: scale(1); }
+}
+
+/* ---- Scroll-linked hero: the frame drifts and the copy settles out as the
+   first screen leaves. Native scroll timelines only — no JS, no scroll
+   listener — and the @supports gate means older engines just get the static
+   hero rather than a broken one. ---- */
+/* Driven off the document scroller, not view(): the hero starts flush with the
+   top of the page, so a view() range is already part-way through at scroll 0 and
+   the frame lands pre-shifted. scroll(root) pins progress 0 to scroll 0. */
+/* Base transform outside the animation so the frame has a painted resting state
+   if the timeline is unavailable; the keyframes start from this same value. */
+.hero-media { transform: scale(1.12); }
+
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-media {
+      animation: hero-drift linear both;
+      animation-timeline: scroll(root block);
+      animation-range: 0 100svh;
+      will-change: transform;
+    }
+    .hero-copy {
+      animation: hero-settle linear both;
+      animation-timeline: scroll(root block);
+      animation-range: 0 70svh;
+      will-change: transform, opacity;
+    }
+  }
+}
+
+/* Overscan must exceed the travel or the drift exposes the frame edge:
+   scale 1.12 gives 6% of height on each side, translate spends 5.6%. */
+@keyframes hero-drift {
+  from { transform: scale(1.12) translate3d(0, 0, 0); }
+  to { transform: scale(1.12) translate3d(0, 5%, 0); }
+}
+
+@keyframes hero-settle {
+  from { opacity: 1; transform: translate3d(0, 0, 0); }
+  to { opacity: 0; transform: translate3d(0, -40px, 0); }
+}
 
 @keyframes rule-fill {
   0% { transform: scaleY(0); opacity: 0; }
