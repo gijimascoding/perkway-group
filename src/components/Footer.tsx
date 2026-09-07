@@ -43,7 +43,7 @@ export function Footer() {
             <ul className="tap-list mt-6 space-y-3.5">
               {businessSegments.slice(0, 6).map((s) => (
                 <li key={s.id}>
-                  <Link href="/portfolio" className={colLink}>{s.title}</Link>
+                  <Link href={`/portfolio#${s.id}`} className={colLink}>{s.title}</Link>
                 </li>
               ))}
             </ul>
