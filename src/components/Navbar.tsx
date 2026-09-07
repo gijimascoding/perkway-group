@@ -73,17 +73,23 @@ export function Navbar() {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-8">
-            {navigationItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`t-small tracking-[0.02em] transition-colors duration-[240ms] ease-out ${
-                  solid ? "text-ink-700 hover:text-ink-900" : "text-white/80 hover:text-white"
-                }`}
-              >
-                {item.label}
-              </Link>
-            ))}
+            {navigationItems.map((item) => {
+              const current = pathname === item.href || pathname.startsWith(item.href + "/");
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  aria-current={current ? "page" : undefined}
+                  className={`t-small tracking-[0.02em] py-1 border-b transition-colors duration-[240ms] ease-out ${
+                    current
+                      ? solid ? "text-ink-900 border-ink-900" : "text-white border-white"
+                      : solid ? "text-ink-700 hover:text-ink-900 border-transparent" : "text-white/80 hover:text-white border-transparent"
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
             <Link
               href="/contact"
               className={`ml-2 t-micro uppercase tracking-[0.08em] px-5 h-[40px] inline-flex items-center border transition-colors duration-[240ms] ease-out ${
@@ -124,16 +130,20 @@ export function Navbar() {
           className="on-dark lg:hidden fixed inset-0 top-[72px] bg-ink-900 z-40 pb-[env(safe-area-inset-bottom)]"
         >
           <nav className="flex flex-col p-8 gap-1">
-            {navigationItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => setMobileOpen(false)}
-                className="text-white t-body tracking-[0.02em] py-4 border-b border-white/10"
-              >
-                {item.label}
-              </Link>
-            ))}
+            {navigationItems.map((item) => {
+              const current = pathname === item.href || pathname.startsWith(item.href + "/");
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  aria-current={current ? "page" : undefined}
+                  onClick={() => setMobileOpen(false)}
+                  className={`t-body tracking-[0.02em] py-4 border-b border-white/10 ${current ? "text-white underline decoration-1 underline-offset-8" : "text-white/85"}`}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
             <Link
               href="/contact"
               onClick={() => setMobileOpen(false)}
