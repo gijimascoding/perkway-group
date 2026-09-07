@@ -62,9 +62,16 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#f7f5f0",
-  colorScheme: "light",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f7f5f0" },
+    { media: "(prefers-color-scheme: dark)", color: "#141518" },
+  ],
 };
+
+/* Runs before first paint: a stored choice wins, otherwise the system
+   preference applies through CSS and no attribute is set. */
+const themeScript =
+  "try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark'){document.documentElement.setAttribute('data-theme',t)}}catch(e){}";
 
 export default function RootLayout({
   children,
@@ -77,7 +84,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`no-js ${sourceSans.variable} ${sourceSerif.variable} ${mono.variable}`} suppressHydrationWarning>
       <head>
-        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.remove('no-js')" }} />
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.remove('no-js');" + themeScript }} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify([organizationSchema, websiteSchema]) }}

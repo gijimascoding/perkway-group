@@ -3,7 +3,7 @@
 export function GlobeMark({ className = "" }: { className?: string }) {
   return (
     <span
-      className={`inline-flex items-center justify-center bg-white text-ink-900 border border-hairline font-[700] tracking-tight ${className}`}
+      className={`inline-flex items-center justify-center bg-paper-50 text-ink-900 border border-hairline font-[700] tracking-tight ${className}`}
     >
       <span className="t-micro leading-none">PG</span>
     </span>

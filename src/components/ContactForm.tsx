@@ -32,7 +32,7 @@ const INQUIRY_TYPES = [
 ];
 
 const inputClass = (invalid: boolean) =>
-  `w-full px-4 py-3 border t-body bg-white focus:outline-none transition-colors ${invalid ? "border-red-700" : "border-hairline focus:border-accent"}`;
+  `w-full px-4 py-3 border t-body bg-paper-50 focus:outline-none transition-colors ${invalid ? "border-red-700" : "border-hairline focus:border-accent"}`;
 const labelClass = "block t-micro font-semibold text-ink-500 uppercase tracking-[0.08em] mb-2";
 
 function validate(data: FormData): Partial<Record<FieldKey, string>> {
@@ -103,7 +103,7 @@ export function ContactForm() {
   if (status === "success") {
     return (
       <div role="status" className="border border-hairline p-10 text-center">
-        <div className="w-12 h-12 bg-ink-900 text-white flex items-center justify-center mx-auto mb-4" aria-hidden>
+        <div className="w-12 h-12 bg-ink-900 text-paper-100 flex items-center justify-center mx-auto mb-4" aria-hidden>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M20 6L9 17l-5-5" />
           </svg>
@@ -209,7 +209,7 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="inline-flex items-center justify-center h-[52px] px-8 bg-ink-900 text-white t-micro uppercase tracking-[0.06em] hover:bg-ink-800 transition-colors disabled:opacity-50"
+        className="inline-flex items-center justify-center h-[52px] px-8 bg-ink-900 text-paper-100 t-micro uppercase tracking-[0.06em] hover:bg-ink-800 transition-colors disabled:opacity-50"
       >
         {status === "submitting" ? "Sending…" : "Submit Inquiry"}
       </button>

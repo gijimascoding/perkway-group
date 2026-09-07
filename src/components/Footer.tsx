@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { company, navigationItems, businessSegments } from "@/data/company";
 import { GlobeMark } from "@/components/GlobeMark";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const colHead = "t-micro uppercase tracking-[0.14em] text-white/60";
 const colLink = "t-small text-white/65 hover:text-white transition-colors";
@@ -84,10 +85,11 @@ export function Footer() {
 
         <div className="mt-8 pt-8 border-t border-white/12 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 t-micro nums text-white/60">
           <p>© {new Date().getFullYear()} {company.legalName}. All rights reserved.</p>
-          <div className="flex gap-6">
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
             <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
             <Link href="/terms" className="hover:text-white transition-colors">Terms of Use</Link>
             <Link href="/disclosures" className="hover:text-white transition-colors">Disclosures</Link>
+            <ThemeToggle />
           </div>
         </div>
       </div>

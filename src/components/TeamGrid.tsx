@@ -20,7 +20,7 @@ function Portrait({ m, sizes = CARD_SIZES, className = "" }: { m: LeadershipMemb
   return photo ? (
     <Image src={photo} alt="" fill quality={95} sizes={sizes} className={`object-cover object-top grayscale contrast-[1.02] ${className}`} />
   ) : (
-    <div className="absolute inset-0 flex items-center justify-center bg-ink-800">
+    <div className="on-dark absolute inset-0 flex items-center justify-center bg-ink-800">
       <span className="text-white/90 h2 tracking-tight">{m.initials}</span>
     </div>
   );
@@ -44,6 +44,7 @@ export function TeamGrid({ members, columns = 4 }: { members: LeadershipMember[]
   const triggerRef = useRef<HTMLElement | null>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
   const [mounted, setMounted] = useState(false);
+  const [shown, setShown] = useState(false);
   useEffect(() => setMounted(true), []);
 
   const open = (m: LeadershipMember) => {
@@ -58,6 +59,11 @@ export function TeamGrid({ members, columns = 4 }: { members: LeadershipMember[]
   useEffect(() => {
     if (!active) return;
     document.body.style.overflow = "hidden";
+    // Two frames in: the panel starts at its hidden state, then transitions.
+    const raf = requestAnimationFrame(() => requestAnimationFrame(() => setShown(true)));
+    // Everything behind the dialog is inert to pointer and assistive tech.
+    const behind = Array.from(document.querySelectorAll<HTMLElement>("body > header, body > main, body > footer"));
+    behind.forEach((el) => el.setAttribute("inert", ""));
     // Focus lands on the close control; Tab and Shift+Tab cycle inside the dialog.
     const dialog = dialogRef.current;
     const focusables = () =>
@@ -74,6 +80,9 @@ export function TeamGrid({ members, columns = 4 }: { members: LeadershipMember[]
     };
     window.addEventListener("keydown", onKey);
     return () => {
+      cancelAnimationFrame(raf);
+      setShown(false);
+      behind.forEach((el) => el.removeAttribute("inert"));
       document.body.style.overflow = "";
       window.removeEventListener("keydown", onKey);
     };
@@ -125,15 +134,17 @@ export function TeamGrid({ members, columns = 4 }: { members: LeadershipMember[]
       )}
 
       {mounted && active && createPortal(
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-8" onClick={close}>
-          <div className="absolute inset-0 bg-ink-900/80" />
+        <div className={`fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-8 ${shown ? "dialog-open" : ""}`}>
+          {/* The scrim is a real control: clicking outside closes, and it stays
+              out of the tab order because the Close button is the keyboard path. */}
+          <button type="button" tabIndex={-1} aria-label="Close biography" onClick={close} className="dialog-scrim absolute inset-0 cursor-default" />
           <div
             ref={dialogRef}
             role="dialog"
             aria-modal="true"
             aria-labelledby="team-modal-title"
-            className={`relative bg-paper-50 max-w-3xl w-full max-h-[88vh] overflow-y-auto grid ${usablePhoto(active) ? "sm:grid-cols-[minmax(0,0.9fr)_1.1fr]" : ""}`}
-            onClick={(e) => e.stopPropagation()}
+            aria-describedby="team-modal-bio"
+            className={`dialog-panel relative bg-paper-50 border border-hairline max-w-3xl w-full max-h-[88vh] overflow-y-auto grid ${usablePhoto(active) ? "sm:grid-cols-[minmax(0,0.9fr)_1.1fr]" : ""}`}
           >
             {usablePhoto(active) && (
               <div className="relative aspect-[3/4] sm:aspect-auto sm:min-h-[440px] bg-paper-200">
@@ -144,7 +155,7 @@ export function TeamGrid({ members, columns = 4 }: { members: LeadershipMember[]
               <button
                 type="button"
                 onClick={close}
-                aria-label="Close"
+                aria-label="Close biography"
                 className="absolute top-3 right-3 w-11 h-11 flex items-center justify-center text-ink-600 hover:text-ink-900 transition-colors"
               >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden>
@@ -154,7 +165,10 @@ export function TeamGrid({ members, columns = 4 }: { members: LeadershipMember[]
               <h3 id="team-modal-title" className="text-ink-900 h3 pr-8">{active.name}</h3>
               <p className="mt-1.5 text-ink-600 t-micro font-[700] uppercase tracking-[0.12em]">{active.title}</p>
               <div className="mt-5 h-px w-12 bg-ink-900" />
-              <p className="mt-5 text-ink-700 t-small">{active.bio}</p>
+              <p id="team-modal-bio" className="mt-5 text-ink-700 t-small">{active.bio}</p>
+              <button type="button" onClick={close} className="mt-8 link-underline">
+                Close
+              </button>
             </div>
           </div>
         </div>,

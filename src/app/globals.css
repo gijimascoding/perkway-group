@@ -35,6 +35,62 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    color-scheme: light;
+  }
+
+  /* ---- Dark mode (DESIGN.md, Color): the surfaces are redesigned, not
+         inverted. Ink and paper swap roles on a cool near-black base, the
+         accent lifts for contrast. `data-theme` is set before first paint by
+         the inline script in layout.tsx; with no stored choice the system
+         preference decides. ---- */
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --color-ink-900: #f7f5f0;
+    --color-ink-800: #e3e1dc;
+    --color-ink-700: #cfccc6;
+    --color-ink-600: #b3b0aa;
+    --color-ink-500: #9a9e9a;
+    --color-ink-400: #6e7278;
+    --color-paper-50: #1c1e23;
+    --color-paper-100: #141518;
+    --color-paper-200: #24272c;
+    --color-hairline: rgba(255, 255, 255, 0.14);
+    --color-accent: #4f9a86;
+    --color-accent-hover: #6db3a0;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --color-ink-900: #f7f5f0;
+      --color-ink-800: #e3e1dc;
+      --color-ink-700: #cfccc6;
+      --color-ink-600: #b3b0aa;
+      --color-ink-500: #9a9e9a;
+      --color-ink-400: #6e7278;
+      --color-paper-50: #1c1e23;
+      --color-paper-100: #141518;
+      --color-paper-200: #24272c;
+      --color-hairline: rgba(255, 255, 255, 0.14);
+      --color-accent: #4f9a86;
+      --color-accent-hover: #6db3a0;
+    }
+  }
+  /* Sections designed dark (hero, pull quote, footer, mobile menu, the nav
+     while it overlays the hero) keep the light-mode palette in both modes, so
+     `bg-ink-900 text-white` inside them means what it says. Keep these values
+     in step with @theme above. */
+  .on-dark,
+  header.is-overlay {
+    --color-ink-900: #16181c;
+    --color-ink-800: #24272c;
+    --color-ink-700: #3a3d42;
+    --color-ink-600: #565a61;
+    --color-ink-500: #6c7178;
+    --color-ink-400: #9aa0a8;
+    --color-paper-50: #ffffff;
+    --color-paper-100: #f7f5f0;
+    --color-paper-200: #f1eee7;
+    --color-hairline: #e4e2dd;
   }
   @media (prefers-reduced-motion: no-preference) {
     html { scroll-behavior: smooth; }
@@ -92,7 +148,7 @@
   /* Skip link: invisible until focused, then a solid ink tab at the top left. */
   .skip-link {
     position: fixed; top: 12px; left: 12px; z-index: 100;
-    padding: 10px 16px; background: var(--color-ink-900); color: #fff;
+    padding: 10px 16px; background: var(--color-ink-900); color: var(--color-paper-100);
     font-size: 15px; font-weight: 600; text-decoration: none;
     transform: translateY(-160%); transition: transform 150ms ease;
   }
@@ -285,7 +341,7 @@
        220ms fill reads as a web button; theirs fills like a weight settling. */
     transition: background-color 600ms ease, color 600ms ease;
   }
-  .link-circle:hover .dot { background: var(--color-ink-900); color: #fff; }
+  .link-circle:hover .dot { background: var(--color-ink-900); color: var(--color-paper-100); }
   .on-dark .link-circle { color: #fff; }
   .on-dark .link-circle:hover .dot { background: #fff; color: var(--color-ink-900); }
 
@@ -308,7 +364,7 @@
     color: var(--color-ink-900);
     transition: background-color 600ms ease, color 600ms ease;
   }
-  .carousel-arrow:hover { background: var(--color-ink-900); color: #fff; }
+  .carousel-arrow:hover { background: var(--color-ink-900); color: var(--color-paper-100); }
   .on-dark .carousel-arrow { color: #fff; }
   .on-dark .carousel-arrow:hover { background: #fff; color: var(--color-ink-900); }
   .carousel-dot {
@@ -408,6 +464,66 @@
   .on-dark .link-underline { color: #fff; border-color: rgba(255, 255, 255, 0.5); }
   .on-dark .link-underline:hover { color: #fff; border-color: #fff; }
 
+  /* ---- Section rail (home, desktop): a column of ticks at the right edge,
+         one per section, the active one longer and in the accent (the accent
+         ration allows the active nav mark). Labels appear on hover or focus,
+         and the active label stays on wide screens where the margin has room.
+         Hidden under 1280px and while the hero is on screen. ---- */
+  .rail {
+    position: fixed;
+    right: 28px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 30;
+    display: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 400ms ease, visibility 0s linear 400ms;
+  }
+  @media (min-width: 1280px) { .rail { display: block; } }
+  .rail.is-visible { opacity: 1; visibility: visible; transition: opacity 400ms ease; }
+  .rail ol { display: flex; flex-direction: column; gap: 14px; align-items: flex-end; }
+  .rail a {
+    display: flex; align-items: center; gap: 12px;
+    min-height: 24px; padding-block: 2px;
+    text-decoration: none; color: var(--color-ink-500);
+  }
+  .rail .label {
+    font-family: var(--font-sans); font-size: 12px; font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase; line-height: 1;
+    opacity: 0; transform: translateX(6px);
+    transition: opacity 200ms ease, transform 200ms ease, color 200ms ease;
+  }
+  .rail .tick {
+    display: block; width: 20px; height: 1px; background: currentColor; flex: none;
+    transition: width 200ms ease, background-color 200ms ease;
+  }
+  .rail a:hover, .rail a:focus-visible { color: var(--color-ink-900); }
+  .rail a:hover .label, .rail a:focus-visible .label, .rail:focus-within .label, .rail:hover .label { opacity: 1; transform: none; }
+  .rail a[aria-current="true"] { color: var(--color-ink-900); }
+  .rail a[aria-current="true"] .tick { width: 32px; background: var(--color-accent); }
+  @media (min-width: 1600px) { .rail a[aria-current="true"] .label { opacity: 1; transform: none; } }
+  .on-dark-scrolled .rail a { color: rgba(255,255,255,0.6); }
+
+  /* ---- Bio dialog: the panel fades and rises 12px over 400ms (medium),
+         the scrim fades with it. Closing is instant: exits faster than
+         enters. ---- */
+  .dialog-scrim { background: rgba(22, 24, 28, 0.8); opacity: 0; transition: opacity 400ms ease; }
+  .dialog-panel { opacity: 0; transform: translateY(12px); transition: opacity 400ms cubic-bezier(0.2, 0.7, 0.2, 1), transform 400ms cubic-bezier(0.2, 0.7, 0.2, 1); }
+  .dialog-open .dialog-scrim { opacity: 1; }
+  .dialog-open .dialog-panel { opacity: 1; transform: none; }
+
+  /* ---- Theme control: three quiet words in the footer bar. The chosen one
+         carries the accent underline, like the active nav link. ---- */
+  .theme-control { display: inline-flex; align-items: center; gap: 16px; }
+  .theme-control button {
+    font: inherit; color: inherit; background: none; border: 0; padding: 4px 0;
+    border-bottom: 1px solid transparent; letter-spacing: inherit; text-transform: inherit;
+    transition: color 200ms ease, border-color 200ms ease;
+  }
+  .theme-control button:hover { color: #fff; }
+  .theme-control button[aria-pressed="true"] { color: #fff; border-bottom-color: #8fc4b4; }
+
   /* ---- Touch targets ----
      The underline and hairline rules are the design; they must not grow. So the
      hit area is extended with transparent padding that is cancelled visually by
@@ -462,6 +578,11 @@
     transform-origin: top;
     animation: rule-fill 2.4s ease-in-out infinite;
   }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rail, .rail .label, .rail .tick, .dialog-scrim, .dialog-panel, .theme-control button { transition: none; }
+  .dialog-panel { transform: none; }
 }
 
 @keyframes hero-ambient {

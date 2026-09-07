@@ -1,0 +1,165 @@
+{
+  "version": 1,
+  "project": {
+    "name": "perkway-group",
+    "productType": null,
+    "stack": [
+      "nextjs",
+      "react",
+      "tailwind-v4"
+    ]
+  },
+  "sources": {
+    "tokens": [
+      "src/app/globals.css"
+    ],
+    "components": [],
+    "assets": [
+      "public/images"
+    ],
+    "instructions": [
+      "DESIGN.md",
+      "CLAUDE.md"
+    ]
+  },
+  "design": {
+    "colorMode": "light",
+    "colors": {
+      "--color-ink-900": {
+        "value": "#16181c",
+        "source": "src/app/globals.css"
+      },
+      "--color-ink-800": {
+        "value": "#24272c",
+        "source": "src/app/globals.css"
+      },
+      "--color-ink-700": {
+        "value": "#3a3d42",
+        "source": "src/app/globals.css"
+      },
+      "--color-ink-600": {
+        "value": "#565a61",
+        "source": "src/app/globals.css"
+      },
+      "--color-ink-500": {
+        "value": "#6c7178",
+        "source": "src/app/globals.css"
+      },
+      "--color-ink-400": {
+        "value": "#9aa0a8",
+        "source": "src/app/globals.css"
+      },
+      "--color-paper-50": {
+        "value": "#ffffff",
+        "source": "src/app/globals.css"
+      },
+      "--color-paper-100": {
+        "value": "#f7f5f0",
+        "source": "src/app/globals.css"
+      },
+      "--color-paper-200": {
+        "value": "#f1eee7",
+        "source": "src/app/globals.css"
+      },
+      "--color-hairline": {
+        "value": "#e4e2dd",
+        "source": "src/app/globals.css"
+      },
+      "--color-hairline-dark": {
+        "value": "rgba(255, 255, 255, 0.14)",
+        "source": "src/app/globals.css"
+      },
+      "--color-accent": {
+        "value": "#2f6b5c",
+        "source": "src/app/globals.css"
+      },
+      "--color-accent-hover": {
+        "value": "#25574a",
+        "source": "src/app/globals.css"
+      }
+    },
+    "typography": {
+      "--font-sans": {
+        "value": "var(--font-source-sans), ui-sans-serif, system-ui, -apple-system, sans-serif",
+        "source": "src/app/globals.css"
+      },
+      "--font-display": {
+        "value": "var(--font-serif), \"Iowan Old Style\", Georgia, \"Times New Roman\", serif",
+        "source": "src/app/globals.css"
+      },
+      "--font-mono": {
+        "value": "var(--font-mono), ui-monospace, \"SF Mono\", Menlo, monospace",
+        "source": "src/app/globals.css"
+      }
+    },
+    "spacing": {},
+    "radius": {},
+    "shadows": {},
+    "motion": {},
+    "density": "unknown"
+  },
+  "components": {
+    "installed": [],
+    "preferredPrimitives": [],
+    "patterns": []
+  },
+  "constraints": {
+    "must": [
+      "Read DESIGN.md before any visual change",
+      "Accent #2f6b5c only on time elements, active nav mark, focus rings, link underlines"
+    ],
+    "avoid": [
+      "Grayscale or duotone photography (rejected 2026-09-07)",
+      "Border radius other than 0 (the circle-arrow link is the one exception)",
+      "Cards with shadows, gradients as decoration"
+    ]
+  },
+  "decisions": [
+    {
+      "date": "2026-09-07",
+      "decision": "Dark mode remaps ink/paper tokens on :root[data-theme] and prefers-color-scheme; .on-dark sections and the overlaid header keep the light palette. Filled ink controls use text-paper-100, not text-white.",
+      "source": "DESIGN.md Color"
+    },
+    {
+      "date": "2026-09-07",
+      "decision": "Home section rail: fixed right-edge ticks at 1280px+, active tick in the accent, labels on hover/focus, visible only between first and last section.",
+      "source": "DESIGN.md Layout"
+    },
+    {
+      "date": "2026-09-07",
+      "decision": "Dialogs: 400ms fade+rise enter, instant exit, inert page behind, scrim is a real button.",
+      "source": "DESIGN.md Layout"
+    }
+  ],
+  "evidence": [
+    {
+      "fact": "design.colorMode:light",
+      "source": "src/app/globals.css"
+    },
+    {
+      "fact": "design.tokens",
+      "source": "src/app/globals.css"
+    },
+    {
+      "fact": "project.instructions",
+      "source": "CLAUDE.md"
+    },
+    {
+      "fact": "project.instructions",
+      "source": "DESIGN.md"
+    },
+    {
+      "fact": "project.stack:nextjs",
+      "source": "package.json"
+    },
+    {
+      "fact": "project.stack:react",
+      "source": "package.json"
+    },
+    {
+      "fact": "project.stack:tailwind-v4",
+      "source": "package.json"
+    }
+  ],
+  "generatedAt": "2026-09-07T17:58:40.491Z"
+}

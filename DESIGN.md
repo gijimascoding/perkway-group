@@ -95,8 +95,13 @@ otherwise equal, pick the one that reads older, slower and quieter.
   than by filter.
 - **Dark mode:** redesign the surfaces, do not invert. Base `#141518`, raised
   `#1c1e23`, text `rgba(247,245,240,.82)`, headings paper-100, hairline
-  `rgba(255,255,255,.14)`, accent lifted to `#4f9a86` for contrast. Not shipped
-  today; `color-scheme: light` stays in the viewport export until it is.
+  `rgba(255,255,255,.14)`, accent lifted to `#4f9a86` for contrast. Shipped
+  2026-09-07: tokens remap on `:root[data-theme]` and on the system preference;
+  sections designed dark (`.on-dark`, the overlaid header) keep the light
+  palette in both modes so `bg-ink-900 text-white` inside them stays true. In
+  a filled ink control, "white" text is `text-paper-100`, never `text-white`.
+  The control is Light / Dark / Auto in the footer bar; a stored choice is set
+  before first paint by the inline script in `layout.tsx`.
 
 ## Spacing
 - **Base unit:** 8px. 4px allowed only inside components (label to input,
@@ -128,6 +133,13 @@ otherwise equal, pick the one that reads older, slower and quieter.
 - **Nav:** 72px bar, wordmark left with the PG monogram in a 36px box, five
   links, outlined "Investor Inquiries" button. Active link gets the verdigris
   underline. Phone: full-screen menu, same order.
+- **Section rail (home, 1280px and up):** a column of 20px ticks fixed at the
+  right edge, one per section, the active one 32px in the accent. Labels appear
+  on hover or focus, and the active label stays at 1600px and wider. Visible
+  only between the first section and the last; the hero and footer stay clean.
+- **Dialogs:** paper-50 panel with a hairline frame on an ink scrim at 80%.
+  Enter: 400ms fade and 12px rise. Exit: instant. The page behind is `inert`;
+  Escape, the X, a visible Close link and the scrim all close it.
 
 ## Motion
 - **Approach:** Intentional. One page-load reveal per section, one hover
@@ -152,6 +164,7 @@ otherwise equal, pick the one that reads older, slower and quieter.
 | 2026-09-07 | Keep Source Serif 4; move body from Inter to Source Sans 3; add JetBrains Mono for figures | One drawing hand for serif and sans; mono makes dates and figures read as record, not copy. |
 | 2026-09-07 | Accent verdigris `#2F6B5C` replaces navy `#1c3d5a`, rationed to time elements, active nav, focus and links | All five peers use navy. Verdigris is the color of aged bronze and it is the one thing that says "time" without a word. Agent default, confirmed by the user at D7. |
 | 2026-09-07 | Time before size: founding year is the first figure in the story; AUM stays in the stats band | The screener still finds AUM in the first fold; the narrative leads with the horizon. |
+| 2026-09-07 | Dark mode, section rail and dialog motion shipped | Built with the project's own primitives (the 21st catalogue needs a login that was not available). Rail ticks and the theme control follow the accent ration: only the active mark carries the accent. |
 | 2026-09-07 | Photography stays in colour; grayscale rejected | The duotone was shipped in b1319ce and reverted the same day: the user found the black-and-white hero depressing. Portraits remain grayscale. |
 | 2026-09-07 | Border radius 0; hairlines and air instead of cards and shadows | Annual-report register; the SaaS card kit is the generic default. |
 | 2026-09-07 | Second-voice divergences recorded, not adopted | Subagent proposed no motion at all, bone paper `#ECE7DC`, Klim faces (Signifier / Untitled Sans / Söhne Mono) and a live day-counter. Kept as notes: Klim licensing is a client decision, the counter is a gimmick until the year is on the page, the motion budget above is already small. |

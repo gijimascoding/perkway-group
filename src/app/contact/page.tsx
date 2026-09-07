@@ -68,7 +68,7 @@ export default function ContactPage() {
                   </div>
                 </div>
 
-                <div className="mt-12 bg-ink-900 p-8 text-white">
+                <div className="on-dark mt-12 bg-ink-900 p-8 text-white">
                   <p className="t-micro font-[700] uppercase tracking-[0.14em] text-white/55">How Can We Help</p>
                   <ul className="mt-4 space-y-3">
                     {[

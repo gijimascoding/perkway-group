@@ -4,6 +4,7 @@ import { Reveal } from "@/components/Reveal";
 import { TeamGrid } from "@/components/TeamGrid";
 import { CircleLink } from "@/components/CircleLink";
 import { Carousel } from "@/components/Carousel";
+import { SectionRail } from "@/components/SectionRail";
 import {
   company,
   figures,
@@ -42,6 +43,16 @@ const ledgerYears = Array.from(
   { length: Math.max(2, asOfYear - Number(figures.founded) + 1) },
   (_, i) => String(Number(figures.founded) + i),
 );
+
+/** Desktop section rail, in page order. Labels match the section kickers. */
+const railSections = [
+  { id: "about", label: "About" },
+  { id: "businesses", label: "Businesses" },
+  { id: "leadership", label: "Leadership" },
+  { id: "global", label: "Global Presence" },
+  { id: "insights", label: "Insights" },
+  { id: "responsibility", label: "Responsibility" },
+];
 
 const responsibilityStats = [
   { v: "LEED", l: "Aligned design standards across new development and major renovation projects" },
@@ -94,6 +105,8 @@ export default function Home() {
 
         <span className="hero-scroll" aria-hidden />
       </section>
+
+      <SectionRail sections={railSections} />
 
       {/* ============ HERO STAT BAND (6 stats) ============ */}
       <section className="bg-paper-100 border-b border-hairline">
@@ -265,7 +278,7 @@ export default function Home() {
 
       {/* ============ GLOBAL PRESENCE ============ */}
       {/* skyline 21:9 band above */}
-      <div className="relative w-full overflow-hidden bg-ink-900 aspect-[21/9] max-h-[520px]">
+      <div className="on-dark relative w-full overflow-hidden bg-ink-900 aspect-[21/9] max-h-[520px]">
         <Image
           src="/images/skyline.jpg"
           alt="Aerial view of a city skyline across the water at dusk"

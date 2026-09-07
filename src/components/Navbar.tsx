@@ -94,7 +94,7 @@ export function Navbar() {
               href="/contact"
               className={`ml-2 t-micro uppercase tracking-[0.08em] px-5 h-[40px] inline-flex items-center border transition-colors duration-[240ms] ease-out ${
                 solid
-                  ? "border-ink-900 text-ink-900 hover:bg-ink-900 hover:text-white"
+                  ? "border-ink-900 text-ink-900 hover:bg-ink-900 hover:text-paper-100"
                   : "border-white/50 text-white hover:bg-white/10"
               }`}
             >

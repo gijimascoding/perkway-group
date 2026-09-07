@@ -8,7 +8,7 @@ import { metrics, figuresAsOf, globalPresence, operatingMarkets } from "@/data/c
 const BLUR = "data:image/gif;base64,R0lGODlhAQABAPAAACIkKAAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==";
 
 const btnPrimary =
-  "inline-flex items-center justify-center h-[52px] px-8 bg-ink-900 text-white t-micro uppercase tracking-[0.06em] hover:bg-ink-800 transition-colors";
+  "inline-flex items-center justify-center h-[52px] px-8 bg-ink-900 text-paper-100 t-micro uppercase tracking-[0.06em] hover:bg-ink-800 transition-colors";
 
 export const metadata: Metadata = {
   title: "About | Perkway Group",
