@@ -11,9 +11,16 @@ export function Navbar() {
   const [solid, setSolid] = useState(false);
   const pathname = usePathname();
 
-  /* Transparent over the hero, solid ivory past 80% of hero height. */
+  /* Transparent over a dark hero, solid paper past 80% of its height. A page
+     whose first section is paper (the legal pages, the 404) has no dark hero
+     to overlay, so the bar is solid from the top; otherwise the white nav
+     text sits invisibly on the paper. */
   useEffect(() => {
     const hero = document.querySelector("main section") as HTMLElement | null;
+    if (hero && !hero.classList.contains("on-dark")) {
+      setSolid(true);
+      return;
+    }
     const threshold = () => (hero?.offsetHeight ?? window.innerHeight * 0.8) * 0.8;
     let limit = threshold();
     const onScroll = () => setSolid(window.scrollY > limit);
