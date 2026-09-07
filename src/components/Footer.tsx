@@ -2,7 +2,7 @@ import Link from "next/link";
 import { company, navigationItems, businessSegments } from "@/data/company";
 import { GlobeMark } from "@/components/GlobeMark";
 
-const colHead = "t-micro uppercase tracking-[0.14em] text-white/45";
+const colHead = "t-micro uppercase tracking-[0.14em] text-white/60";
 const colLink = "t-small text-white/65 hover:text-white transition-colors";
 
 export function Footer() {
@@ -75,19 +75,19 @@ export function Footer() {
             Its absence is one of the loudest tells that a site is marketing
             rather than disclosure. */}
         <div className="mt-16 pt-8 border-t border-white/12">
-          <p className="t-micro text-white/40 max-w-[68ch]">
+          <p className="t-micro text-white/55 max-w-[68ch]">
             This website is for informational purposes only and does not
             constitute an offer to sell or a solicitation of an offer to buy any
             security. Investing involves risk, including possible loss of capital.
           </p>
         </div>
 
-        <div className="mt-8 pt-8 border-t border-white/12 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 t-micro nums text-white/45">
+        <div className="mt-8 pt-8 border-t border-white/12 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 t-micro nums text-white/60">
           <p>© {new Date().getFullYear()} {company.legalName}. All rights reserved.</p>
           <div className="flex gap-6">
-            <span>Privacy Policy</span>
-            <span>Terms of Use</span>
-            <span>Disclosures</span>
+            <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-white transition-colors">Terms of Use</Link>
+            <Link href="/disclosures" className="hover:text-white transition-colors">Disclosures</Link>
           </div>
         </div>
       </div>
