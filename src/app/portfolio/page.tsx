@@ -55,9 +55,9 @@ export default function PortfolioPage() {
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <p className="eyebrow mt-5">{s.subtitle}</p>
-                  <h3 className="h3 mt-4 text-ink-900">
+                  <h2 className="h3 mt-4 text-ink-900">
                     {s.title}
-                  </h3>
+                  </h2>
                 </div>
                 <div>
                   <p className="text-ink-700 t-body measure">{s.description}</p>
