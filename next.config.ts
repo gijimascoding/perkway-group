@@ -1,6 +1,21 @@
 import type { NextConfig } from "next";
 
+const securityHeaders = [
+  // HSTS is set by the host; the rest are the standard institutional set.
+  { key: "X-Content-Type-Options", value: "nosniff" },
+  { key: "X-Frame-Options", value: "DENY" },
+  { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+  { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=(), payment=(), usb=()" },
+  { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
+];
+
 const nextConfig: NextConfig = {
+  // The home directory carries a stray package-lock.json; pin tracing here so
+  // the build stops guessing the workspace root.
+  outputFileTracingRoot: __dirname,
+  async headers() {
+    return [{ source: "/(.*)", headers: securityHeaders }];
+  },
   images: {
     // Cap practical delivery so full-bleed images stop requesting w=3840.
     // 1440 added so the most common desktop width gets an exact-fit render
