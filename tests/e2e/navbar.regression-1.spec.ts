@@ -7,7 +7,7 @@ import { expect, test } from "@playwright/test";
 // Report: .gstack/qa-reports/qa-report-www-perkways-com-2026-09-07.md
 
 const paperFirst = ["/privacy", "/terms", "/disclosures", "/this-page-does-not-exist"];
-const darkFirst = ["/", "/about", "/leadership"];
+const darkFirst = ["/", "/about"];
 
 for (const path of paperFirst) {
   test(`nav is solid from the top on ${path}`, async ({ page }) => {

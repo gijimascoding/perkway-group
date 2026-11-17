@@ -6,31 +6,22 @@ test("home loads without console errors and every nav link answers", async ({ pa
   page.on("console", (m) => m.type() === "error" && errors.push(m.text()));
   await page.goto("/");
   await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
-  for (const path of ["/about", "/portfolio", "/leadership", "/insights", "/contact"]) {
+  for (const path of ["/about", "/portfolio", "/insights", "/contact"]) {
     const r = await page.request.get(path);
     expect(r.status(), path).toBe(200);
   }
   expect(errors).toEqual([]);
 });
 
-test("bio dialog opens, traps focus, and closes on Escape with focus restored", async ({ page }) => {
-  // The executive cards (with bio dialogs) live on the home page; /leadership lists the board only.
-  await page.goto("/");
-  const trigger = page.getByRole("button", { name: /Read the biography of/ }).first();
-  await trigger.click();
-  const dialog = page.getByRole("dialog");
-  await expect(dialog).toBeVisible();
-  await expect(page.locator("main")).toHaveAttribute("inert", "");
-  await page.keyboard.press("Escape");
-  await expect(dialog).toBeHidden();
-  await expect(page.locator("main")).not.toHaveAttribute("inert", "");
-});
-
-test("leadership page lists the board only, no executive team", async ({ page }) => {
+test("leadership is retired: /leadership redirects to /about and no one is named", async ({ page }) => {
   await page.goto("/leadership");
-  await expect(page.getByRole("heading", { name: "Board & Advisors" })).toBeVisible();
-  await expect(page.getByRole("heading", { name: "Executive Leadership" })).toHaveCount(0);
+  await expect(page).toHaveURL(/\/about$/);
+  await expect(page.locator("header nav").getByRole("link", { name: "Leadership" })).toHaveCount(0);
+  await page.goto("/");
+  await expect(page.locator("#leadership")).toHaveCount(0);
   await expect(page.getByText("Alexander Reinhardt")).toHaveCount(0);
+  const llms = await (await page.request.get("/llms.txt")).text();
+  expect(llms).not.toMatch(/Leadership|Reinhardt|Wisner/);
 });
 
 test("contact form blocks an empty submit with an error summary", async ({ page }) => {

@@ -179,74 +179,6 @@ export const businessSegments: BusinessSegment[] = [
   },
 ];
 
-export interface LeadershipMember {
-  name: string;
-  title: string;
-  role: "executive" | "board";
-  bio: string;
-  initials: string;
-  photo?: string;
-}
-
-export const leadership: LeadershipMember[] = [
-  {
-    name: "Alexander Reinhardt",
-    title: "Managing Director - Asset Manager",
-    role: "executive",
-    bio: "Managing Director at Perkway Group with over 15 years of experience in real estate investment, asset management, and corporate strategy. Oversees portfolio performance, capital improvements, and value creation across the group's real estate holdings. Previously held senior positions at leading global real estate firms.",
-    initials: "AR",
-    photo: "/team/alexander-reinhardt.png",
-  },
-  {
-    name: "Catherine Morel",
-    title: "Chief Financial Officer",
-    role: "executive",
-    bio: "Oversees all financial operations, capital markets activity, and investor relations for the group. Brings deep expertise in real estate finance, structured transactions, and institutional fund management from prior roles at major investment banks and alternative asset managers.",
-    initials: "CM",
-    photo: "/team/catherine-morel.png",
-  },
-  {
-    name: "David Chen",
-    title: "Chief Operating Officer",
-    role: "executive",
-    bio: "Responsible for the day-to-day operations of Perkway's portfolio companies and operating platforms. Leads the integration of technology and operational best practices across all business segments. Background in hospitality operations and PropTech at scale.",
-    initials: "DC",
-    photo: "/team/david-chen.png",
-  },
-  {
-    name: "Sarah Whitfield",
-    title: "Chief Investment Officer",
-    role: "executive",
-    bio: "Leads all investment activity including acquisitions, dispositions, and capital deployment strategy. Brings institutional investment expertise from a career spanning private equity real estate, sovereign wealth fund advisory, and cross-border transaction structuring.",
-    initials: "SW",
-    photo: "/team/sarah-whitfield.png",
-  },
-  {
-    name: "Nancy Wisner",
-    title: "Board Member",
-    role: "board",
-    bio: "Independent board member with extensive experience in corporate governance, institutional real estate, and strategic advisory. Provides oversight on risk management, compliance, and long-term strategic direction.",
-    initials: "NW",
-    photo: "https://www.perkways.com/wp-content/uploads/2021/02/1.png",
-  },
-  {
-    name: "Ariel Rosenberg",
-    title: "Board Member",
-    role: "board",
-    bio: "Board member with a distinguished career in private equity, capital markets, and corporate finance. Advises on capital structure, M&A strategy, and institutional partnerships.",
-    initials: "ARo",
-    photo: "https://www.perkways.com/wp-content/uploads/2021/02/2.png",
-  },
-  {
-    name: "Terry Leppla",
-    title: "Board Member",
-    role: "board",
-    bio: "Board member bringing decades of experience in real estate development, construction, and urban planning. Provides strategic guidance on development pipeline, construction oversight, and regulatory affairs.",
-    initials: "TL",
-    photo: "https://www.perkways.com/wp-content/uploads/2021/02/3.png",
-  },
-];
-
 export interface GlobalOffice {
   city: string;
   country: string;
@@ -334,7 +266,6 @@ export const insights: InsightItem[] = [
 export const navigationItems = [
   { label: "About", href: "/about" },
   { label: "Portfolio", href: "/portfolio" },
-  { label: "Leadership", href: "/leadership" },
   { label: "Insights", href: "/insights" },
   { label: "Contact", href: "/contact" },
 ];

@@ -454,14 +454,6 @@
   @media (min-width: 1600px) { .rail a[aria-current="true"] .label { opacity: 1; transform: none; } }
   .on-dark-scrolled .rail a { color: rgba(255,255,255,0.6); }
 
-  /* ---- Bio dialog: the panel fades and rises 12px over 400ms (medium),
-         the scrim fades with it. Closing is instant: exits faster than
-         enters. ---- */
-  .dialog-scrim { background: rgba(22, 24, 28, 0.8); opacity: 0; transition: opacity 400ms ease; }
-  .dialog-panel { opacity: 0; transform: translateY(12px); transition: opacity 400ms cubic-bezier(0.2, 0.7, 0.2, 1), transform 400ms cubic-bezier(0.2, 0.7, 0.2, 1); }
-  .dialog-open .dialog-scrim { opacity: 1; }
-  .dialog-open .dialog-panel { opacity: 1; transform: none; }
-
   /* ---- Touch targets ----
      The underline and hairline rules are the design; they must not grow. So the
      hit area is extended with transparent padding that is cancelled visually by
@@ -519,8 +511,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .rail, .rail .label, .rail .tick, .dialog-scrim, .dialog-panel { transition: none; }
-  .dialog-panel { transform: none; }
+  .rail, .rail .label, .rail .tick { transition: none; }
 }
 
 @keyframes hero-ambient {

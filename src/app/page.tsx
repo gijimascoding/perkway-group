@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Reveal } from "@/components/Reveal";
-import { TeamGrid } from "@/components/TeamGrid";
 import { CircleLink } from "@/components/CircleLink";
 import { Carousel } from "@/components/Carousel";
 import { SectionRail } from "@/components/SectionRail";
@@ -11,13 +10,10 @@ import {
   figuresAsOf,
   metrics,
   businessSegments,
-  leadership,
   globalPresence,
   operatingMarkets,
   insights,
 } from "@/data/company";
-
-const execs = leadership.filter((m) => m.role === "executive");
 
 const BLUR = "data:image/gif;base64,R0lGODlhAQABAPAAACIkKAAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==";
 
@@ -48,7 +44,6 @@ const ledgerYears = Array.from(
 const railSections = [
   { id: "about", label: "About" },
   { id: "businesses", label: "Businesses" },
-  { id: "leadership", label: "Leadership" },
   { id: "global", label: "Global Presence" },
   { id: "insights", label: "Insights" },
   { id: "responsibility", label: "Responsibility" },
@@ -247,31 +242,6 @@ export default function Home() {
             <blockquote className="display-xl mt-10 mx-auto max-w-[19ch] text-white">
               We build businesses designed to compound value across generations, not quarters.
             </blockquote>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ============ LEADERSHIP ============ */}
-      <section id="leadership" className="bg-paper-100">
-        <div className="container-x section-pad">
-          <Reveal className="section-head">
-            <span className="kicker">Leadership</span>
-            <h2 className="display-xl mt-10 mx-auto max-w-[18ch] text-ink-900">
-              Guided by Experienced Principals
-            </h2>
-            <p className="mt-10 mx-auto max-w-[62ch] text-ink-700 lead">
-              Our leadership team brings decades of combined experience in real estate
-              investment, corporate strategy, hospitality operations, and technology
-              innovation.
-            </p>
-          </Reveal>
-
-          <div className="mt-16">
-            <TeamGrid members={execs} columns={4} />
-          </div>
-
-          <Reveal className="mt-16">
-            <CircleLink href="/leadership">View Full Leadership Team &amp; Board</CircleLink>
           </Reveal>
         </div>
       </section>

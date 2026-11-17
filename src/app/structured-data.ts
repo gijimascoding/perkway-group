@@ -1,4 +1,4 @@
-import { businessSegments, company, figures, globalPresence, leadership, type LeadershipMember } from "@/data/company";
+import { businessSegments, company, figures, globalPresence } from "@/data/company";
 import { BASE_URL } from "./robots";
 
 /** Organization + WebSite JSON-LD. This is what tells Google which image is the
@@ -51,7 +51,6 @@ export const organizationSchema = {
     { "@type": "ContactPoint", contactType: "customer service", email: company.email, telephone: company.phone, availableLanguage: "en" },
   ],
   knowsAbout: businessSegments.map((s) => s.title),
-  employee: leadership.filter((m) => m.role === "executive").map((m) => ({ "@id": personId(m) })),
 } as const;
 
 export const websiteSchema = {
@@ -64,23 +63,3 @@ export const websiteSchema = {
   inLanguage: "en",
   publisher: { "@id": `${BASE_URL}/#organization` },
 } as const;
-
-export function personId(m: LeadershipMember) {
-  return `${BASE_URL}/leadership#${m.name.toLowerCase().replace(/[^a-z]+/g, "-")}`;
-}
-
-/** Person nodes for the leadership page. Only site-hosted portraits are named. */
-export function personSchema(m: LeadershipMember) {
-  const image = m.photo && m.photo.startsWith("/") ? `${BASE_URL}${m.photo}` : undefined;
-  return {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "@id": personId(m),
-    name: m.name,
-    jobTitle: m.title,
-    description: m.bio,
-    worksFor: { "@id": `${BASE_URL}/#organization` },
-    ...(m.role === "board" ? { memberOf: { "@id": `${BASE_URL}/#organization` } } : {}),
-    ...(image ? { image } : {}),
-  };
-}

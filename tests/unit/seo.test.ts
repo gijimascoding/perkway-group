@@ -1,7 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { breadcrumbSchema, pageMetadata, webPageSchema } from "@/app/seo";
-import { organizationSchema, personSchema } from "@/app/structured-data";
-import { leadership } from "@/data/company";
+import { organizationSchema } from "@/app/structured-data";
 
 describe("pageMetadata", () => {
   const m = pageMetadata({ title: "About", description: "d", path: "/about" });
@@ -20,9 +19,9 @@ describe("pageMetadata", () => {
 
 describe("breadcrumbSchema", () => {
   it("always starts at Home with positions counting from 1", () => {
-    const b = breadcrumbSchema([{ name: "Leadership", path: "/leadership" }]);
+    const b = breadcrumbSchema([{ name: "About", path: "/about" }]);
     expect(b.itemListElement[0]).toMatchObject({ position: 1, name: "Home", item: "https://www.perkways.com/" });
-    expect(b.itemListElement[1]).toMatchObject({ position: 2, name: "Leadership", item: "https://www.perkways.com/leadership" });
+    expect(b.itemListElement[1]).toMatchObject({ position: 2, name: "About", item: "https://www.perkways.com/about" });
   });
 });
 
@@ -44,17 +43,7 @@ describe("organizationSchema", () => {
     expect("sameAs" in organizationSchema).toBe(false);
   });
 
-  it("lists only executives as employees", () => {
-    const execs = leadership.filter((m) => m.role === "executive").length;
-    expect(organizationSchema.employee).toHaveLength(execs);
-  });
-});
-
-describe("personSchema", () => {
-  it("names a site-hosted portrait and omits an external one", () => {
-    const hosted = leadership.find((m) => m.photo?.startsWith("/"))!;
-    const external = leadership.find((m) => m.photo?.startsWith("http"))!;
-    expect(personSchema(hosted).image).toBe(`https://www.perkways.com${hosted.photo}`);
-    expect(personSchema(external).image).toBeUndefined();
+  it("names no individual people", () => {
+    expect("employee" in organizationSchema).toBe(false);
   });
 });

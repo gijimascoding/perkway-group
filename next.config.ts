@@ -13,6 +13,10 @@ const nextConfig: NextConfig = {
   // The home directory carries a stray package-lock.json; pin tracing here so
   // the build stops guessing the workspace root.
   outputFileTracingRoot: __dirname,
+  async redirects() {
+    // The leadership page was retired; send old links and search results to About.
+    return [{ source: "/leadership", destination: "/about", permanent: true }];
+  },
   async headers() {
     return [{ source: "/(.*)", headers: securityHeaders }];
   },
@@ -25,9 +29,8 @@ const nextConfig: NextConfig = {
     // AVIF first: ~35% fewer bytes than webp at the same q, which is what buys
     // the hero its LCP budget. Delivery only.
     formats: ["image/avif", "image/webp"],
-    // 82 is the site default; 95 is reserved for the leadership portraits,
-    // where faces show codec softness at 82 and the files are small anyway.
-    qualities: [82, 95],
+    // 82 is the site default.
+    qualities: [82],
     remotePatterns: [
       { protocol: "https", hostname: "images.unsplash.com" },
       { protocol: "https", hostname: "www.perkways.com" },

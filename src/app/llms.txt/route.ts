@@ -1,4 +1,4 @@
-import { businessSegments, company, figures, figuresAsOf, globalPresence, insights, leadership, navigationItems, operatingMarkets } from "@/data/company";
+import { businessSegments, company, figures, figuresAsOf, globalPresence, insights, navigationItems, operatingMarkets } from "@/data/company";
 import { faqs } from "@/data/faq";
 import { BASE_URL } from "../robots";
 
@@ -11,8 +11,6 @@ import { BASE_URL } from "../robots";
 export const dynamic = "force-static";
 
 export function GET() {
-  const execs = leadership.filter((m) => m.role === "executive");
-  const board = leadership.filter((m) => m.role === "board");
   const lines = [
     `# ${company.name}`,
     "",
@@ -34,17 +32,9 @@ export function GET() {
     "",
     ...businessSegments.map((s) => `- ${s.title} (${s.subtitle}): ${s.description}`),
     "",
-    "## Leadership",
-    "",
-    ...execs.map((m) => `- ${m.name}, ${m.title}: ${m.bio}`),
-    "",
-    "## Board",
-    "",
-    ...board.map((m) => `- ${m.name}, ${m.title}`),
-    "",
     "## Pages",
     "",
-    `- [Home](${BASE_URL}/): overview, figures, businesses, leadership, insights`,
+    `- [Home](${BASE_URL}/): overview, figures, businesses, insights`,
     ...navigationItems.map((n) => `- [${n.label}](${BASE_URL}${n.href})`),
     `- [Disclosures](${BASE_URL}/disclosures): basis of every figure, no-offer statement, risk`,
     `- [Privacy Policy](${BASE_URL}/privacy)`,
