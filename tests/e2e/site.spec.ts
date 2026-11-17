@@ -14,7 +14,8 @@ test("home loads without console errors and every nav link answers", async ({ pa
 });
 
 test("bio dialog opens, traps focus, and closes on Escape with focus restored", async ({ page }) => {
-  await page.goto("/leadership");
+  // The executive cards (with bio dialogs) live on the home page; /leadership lists the board only.
+  await page.goto("/");
   const trigger = page.getByRole("button", { name: /Read the biography of/ }).first();
   await trigger.click();
   const dialog = page.getByRole("dialog");
@@ -23,6 +24,13 @@ test("bio dialog opens, traps focus, and closes on Escape with focus restored", 
   await page.keyboard.press("Escape");
   await expect(dialog).toBeHidden();
   await expect(page.locator("main")).not.toHaveAttribute("inert", "");
+});
+
+test("leadership page lists the board only, no executive team", async ({ page }) => {
+  await page.goto("/leadership");
+  await expect(page.getByRole("heading", { name: "Board & Advisors" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Executive Leadership" })).toHaveCount(0);
+  await expect(page.getByText("Alexander Reinhardt")).toHaveCount(0);
 });
 
 test("contact form blocks an empty submit with an error summary", async ({ page }) => {

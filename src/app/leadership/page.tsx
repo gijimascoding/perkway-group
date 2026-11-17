@@ -10,17 +10,16 @@ import { leadership } from "@/data/company";
 export const metadata: Metadata = pageMetadata({
   title: "Leadership",
   description:
-    "The executive team and board of Perkway Group: Alexander Reinhardt, Catherine Morel, David Chen and Sarah Whitfield, with directors Nancy Wisner, Ariel Rosenberg and Terry Leppla.",
+    "The board of Perkway Group: directors Nancy Wisner, Ariel Rosenberg and Terry Leppla.",
   path: "/leadership",
 });
 
-const executives = leadership.filter((m) => m.role === "executive");
 const board = leadership.filter((m) => m.role === "board");
 
 const leadershipSchema = [
   webPageSchema({ type: "ProfilePage", name: "Perkway Group leadership", description: String(metadata.description), path: "/leadership" }),
   breadcrumbSchema([{ name: "Leadership", path: "/leadership" }]),
-  ...leadership.map(personSchema),
+  ...board.map(personSchema),
 ];
 
 export default function LeadershipPage() {
@@ -38,14 +37,6 @@ export default function LeadershipPage() {
       <section className="bg-paper-100">
         <div className="container-x section-pad">
           <Reveal>
-            <p className="eyebrow">Executive Team</p>
-            <h2 className="h2 mt-8 text-ink-900">Executive Leadership</h2>
-          </Reveal>
-          <Reveal className="mt-16">
-            <TeamGrid members={executives} columns={4} />
-          </Reveal>
-
-          <Reveal className="mt-32">
             <p className="eyebrow">Board of Directors</p>
             <h2 className="h2 mt-8 text-ink-900">Board &amp; Advisors</h2>
           </Reveal>
